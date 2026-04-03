@@ -114,9 +114,115 @@ function BrandLogo({brand,size=50}){
   return <svg viewBox="0 0 160 28" width={size*2.5} height={size*.45}><text x="80" y="22" textAnchor="middle" fontFamily="serif" fontSize="20" fontWeight="700" fill="#c8a84e" letterSpacing="3">MARSHALL</text></svg>;
 }
 
+/* ═══ BRUGER-KONTI — tilføj/fjern brugere her ═══ */
+const USERS = [
+  { user: "admin", pass: "GoOrder2026!", name: "Administrator" },
+  { user: "demo", pass: "demo123", name: "Demo bruger" },
+  { user: "kunde1", pass: "Bestil2026", name: "Kunde 1" },
+  /* Tilføj flere: { user: "brugernavn", pass: "kodeord", name: "Visningsnavn" }, */
+];
+
+/* ═══ LOGIN PORTAL ═══ */
+function LoginPortal({ onLogin }) {
+  const [user, setUser] = useState("");
+  const [pass, setPass] = useState("");
+  const [error, setError] = useState(false);
+  const [langL, setLangL] = useState("da");
+
+  const labels = {
+    da: { title: "GoOrder", sub: "Multi-brand bestillingssystem", userLabel: "Brugernavn", passLabel: "Adgangskode", userPh: "Indtast brugernavn", passPh: "Indtast adgangskode", button: "Log ind", error: "Forkert brugernavn eller adgangskode.", footer: "Kontakt din leverandør for at få login-oplysninger." },
+    en: { title: "GoOrder", sub: "Multi-brand ordering system", userLabel: "Username", passLabel: "Password", userPh: "Enter username", passPh: "Enter password", button: "Sign in", error: "Invalid username or password.", footer: "Contact your supplier for login credentials." },
+    de: { title: "GoOrder", sub: "Multi-Marken Bestellsystem", userLabel: "Benutzername", passLabel: "Passwort", userPh: "Benutzername eingeben", passPh: "Passwort eingeben", button: "Anmelden", error: "Falscher Benutzername oder Passwort.", footer: "Kontaktieren Sie Ihren Lieferanten für Zugangsdaten." },
+    hi: { title: "GoOrder", sub: "मल्टी-ब्रांड ऑर्डर सिस्टम", userLabel: "उपयोगकर्ता नाम", passLabel: "पासवर्ड", userPh: "उपयोगकर्ता नाम दर्ज करें", passPh: "पासवर्ड दर्ज करें", button: "लॉग इन", error: "गलत उपयोगकर्ता नाम या पासवर्ड।", footer: "लॉगिन जानकारी के लिए अपने आपूर्तिकर्ता से संपर्क करें।" },
+    zh: { title: "GoOrder", sub: "多品牌订购系统", userLabel: "用户名", passLabel: "密码", userPh: "输入用户名", passPh: "输入密码", button: "登录", error: "用户名或密码错误。", footer: "请联系您的供应商获取登录信息。" },
+  };
+  const L = labels[langL];
+  const inputStyle = (hasError) => ({ width: "100%", padding: "14px 18px", border: hasError ? "2px solid #ff3b30" : "2px solid rgba(255,255,255,.15)", borderRadius: 12, fontSize: 15, outline: "none", background: "rgba(255,255,255,.08)", color: "#f5f5f7", boxSizing: "border-box", transition: "border .2s" });
+
+  const tryLogin = () => {
+    const match = USERS.find(u => u.user.toLowerCase() === user.trim().toLowerCase() && u.pass === pass);
+    if (match) {
+      try { sessionStorage.setItem("goorder_auth", "1"); sessionStorage.setItem("goorder_user", match.name); } catch(e) {}
+      onLogin(match.name, langL);
+    } else {
+      setError(true);
+      setTimeout(() => setError(false), 4000);
+    }
+  };
+
+  return (
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "linear-gradient(160deg, #0a0a0a 0%, #1a1a2e 40%, #16213e 100%)", fontFamily: "'SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif", padding: 20 }}>
+      {/* Language selector */}
+      <div style={{ position: "absolute", top: 20, right: 20 }}>
+        <select value={langL} onChange={e => setLangL(e.target.value)} style={{ background: "rgba(255,255,255,.1)", border: "1px solid rgba(255,255,255,.2)", borderRadius: 8, padding: "6px 24px 6px 10px", color: "#fff", fontSize: 12, outline: "none", cursor: "pointer", WebkitAppearance: "none", appearance: "none", backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23fff'/%3E%3C/svg%3E\")", backgroundRepeat: "no-repeat", backgroundPosition: "right 8px center" }}>
+          {Object.entries(LANGS).map(([k, v]) => <option key={k} value={k} style={{ color: "#1d1d1f", background: "#fff" }}>{v}</option>)}
+        </select>
+      </div>
+
+      {/* Logo */}
+      <div style={{ marginBottom: 36, textAlign: "center" }}>
+        <div style={{ fontSize: 48, marginBottom: 8 }}>📦</div>
+        <h1 style={{ color: "#f5f5f7", fontSize: 36, fontWeight: 800, letterSpacing: "-1px", margin: 0 }}>{L.title}</h1>
+        <p style={{ color: "rgba(255,255,255,.5)", fontSize: 14, marginTop: 6 }}>{L.sub}</p>
+      </div>
+
+      {/* Login box */}
+      <div style={{ background: "rgba(255,255,255,.06)", backdropFilter: "blur(20px)", borderRadius: 20, padding: "36px 32px", width: "100%", maxWidth: 380, border: "1px solid rgba(255,255,255,.1)", boxShadow: "0 20px 60px rgba(0,0,0,.4)" }}>
+        <label style={{ display: "block", color: "rgba(255,255,255,.6)", fontSize: 12, fontWeight: 600, marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.5px" }}>{L.userLabel}</label>
+        <input
+          type="text"
+          value={user}
+          onChange={e => { setUser(e.target.value); setError(false); }}
+          onKeyDown={e => e.key === "Enter" && document.getElementById("goorder-pass").focus()}
+          placeholder={L.userPh}
+          style={inputStyle(error)}
+          autoFocus
+          autoComplete="username"
+        />
+        <label style={{ display: "block", color: "rgba(255,255,255,.6)", fontSize: 12, fontWeight: 600, marginBottom: 6, marginTop: 16, textTransform: "uppercase", letterSpacing: "0.5px" }}>{L.passLabel}</label>
+        <input
+          id="goorder-pass"
+          type="password"
+          value={pass}
+          onChange={e => { setPass(e.target.value); setError(false); }}
+          onKeyDown={e => e.key === "Enter" && tryLogin()}
+          placeholder={L.passPh}
+          style={inputStyle(error)}
+          autoComplete="current-password"
+        />
+        {error && <div style={{ color: "#ff6b6b", fontSize: 12, marginTop: 10, textAlign: "center", background: "rgba(255,59,48,.1)", padding: "8px 12px", borderRadius: 8 }}>⚠️ {L.error}</div>}
+        <button
+          onClick={tryLogin}
+          style={{ width: "100%", padding: "14px", marginTop: 20, background: "linear-gradient(135deg, #0071e3, #5856d6)", color: "#fff", border: "none", borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: "pointer", transition: "all .2s", letterSpacing: "0.5px" }}
+          onMouseEnter={e => e.currentTarget.style.transform = "translateY(-1px)"}
+          onMouseLeave={e => e.currentTarget.style.transform = "none"}
+        >{L.button}</button>
+      </div>
+
+      {/* Footer */}
+      <p style={{ color: "rgba(255,255,255,.3)", fontSize: 11, marginTop: 32, textAlign: "center", maxWidth: 320 }}>{L.footer}</p>
+      <div style={{ color: "rgba(255,255,255,.15)", fontSize: 10, marginTop: 16 }}>goorder.dk</div>
+    </div>
+  );
+}
+
 /* ═══ MAIN APP ═══ */
 export default function App(){
-  const[lang,setLang]=useState("da");const t=T[lang];
+  // Auth gate
+  const [authed, setAuthed] = useState(() => {
+    try { return sessionStorage.getItem("goorder_auth") === "1"; } catch(e) { return false; }
+  });
+  const [userName, setUserName] = useState(() => {
+    try { return sessionStorage.getItem("goorder_user") || ""; } catch(e) { return ""; }
+  });
+  const [initLang, setInitLang] = useState("da");
+
+  const handleLogin = (name, selectedLang) => { setAuthed(true); setUserName(name); setInitLang(selectedLang); };
+  const handleLogout = () => { setAuthed(false); setUserName(""); try { sessionStorage.removeItem("goorder_auth"); sessionStorage.removeItem("goorder_user"); } catch(e) {} };
+
+  if (!authed) return <LoginPortal onLogin={handleLogin} />;
+
+  const[lang,setLang]=useState(initLang);const t=T[lang];
   const[cur,setCur]=useState("EUR");
   const[step,setStep]=useState("brand");
   const[brand,setBrand]=useState(null);
@@ -347,12 +453,13 @@ export default function App(){
 
   return(<div style={S.root}>
     <div style={S.nav}>
-      <div style={S.logo} onClick={goHome}><span style={{fontSize:14}}>📦</span><div><span>{t.title}</span><div style={{fontSize:7,opacity:.5,textTransform:"uppercase",letterSpacing:"1.5px"}}>{t.sub}</div></div></div>
+      <div style={S.logo} onClick={goHome}><span style={{fontSize:14}}>📦</span><div><span>GoOrder</span><div style={{fontSize:7,opacity:.5,textTransform:"uppercase",letterSpacing:"1.5px"}}>goorder.dk</div></div></div>
       <div style={S.navR}>
         <button style={S.searchBtn} onClick={()=>setShowSearch(true)}>🔍</button>
         <select style={S.sel} value={lang} onChange={e=>setLang(e.target.value)}>{Object.entries(LANGS).map(([k,v])=><option key={k} value={k} style={oS}>{v}</option>)}</select>
         <select style={S.sel} value={cur} onChange={e=>setCur(e.target.value)}>{Object.entries(CURRENCIES).map(([k,v])=><option key={k} value={k} style={oS}>{v.label}</option>)}</select>
         <button style={S.cartBtn} onClick={()=>setStep("cart")}>🛒 {cartCount>0&&<span style={S.badge}>{cartCount}</span>}</button>
+        <button onClick={handleLogout} style={{background:"rgba(255,255,255,.08)",border:"1px solid rgba(255,255,255,.15)",borderRadius:7,padding:"5px 10px",color:"rgba(255,255,255,.6)",cursor:"pointer",fontSize:10,display:"flex",alignItems:"center",gap:4}}><span style={{color:"rgba(255,255,255,.9)",fontWeight:600}}>{userName}</span> ↩</button>
       </div>
     </div>
     {showSearch&&<SearchOverlay/>}
