@@ -236,8 +236,6 @@ export default function App(){
   const[searchQ,setSearchQ]=useState("");
   const[showSearch,setShowSearch]=useState(false);
 
-  if (!authed) return <LoginPortal onLogin={handleLogin} />;
-
   const brandData=brand?BRANDS[brand]:null;
   const brandItems=useMemo(()=>P.filter(p=>p.brand===brand),[brand]);
   const catItems=useMemo(()=>brandItems.filter(p=>p.kategori===cat),[brandItems,cat]);
@@ -450,6 +448,8 @@ export default function App(){
       <div style={{marginTop:12,paddingTop:8,borderTop:"1px solid #e8e8ed",fontSize:8,color:"#86868b",textAlign:"center"}}>{isPO?t.poNote:t.proformaNote} {t.moqNote}: {MOQ} {t.pcs}.</div>
       <div style={{marginTop:8,padding:"8px 12px",background:"#fffbeb",border:"1px solid #f5e6a3",borderRadius:6,fontSize:9,color:"#92700c",textAlign:"center",fontWeight:600}}>⚠️ {t.priceLine} — {t.prefCurrency}: {CURRENCIES[cur].name} ({CURRENCIES[cur].symbol})</div>
     </div></div>);};
+
+  if (!authed) return <LoginPortal onLogin={handleLogin} />;
 
   return(<div style={S.root}>
     <div style={S.nav}>
