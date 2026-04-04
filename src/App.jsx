@@ -301,8 +301,8 @@ export default function App(){
   // Email mailto
   const sendEmail=()=>{
     const lines=cart.map((it,i)=>`${i+1}. ${it.brand} ${it.model} | ${it.farve} ${it.lager!=="–"?it.lager:""} | ${it.modelNr} | ${it.qty}x`).join("%0A");
-    const body=`${t.orderNr}: ${orderNr}%0A${t.company}: ${cust.firma}%0A${t.contact}: ${cust.kontakt}%0A${t.currency}: ${cur}%0A%0A${t.orderSummary}:%0A${lines}%0A%0A${t.totalUnits}: ${cartCount} ${t.pcs}%0A%0A${t.priceLine}%0A${t.notes}: ${cust.noter||"–"}`;
-    window.open(`mailto:?subject=${encodeURIComponent(`${t.po} ${orderNr}`)}&body=${body}`);
+    const body=`${t.orderNr}: ${orderNr}%0A${t.company}: ${cust.firma}%0A${t.contact}: ${cust.kontakt}%0A${t.email}: ${cust.email}%0A${t.phone}: ${cust.tel||"–"}%0A${t.address}: ${cust.adresse||"–"}%0A${t.currency}: ${cur}%0A%0A${t.orderSummary}:%0A${lines}%0A%0A${t.totalUnits}: ${cartCount} ${t.pcs}%0A%0A${t.priceLine}%0A${t.notes}: ${cust.noter||"–"}`;
+    window.open(`mailto:hello@keap.me?subject=${encodeURIComponent(`${t.proforma} ${orderNr} — ${cust.firma}`)}&body=${body}`);
   };
 
   const goToSearchResult=(r)=>{
@@ -424,7 +424,7 @@ export default function App(){
   </>)}</div>);
 
   // ═══ INVOICE ═══
-  const InvV=()=>{const now=new Date();const dl=lang==="da"?"da-DK":lang==="de"?"de-DE":lang==="zh"?"zh-CN":lang==="hi"?"hi-IN":"en-GB";const d1=now.toLocaleDateString(dl,{day:"numeric",month:"long",year:"numeric"});const d2=new Date(now.getTime()+14*864e5).toLocaleDateString(dl,{day:"numeric",month:"long",year:"numeric"});const isPO=docView==="po";
+  const InvV=()=>{const now=new Date();const dl=lang==="da"?"da-DK":lang==="de"?"de-DE":lang==="zh"?"zh-CN":lang==="hi"?"hi-IN":"en-GB";const d1=now.toLocaleDateString(dl,{day:"numeric",month:"long",year:"numeric"});const d2=new Date(now.getTime()+14*864e5).toLocaleDateString(dl,{day:"numeric",month:"long",year:"numeric"});
   return(<div style={S.main}>
     <div data-noprint style={{display:"flex",gap:5,marginBottom:10,flexWrap:"wrap"}}>
       <button style={S.sBtn} onClick={()=>window.print()}>🖨 {t.printPdf}</button>
@@ -432,20 +432,18 @@ export default function App(){
       <button style={S.sBtn} onClick={sendEmail}>📧 {t.emailOrder}</button>
       <button style={S.pBtn} onClick={()=>{setCart([]);setCust({firma:"",kontakt:"",email:"",tel:"",adresse:"",noter:""});setOrderNr("");goHome();}}>+ {t.newOrder}</button>
     </div>
-    <div data-noprint style={{display:"flex",gap:3}}><button style={S.docTab(docView==="proforma")} onClick={()=>setDocView("proforma")}>{t.viewProforma}</button><button style={S.docTab(docView==="po")} onClick={()=>setDocView("po")}>{t.viewPO}</button></div>
-    <div className="print-doc" style={{...S.sec,maxWidth:1000,borderTopLeftRadius:0,margin:"0 auto"}}>
+    <div className="print-doc" style={{...S.sec,maxWidth:1000,margin:"0 auto"}}>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:16,flexWrap:"wrap",gap:8}}>
-        <div><div style={{fontSize:18,fontWeight:800,letterSpacing:"-.5px",marginBottom:1}}>{isPO?t.po:t.proforma}</div><div style={{color:"#86868b",fontSize:10}}>{uniq(cart.map(i=>i.brand)).join(" · ")}</div></div>
-        <div style={S.stamp(isPO?"#0071e3":"#34c759")}>{isPO?"PO":"PROFORMA"}</div>
+        <div><div style={{fontSize:18,fontWeight:800,letterSpacing:"-.5px",marginBottom:1}}>{t.proforma}</div><div style={{color:"#86868b",fontSize:10}}>{uniq(cart.map(i=>i.brand)).join(" · ")}</div></div>
+        <div style={S.stamp("#34c759")}>PROFORMA</div>
       </div>
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14,marginBottom:14}}>
-        <div><div style={{fontSize:8,fontWeight:700,color:"#86868b",textTransform:"uppercase",marginBottom:3}}>{isPO?t.supplierInfo:t.billTo}</div>{isPO?(<><div style={{fontWeight:700,fontSize:12}}>{supplier.name}</div>{supplier.contact&&<div style={{fontSize:10}}>{supplier.contact}</div>}{supplier.delivery&&<div style={{fontSize:10}}>{t.requestedDelivery}: {supplier.delivery}</div>}</>):(<><div style={{fontWeight:700,fontSize:12}}>{cust.firma}</div><div style={{fontSize:10}}>{cust.kontakt} · {cust.email}</div>{cust.tel&&<div style={{fontSize:10}}>{cust.tel}</div>}{cust.adresse&&<div style={{fontSize:10}}>{cust.adresse}</div>}</>)}</div>
+        <div><div style={{fontSize:8,fontWeight:700,color:"#86868b",textTransform:"uppercase",marginBottom:3}}>{t.billTo}</div><div style={{fontWeight:700,fontSize:12}}>{cust.firma}</div><div style={{fontSize:10}}>{cust.kontakt} · {cust.email}</div>{cust.tel&&<div style={{fontSize:10}}>{cust.tel}</div>}{cust.adresse&&<div style={{fontSize:10}}>{cust.adresse}</div>}</div>
         <div style={{textAlign:"right"}}>{[[t.orderNr+":",orderNr],[t.date+":",d1],[t.dueDate+":",d2],[t.currency+":",`${CURRENCIES[cur].name} (${CURRENCIES[cur].symbol})`]].map(([l,v])=>(<div key={l} style={{fontSize:10,marginBottom:2}}><span style={{color:"#86868b"}}>{l} </span><span style={{fontWeight:600}}>{v}</span></div>))}</div>
       </div>
-      {isPO&&<div style={{background:"#f5f5f7",borderRadius:6,padding:8,marginBottom:12,fontSize:10}}><strong>{t.custInfo}:</strong> {cust.firma} — {cust.kontakt} — {cust.email}</div>}
       <div style={{overflowX:"auto"}}><table style={S.tbl}><thead><tr>{["#",t.brand,t.product,t.gen,t.chip,t.clr,t.stor,t.modelNr,"SKU EU","SKU IN",t.amount].map(h=><th key={h} style={S.th}>{h}</th>)}</tr></thead><tbody>{cart.map((it,i)=><tr key={i}><td style={{...S.td,color:"#86868b"}}>{i+1}</td><td style={{...S.td,fontWeight:600,fontSize:8}}>{it.brand}</td><td style={{...S.td,fontWeight:600,whiteSpace:"nowrap"}}>{it.model}</td><td style={S.td}>{it.gen}</td><td style={{...S.td,fontSize:8}}>{it.chip}</td><td style={S.td}>{it.farve}</td><td style={S.td}>{it.lager}</td><td style={{...S.td,fontSize:8}}>{it.modelNr}</td><td style={{...S.td,fontFamily:"monospace",fontSize:7}}>{it.skuEU}</td><td style={{...S.td,fontFamily:"monospace",fontSize:7}}>{it.skuIn}</td><td style={{...S.td,fontWeight:700,textAlign:"center"}}>{it.qty}</td></tr>)}</tbody><tfoot><tr style={{background:"#0a0a0a",color:"#fff"}}><td colSpan={10} style={{...S.td,textAlign:"right",fontWeight:700,fontSize:10,color:"#fff"}}>{t.totalUnits}</td><td style={{...S.td,fontWeight:700,fontSize:10,color:"#fff",textAlign:"center"}}>{cartCount} {t.pcs}</td></tr></tfoot></table></div>
       {cust.noter&&<div style={{marginTop:10,padding:8,background:"#f5f5f7",borderRadius:6,fontSize:9}}><strong>{t.notes}:</strong> {cust.noter}</div>}
-      <div style={{marginTop:12,paddingTop:8,borderTop:"1px solid #e8e8ed",fontSize:8,color:"#86868b",textAlign:"center"}}>{isPO?t.poNote:t.proformaNote} {t.moqNote}: {MOQ} {t.pcs}.</div>
+      <div style={{marginTop:12,paddingTop:8,borderTop:"1px solid #e8e8ed",fontSize:8,color:"#86868b",textAlign:"center"}}>{t.proformaNote} {t.moqNote}: {MOQ} {t.pcs}.</div>
       <div style={{marginTop:8,padding:"8px 12px",background:"#fffbeb",border:"1px solid #f5e6a3",borderRadius:6,fontSize:9,color:"#92700c",textAlign:"center",fontWeight:600}}>⚠️ {t.priceLine} — {t.prefCurrency}: {CURRENCIES[cur].name} ({CURRENCIES[cur].symbol})</div>
     </div></div>);};
 
