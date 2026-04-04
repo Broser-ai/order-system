@@ -220,8 +220,6 @@ export default function App(){
   const handleLogin = (name, selectedLang) => { setAuthed(true); setUserName(name); setInitLang(selectedLang); };
   const handleLogout = () => { setAuthed(false); setUserName(""); try { sessionStorage.removeItem("goorder_auth"); sessionStorage.removeItem("goorder_user"); } catch(e) {} };
 
-  if (!authed) return <LoginPortal onLogin={handleLogin} />;
-
   const[lang,setLang]=useState(initLang);const t=T[lang];
   const[cur,setCur]=useState("EUR");
   const[step,setStep]=useState("brand");
@@ -237,6 +235,8 @@ export default function App(){
   const[docView,setDocView]=useState("proforma");
   const[searchQ,setSearchQ]=useState("");
   const[showSearch,setShowSearch]=useState(false);
+
+  if (!authed) return <LoginPortal onLogin={handleLogin} />;
 
   const brandData=brand?BRANDS[brand]:null;
   const brandItems=useMemo(()=>P.filter(p=>p.brand===brand),[brand]);
