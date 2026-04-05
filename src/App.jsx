@@ -1,134 +1,1568 @@
-import { useState, useMemo, useEffect, useCallback } from "react";
-import * as XLSX from "xlsx";
-const SB="https://jesskkrtdcrjkhqbvwqo.supabase.co/rest/v1";
-const SK="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Implc3Nra3J0ZGNyamtocWJ2d3FvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyOTgyMjAsImV4cCI6MjA5MDg3NDIyMH0.BtJMQ5NOY6oL0HqaSweLtAZZoD0YHWmUTyV_XWK0CDw";
-const H={"apikey":SK,"Authorization":"Bearer "+SK,"Content-Type":"application/json"};
-async function dbG(t,q=""){try{return(await fetch(SB+"/"+t+q,{headers:H})).json();}catch{return[];}}
-async function dbP(t,d){try{return(await fetch(SB+"/"+t,{method:"POST",headers:{...H,"Prefer":"return=representation"},body:JSON.stringify(d)})).json();}catch{return null;}}
-async function dbU(t,q,d){try{await fetch(SB+"/"+t+"?"+q,{method:"PATCH",headers:{...H,"Prefer":"return=representation"},body:JSON.stringify(d)});return true;}catch{return false;}}
-async function dbD(t,q){try{await fetch(SB+"/"+t+"?"+q,{method:"DELETE",headers:H});return true;}catch{return false;}}
-if(typeof document!=="undefined"&&!document.getElementById("pc")){const s=document.createElement("style");s.id="pc";s.textContent="@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}[data-noprint]{display:none!important}}";document.head.appendChild(s);}
-const CUR={DKK:{s:"kr",l:"🇩🇰 DKK",n:"DKK"},EUR:{s:"€",l:"🇪🇺 EUR",n:"Euro"},USD:{s:"$",l:"🇺🇸 USD",n:"USD"},INR:{s:"₹",l:"🇮🇳 INR",n:"INR"},CNY:{s:"¥",l:"🇨🇳 CNY",n:"CNY"}};
-const T={
-da:{pickBrand:"Vælg brand",pickBrandSub:"Vælg leverandør",pickCat:"Vælg kategori",pickModel:"Konfigurér bestilling",configs:"konfig.",variants:"varianter",size:"Størrelse",network:"Netværk",storage:"Lager",color:"Farve",qty:"Antal",moq:"MOQ",pcs:"stk.",add:"Tilføj",config:"Konfiguration",cart:"Bestilling",empty:"Din bestilling er tom",summary:"Bestillingsoversigt",units:"enheder",product:"Produkt",gen:"Gen",chip:"Chip",clr:"Farve",modelNr:"Model Nr",amount:"Antal",custInfo:"Kundeoplysninger",company:"Firma",contact:"Kontakt",email:"Email",phone:"Telefon",address:"Adresse",notes:"Noter",contShop:"Fortsæt indkøb",submit:"Send bestilling",proforma:"PROFORMA FAKTURA",billTo:"Faktureres til",orderNr:"Ordre nr",date:"Dato",due:"Forfald",total:"TOTAL",profNote:"Proforma — ikke endelig faktura.",print:"Print/PDF",newOrd:"Ny bestilling",back:"← Tilbage",cats:"Kategorier",brands:"Brands",min:"Min.",del:"Fjern",supplier:"Leverandør",visit:"Besøg hjemmeside",priceNote:"Denne bestilling er uden priser. Endelig pris inkl. fragt fremsendes som separat tilbud.",priceLine:"Priser kalkuleres separat",excel:"Excel",mail:"Email",search:"Søg...",currency:"Valuta",prefCur:"Tilbudsvaluta",results:"resultater",goTo:"Gå til",admin:"Admin",orders:"Ordrer",users:"Brugere",status:"Status",sNew:"Ny",sProc:"Behandler",sShip:"Afsendt",sDel:"Leveret",sCan:"Annulleret",all:"Alle ordrer",addUser:"Tilføj bruger",user:"Brugernavn",pass:"Adgangskode",role:"Rolle",actions:"Handlinger",save:"Gem",delete:"Slet",invoice:"Faktura",subtotal:"Subtotal",shipping:"Fragt",sendInv:"Send faktura",ordered:"Bestilt",view:"Vis",close:"Luk",brand:"Brand",lines:"linjer",name:"Navn"},
-en:{pickBrand:"Select brand",pickBrandSub:"Choose supplier",pickCat:"Select category",pickModel:"Configure order",configs:"configs",variants:"variants",size:"Size",network:"Network",storage:"Storage",color:"Color",qty:"Quantity",moq:"MOQ",pcs:"pcs",add:"Add to order",config:"Configuration",cart:"Order",empty:"Your order is empty",summary:"Order summary",units:"units",product:"Product",gen:"Gen",chip:"Chip",clr:"Color",modelNr:"Model No",amount:"Qty",custInfo:"Customer info",company:"Company",contact:"Contact",email:"Email",phone:"Phone",address:"Address",notes:"Notes",contShop:"Continue shopping",submit:"Submit order",proforma:"PROFORMA INVOICE",billTo:"Bill to",orderNr:"Order no",date:"Date",due:"Due",total:"TOTAL",profNote:"Proforma — not final.",print:"Print/PDF",newOrd:"New order",back:"← Back",cats:"Categories",brands:"Brands",min:"Min.",del:"Remove",supplier:"Supplier",visit:"Visit website",priceNote:"No prices included. Final pricing incl. shipping sent separately.",priceLine:"Prices calculated separately",excel:"Excel",mail:"Email",search:"Search...",currency:"Currency",prefCur:"Quote currency",results:"results",goTo:"Go to",admin:"Admin",orders:"Orders",users:"Users",status:"Status",sNew:"New",sProc:"Processing",sShip:"Shipped",sDel:"Delivered",sCan:"Cancelled",all:"All orders",addUser:"Add user",user:"Username",pass:"Password",role:"Role",actions:"Actions",save:"Save",delete:"Delete",invoice:"Invoice",subtotal:"Subtotal",shipping:"Shipping",sendInv:"Send invoice",ordered:"Ordered",view:"View",close:"Close",brand:"Brand",lines:"lines",name:"Name"},
-de:{pickBrand:"Marke wählen",pickBrandSub:"Lieferant wählen",pickCat:"Kategorie",pickModel:"Konfigurieren",configs:"Konfig.",variants:"Varianten",size:"Größe",network:"Netzwerk",storage:"Speicher",color:"Farbe",qty:"Menge",moq:"MOQ",pcs:"Stk.",add:"Hinzufügen",config:"Konfiguration",cart:"Bestellung",empty:"Leer",summary:"Übersicht",units:"Einheiten",product:"Produkt",gen:"Gen",chip:"Chip",clr:"Farbe",modelNr:"Modell-Nr",amount:"Menge",custInfo:"Kundeninfo",company:"Firma",contact:"Kontakt",email:"E-Mail",phone:"Telefon",address:"Adresse",notes:"Notizen",contShop:"Weiter",submit:"Absenden",proforma:"PROFORMA",billTo:"Rechnung an",orderNr:"Best.-Nr",date:"Datum",due:"Fällig",total:"GESAMT",profNote:"Proforma.",print:"Drucken",newOrd:"Neu",back:"← Zurück",cats:"Kategorien",brands:"Marken",min:"Min.",del:"Entfernen",supplier:"Lieferant",visit:"Webseite",priceNote:"Keine Preise enthalten.",priceLine:"Preise separat",excel:"Excel",mail:"E-Mail",search:"Suche...",currency:"Währung",prefCur:"Währung",results:"Ergebnisse",goTo:"Öffnen",admin:"Admin",orders:"Bestellungen",users:"Benutzer",status:"Status",sNew:"Neu",sProc:"In Bearbeitung",sShip:"Versendet",sDel:"Geliefert",sCan:"Storniert",all:"Alle",addUser:"Hinzufügen",user:"Benutzer",pass:"Passwort",role:"Rolle",actions:"Aktionen",save:"Speichern",delete:"Löschen",invoice:"Rechnung",subtotal:"Zwischensumme",shipping:"Versand",sendInv:"Senden",ordered:"Bestellt",view:"Ansehen",close:"Schließen",brand:"Marke",lines:"Pos.",name:"Name"},
-hi:{pickBrand:"ब्रांड",pickBrandSub:"चुनें",pickCat:"श्रेणी",pickModel:"कॉन्फ़िगर",configs:"कॉन्फ़िग",variants:"वेरिएंट",size:"आकार",network:"नेटवर्क",storage:"स्टोरेज",color:"रंग",qty:"मात्रा",moq:"MOQ",pcs:"पीस",add:"जोड़ें",config:"कॉन्फ़िग",cart:"ऑर्डर",empty:"खाली",summary:"सारांश",units:"यूनिट",product:"उत्पाद",gen:"जेन",chip:"चिप",clr:"रंग",modelNr:"मॉडल",amount:"मात्रा",custInfo:"ग्राहक",company:"कंपनी",contact:"संपर्क",email:"ईमेल",phone:"फोन",address:"पता",notes:"नोट्स",contShop:"जारी",submit:"भेजें",proforma:"प्रोफॉर्मा",billTo:"प्राप्तकर्ता",orderNr:"ऑर्डर नं",date:"दिनांक",due:"देय",total:"कुल",profNote:"अंतिम नहीं।",print:"प्रिंट",newOrd:"नया",back:"← वापस",cats:"श्रेणियाँ",brands:"ब्रांड",min:"न्यूनतम",del:"हटाएं",supplier:"आपूर्तिकर्ता",visit:"वेबसाइट",priceNote:"कीमतें शामिल नहीं।",priceLine:"अलग से",excel:"Excel",mail:"ईमेल",search:"खोजें...",currency:"मुद्रा",prefCur:"मुद्रा",results:"परिणाम",goTo:"देखें",admin:"एडमिन",orders:"ऑर्डर",users:"उपयोगकर्ता",status:"स्थिति",sNew:"नया",sProc:"प्रक्रिया",sShip:"भेजा",sDel:"पहुंचा",sCan:"रद्द",all:"सभी",addUser:"जोड़ें",user:"नाम",pass:"पासवर्ड",role:"भूमिका",actions:"कार्य",save:"सेव",delete:"हटाएं",invoice:"बिल",subtotal:"उप-कुल",shipping:"शिपिंग",sendInv:"भेजें",ordered:"दिनांक",view:"देखें",close:"बंद",brand:"ब्रांड",lines:"लाइन",name:"नाम"},
-zh:{pickBrand:"选择品牌",pickBrandSub:"选择供应商",pickCat:"选择类别",pickModel:"配置",configs:"配置",variants:"款式",size:"尺寸",network:"网络",storage:"存储",color:"颜色",qty:"数量",moq:"MOQ",pcs:"件",add:"加入",config:"配置",cart:"订单",empty:"为空",summary:"摘要",units:"件",product:"产品",gen:"代",chip:"芯片",clr:"颜色",modelNr:"型号",amount:"数量",custInfo:"客户",company:"公司",contact:"联系人",email:"邮箱",phone:"电话",address:"地址",notes:"备注",contShop:"继续",submit:"提交",proforma:"形式发票",billTo:"收票人",orderNr:"订单号",date:"日期",due:"到期",total:"总计",profNote:"非最终。",print:"打印",newOrd:"新订单",back:"← 返回",cats:"类别",brands:"品牌",min:"最少",del:"移除",supplier:"供应商",visit:"官网",priceNote:"不含价格。",priceLine:"另计",excel:"导出",mail:"邮件",search:"搜索...",currency:"货币",prefCur:"货币",results:"结果",goTo:"查看",admin:"管理",orders:"订单",users:"用户",status:"状态",sNew:"新",sProc:"处理中",sShip:"已发",sDel:"已达",sCan:"已取消",all:"全部",addUser:"添加",user:"用户名",pass:"密码",role:"角色",actions:"操作",save:"保存",delete:"删除",invoice:"发票",subtotal:"小计",shipping:"运费",sendInv:"发送",ordered:"日期",view:"查看",close:"关闭",brand:"品牌",lines:"行",name:"名称"}};
-const LANGS={da:"🇩🇰 Dansk",en:"🇬🇧 English",de:"🇩🇪 Deutsch",hi:"🇮🇳 हिन्दी",zh:"🇨🇳 中文"};
-const STS=["new","processing","shipped","delivered","cancelled"];
-const SC={new:"#ff9500",processing:"#0071e3",shipped:"#5856d6",delivered:"#34c759",cancelled:"#ff3b30"};
-const BRANDS={Apple:{name:"Apple",bg:"linear-gradient(145deg,#0a0a0a,#1a1a2e)",accent:"#0071e3",url:"https://www.apple.com",sup:"Apple Distribution International Ltd.",cats:["iPhone","iPad","MacBook","Apple Watch","AirPods"],ci:{iPhone:"📱",iPad:"📋",MacBook:"💻","Apple Watch":"⌚",AirPods:"🎧"}},JBL:{name:"JBL",bg:"linear-gradient(145deg,#ff6600,#cc3300)",accent:"#ff6600",url:"https://www.jbl.com",sup:"HARMAN International (Samsung)",cats:["Headphones","Earbuds","Portable Speakers","Party Speakers","Home Speakers"],ci:{Headphones:"🎧",Earbuds:"🎵","Portable Speakers":"📢","Party Speakers":"🎉","Home Speakers":"🏠"}},Marshall:{name:"Marshall",bg:"linear-gradient(145deg,#1a1a1a,#3d2b1f)",accent:"#c8a84e",url:"https://www.marshall.com",sup:"Marshall Group / Zound Industries",cats:["Headphones","Earbuds","Portable Speakers","Home Speakers","Soundbars"],ci:{Headphones:"🎧",Earbuds:"🎵","Portable Speakers":"📢","Home Speakers":"🏠",Soundbars:"📺"}}};
-const RAW=[["Apple","iPhone","iPhone 17 Pro Max","2025","A19 Pro","6.9\"",["5G"],["256GB","512GB","1TB","2TB"],["Silver","Cosmic Orange","Deep Blue"],"A3257"],["Apple","iPhone","iPhone 17 Pro","2025","A19 Pro","6.3\"",["5G"],["256GB","512GB","1TB"],["Silver","Cosmic Orange","Deep Blue"],"A3256"],["Apple","iPhone","iPhone Air","2025","A19 Pro","6.5\"",["5G"],["256GB","512GB","1TB"],["Space Black","Cloud White","Light Gold","Sky Blue"],"A3260"],["Apple","iPhone","iPhone 17","2025","A19","6.3\"",["5G"],["256GB","512GB"],["Black","Lavender","Mist Blue","Sage","White"],"A3254"],["Apple","iPhone","iPhone 17e","2026","A19","6.1\"",["5G"],["256GB","512GB"],["Black","White","Soft Pink"],"A3500"],["Apple","iPhone","iPhone 16 Pro Max","2024","A18 Pro","6.9\"",["5G"],["256GB","512GB","1TB"],["Desert Titanium","Natural Titanium","Black Titanium","White Titanium"],"A3295"],["Apple","iPhone","iPhone 16 Pro","2024","A18 Pro","6.3\"",["5G"],["128GB","256GB","512GB","1TB"],["Desert Titanium","Natural Titanium","Black Titanium","White Titanium"],"A3293"],["Apple","iPhone","iPhone 16 Plus","2024","A18","6.7\"",["5G"],["128GB","256GB","512GB"],["Ultramarine","Teal","Pink","White","Black"],"A3290"],["Apple","iPhone","iPhone 16","2024","A18","6.1\"",["5G"],["128GB","256GB","512GB"],["Ultramarine","Teal","Pink","White","Black"],"A3287"],["Apple","iPhone","iPhone 16e","2025","A18","6.1\"",["5G"],["128GB","256GB","512GB"],["Black","White"],"A3410"],["Apple","iPad","iPad Pro 11\"","2025","M5","11\"",["Wi-Fi","Wi-Fi+Cell"],["256GB","512GB","1TB","2TB"],["Space Black","Silver"],"A3357"],["Apple","iPad","iPad Pro 13\"","2025","M5","13\"",["Wi-Fi","Wi-Fi+Cell"],["256GB","512GB","1TB","2TB"],["Space Black","Silver"],"A3358"],["Apple","iPad","iPad Air 11\"","2025","M3","11\"",["Wi-Fi","Wi-Fi+Cell"],["128GB","256GB","512GB","1TB"],["Space Gray","Blue","Purple","Starlight"],"A3340"],["Apple","iPad","iPad Air 13\"","2025","M3","13\"",["Wi-Fi","Wi-Fi+Cell"],["128GB","256GB","512GB","1TB"],["Space Gray","Blue","Purple","Starlight"],"A3341"],["Apple","iPad","iPad mini 7","2024","A17 Pro","8.3\"",["Wi-Fi","Wi-Fi+Cell"],["128GB","256GB","512GB"],["Space Gray","Blue","Purple","Starlight"],"A3030"],["Apple","iPad","iPad 10","2024","A14","10.9\"",["Wi-Fi","Wi-Fi+Cell"],["64GB","256GB"],["Blue","Pink","Yellow","Silver"],"A2696"],["Apple","MacBook","MacBook Air 13\" M4","2025","M4","13.6\"",["–"],["256GB","512GB","1TB","2TB"],["Midnight","Starlight","Space Gray","Sky Blue"],"A3550"],["Apple","MacBook","MacBook Air 15\" M4","2025","M4","15.3\"",["–"],["256GB","512GB","1TB","2TB"],["Midnight","Starlight","Space Gray","Sky Blue"],"A3551"],["Apple","MacBook","MacBook Pro 14\" M4","2024","M4","14.2\"",["–"],["512GB","1TB","2TB"],["Space Black","Silver"],"A3530"],["Apple","MacBook","MacBook Pro 14\" M4 Pro","2024","M4 Pro","14.2\"",["–"],["512GB","1TB","2TB","4TB"],["Space Black","Silver"],"A3531"],["Apple","MacBook","MacBook Pro 16\" M4 Pro","2024","M4 Pro","16.2\"",["–"],["512GB","1TB","2TB","4TB"],["Space Black","Silver"],"A3535"],["Apple","MacBook","MacBook Pro 16\" M4 Max","2024","M4 Max","16.2\"",["–"],["1TB","2TB","4TB"],["Space Black","Silver"],"A3536"],["Apple","Apple Watch","Watch Series 11","2025","S10","42/46mm",["GPS","GPS+Cell"],["64GB"],["Jet Black","Rose Gold","Silver","Space Gray"],"A3300"],["Apple","Apple Watch","Watch Ultra 3","2025","S10","49mm",["GPS+Cell+Sat"],["64GB"],["Natural Titanium","Black Titanium"],"A3310"],["Apple","Apple Watch","Watch SE 3","2025","S10","40/44mm",["GPS","GPS+Cell"],["32GB"],["Midnight","Starlight","Silver"],"A3160"],["Apple","AirPods","AirPods Pro 3","2025","H2","–",["BT 5.3"],["–"],["White"],"A3430"],["Apple","AirPods","AirPods 4","2024","H2","–",["BT 5.3"],["–"],["White"],"A3200"],["Apple","AirPods","AirPods 4 ANC","2024","H2","–",["BT 5.3"],["–"],["White"],"A3201"],["Apple","AirPods","AirPods Max","2024","H2","–",["BT 5.3"],["–"],["Midnight","Starlight","Blue","Orange","Purple"],"A3210"],["JBL","Headphones","Tour ONE M3","2025","40mm Mica","Over-ear",["BT 5.3"],["–"],["Black","Mocha","Blue"],"TOURM3"],["JBL","Headphones","Live 770NC","2024","40mm","Over-ear",["BT 5.3"],["–"],["Black","Blue","White"],"LIVE770"],["JBL","Headphones","Live 670NC","2024","40mm","On-ear",["BT 5.3"],["–"],["Black","Blue","White","Rose"],"LIVE670"],["JBL","Headphones","Tune 770NC","2024","32mm","Over-ear",["BT 5.3"],["–"],["Black","Blue","Purple","White"],"TUNE770"],["JBL","Headphones","Tune 520BT","2024","32mm","On-ear",["BT 5.3"],["–"],["Black","Blue","Purple","White"],"TUNE520"],["JBL","Earbuds","Tour Pro 3","2025","Dual","In-ear",["BT 5.3+LDAC"],["–"],["Black","Latte"],"TOURPRO3"],["JBL","Earbuds","Live Buds 3","2024","10mm","TWS",["BT 5.3"],["–"],["Black","Silver","Blue"],"LIVEBUDS3"],["JBL","Earbuds","Tune Buds 2","2025","10mm","TWS",["BT 5.3"],["–"],["Black","White","Turquoise"],"TUNEBUDS2"],["JBL","Earbuds","Endurance Race 2","2025","8mm","Sport",["BT 5.3"],["–"],["Black","Blue","Coral"],"ENDRACE2"],["JBL","Earbuds","Vibe Buds 2","2025","8mm","TWS",["BT 5.3"],["–"],["Black","White","Blue","Pink"],"VIBEBUDS2"],["JBL","Portable Speakers","Flip 7","2025","IP68","Portable",["BT 5.4"],["–"],["Black","Blue","Red","Pink","Green","White"],"FLIP7"],["JBL","Portable Speakers","Charge 6","2025","IP67","Portable",["BT 5.4"],["–"],["Black","Blue","Red","Grey","Teal"],"CHARGE6"],["JBL","Portable Speakers","Xtreme 4","2024","IP67","Portable",["BT 5.3"],["–"],["Black","Blue"],"XTREME4"],["JBL","Portable Speakers","Go 4","2024","IP67","Mini",["BT 5.3"],["–"],["Black","Blue","Red","Pink","Purple","White"],"GO4"],["JBL","Portable Speakers","Clip 5","2024","IP67","Clip",["BT 5.3"],["–"],["Black","Blue","Red","Pink","White"],"CLIP5"],["JBL","Party Speakers","PartyBox 520","2025","400W","Party",["BT 5.4"],["–"],["Black"],"PB520"],["JBL","Party Speakers","PartyBox Stage 320","2024","240W","Party",["BT 5.4"],["–"],["Black"],"PBS320"],["JBL","Party Speakers","PartyBox Encore 2","2025","100W","Party",["BT 5.4"],["–"],["Black"],"PBE2"],["JBL","Home Speakers","Authentics 300","2025","Wi-Fi+BT","Home",["Wi-Fi+BT"],["–"],["Black/Gold"],"AUTH300"],["JBL","Home Speakers","Authentics 200","2025","Wi-Fi+BT","Home",["Wi-Fi+BT"],["–"],["Black/Gold"],"AUTH200"],["Marshall","Headphones","Monitor III ANC","2024","50mm","Over-ear",["BT 5.4"],["–"],["Black","Cream"],"MONIII"],["Marshall","Headphones","Major V","2024","40mm","On-ear",["BT 5.3"],["–"],["Black","Brown"],"MAJV"],["Marshall","Headphones","Major IV","2024","40mm","On-ear",["BT 5.3"],["–"],["Black","Brown"],"MAJIV"],["Marshall","Earbuds","Minor IV","2024","12mm","TWS",["BT 5.3"],["–"],["Black","Brown","Cream"],"MINIV"],["Marshall","Earbuds","Motif II ANC","2024","6mm","TWS",["BT 5.3"],["–"],["Black","Cream"],"MOTII"],["Marshall","Portable Speakers","Emberton III","2025","Stereo","Portable",["BT 5.3"],["–"],["Black & Brass","Cream","Forest"],"EMBIII"],["Marshall","Portable Speakers","Middleton II","2025","Stereo","Portable",["BT 5.3"],["–"],["Black & Brass","Cream"],"MIDII"],["Marshall","Portable Speakers","Willen II","2025","Full-range","Mini",["BT 5.3"],["–"],["Black & Brass","Cream"],"WILII"],["Marshall","Portable Speakers","Kilburn III","2024","Stereo","Portable",["BT 5.3"],["–"],["Black & Brass","Brown","Cream"],"KILIII"],["Marshall","Portable Speakers","Tufton","2024","Stereo","Portable",["BT 5.0"],["–"],["Black & Brass"],"TUFT"],["Marshall","Home Speakers","Stanmore III","2024","Stereo","Home",["BT 5.2"],["–"],["Black","Cream","Brown"],"STIII"],["Marshall","Home Speakers","Woburn III","2024","Stereo","Home",["BT 5.2"],["–"],["Black","Cream"],"WOBIII"],["Marshall","Home Speakers","Acton III","2024","Compact","Home",["BT 5.2"],["–"],["Black","Cream"],"ACTIII"],["Marshall","Soundbars","Heston 120","2025","Dolby Atmos","Soundbar",["Wi-Fi+BT+HDMI"],["–"],["Black"],"HEST120"],["Marshall","Soundbars","Heston 60","2025","Dolby Atmos","Bar",["Wi-Fi+BT+HDMI"],["–"],["Black"],"HEST60"],["Marshall","Soundbars","Sub 200","2025","Wireless","Sub",["Wi-Fi"],["–"],["Black"],"SUB200"]];
-function hS(s){let h=0;for(let i=0;i<s.length;i++)h=((h<<5)-h+s.charCodeAt(i))&0xffffff;return Math.abs(h).toString(16).toUpperCase().padStart(4,"0").slice(0,4);}
-function bP(){let id=0;const o=[];for(const[br,k,m,g,ch,sk,ns,ss,cs,mn]of RAW){for(const n of ns)for(const s of ss)for(const c of cs){const h=hS(mn+n+s+c);o.push({id:id++,brand:br,kat:k,model:m,gen:g,chip:ch,sk,net:n,stor:s,farve:c,mnr:mn,skuEU:h+"-EU",skuIn:h+"-IN"});}}return o;}
-const P=bP();
-const CM={"Space Black":"#1d1d1f","Black Titanium":"#2c2c2e","Natural Titanium":"#c5b9a8","White Titanium":"#f5f5f0","Desert Titanium":"#c4a882",Black:"#1d1d1f","Black & Brass":"#1d1d1f",White:"#f5f5f7",Silver:"#c0c0c0","Space Gray":"#6e6e73",Blue:"#4e7eff",Ultramarine:"#3c3cff",Teal:"#30bfbf",Pink:"#ff6482","Soft Pink":"#ffb3c6",Purple:"#bf5af2",Starlight:"#f0e4d3","Sky Blue":"#7ec8e3","Cloud White":"#f0f0f0","Light Gold":"#e8d5a8",Midnight:"#1a2744",Yellow:"#ffe066","Rose Gold":"#e8b4b4","Jet Black":"#0a0a0a",Orange:"#ff9500",Lavender:"#b4a7d6","Mist Blue":"#a8c4d4",Sage:"#a8c4a8","Cosmic Orange":"#e86830","Deep Blue":"#1a3d7c",Cream:"#f5f0e0",Brown:"#5c3a21",Forest:"#2d5a27",Mocha:"#6b4c3b","Black/Gold":"#1d1d1f",Red:"#e31937",Green:"#22813a",Coral:"#ff6b5a",Grey:"#8a8a8e",Rose:"#e8a0b4",Latte:"#c8b89a",Turquoise:"#40c9c2"};
-const LC=["White","Starlight","White Titanium","Yellow","Natural Titanium","Silver","Rose Gold","Sky Blue","Cloud White","Light Gold","Cream","Latte","Soft Pink","Lavender","Mist Blue","Sage"];
-const MOQ=5;const uniq=a=>[...new Set(a)];
-function genOrd(){const d=new Date();return`GO-${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}-${Math.floor(1e3+Math.random()*9e3)}`;}
-function BrandLogo({brand,size=50}){if(brand==="Apple")return<svg viewBox="0 0 24 24" width={size} height={size} fill="#f5f5f7"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>;if(brand==="JBL")return<svg viewBox="0 0 100 36" width={size*2} height={size*.7}><text x="50" y="30" textAnchor="middle" fontFamily="Arial Black,sans-serif" fontSize="34" fontWeight="900" fill="#fff">JBL</text></svg>;return<svg viewBox="0 0 160 28" width={size*2.5} height={size*.45}><text x="80" y="22" textAnchor="middle" fontFamily="serif" fontSize="20" fontWeight="700" fill="#c8a84e" letterSpacing="3">MARSHALL</text></svg>;}
+/* ═══════════════════════════════════════════════════════════════
+   GoOrder — Komplet B2B Bestillingssystem  v2.0
+   ═══════════════════════════════════════════════════════════════ */
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import { createClient } from '@supabase/supabase-js';
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import * as XLSX from 'xlsx';
 
-function LoginPortal({onLogin}){const[u,sU]=useState("");const[p,sP]=useState("");const[err,sE]=useState(false);const[loading,sL]=useState(false);
-const go=async()=>{sL(true);const r=await dbG("users",`?username=eq.${encodeURIComponent(u.trim().toLowerCase())}&password=eq.${encodeURIComponent(p)}&active=eq.true`);if(r?.length>0){try{sessionStorage.setItem("go_u",JSON.stringify(r[0]));}catch{}onLogin(r[0]);}else{sE(true);setTimeout(()=>sE(false),3000);}sL(false);};
-return(<div style={{minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",background:"linear-gradient(160deg,#0a0a0a,#1a1a2e 40%,#16213e)",fontFamily:"'SF Pro Display',-apple-system,sans-serif",padding:20}}>
-<div style={{marginBottom:36,textAlign:"center"}}><div style={{fontSize:48,marginBottom:8}}>📦</div><h1 style={{color:"#f5f5f7",fontSize:36,fontWeight:800,margin:0}}>GoOrder</h1><p style={{color:"rgba(255,255,255,.5)",fontSize:14,marginTop:6}}>Multi-brand bestillingssystem</p></div>
-<div style={{background:"rgba(255,255,255,.06)",backdropFilter:"blur(20px)",borderRadius:20,padding:"36px 32px",width:"100%",maxWidth:380,border:"1px solid rgba(255,255,255,.1)",boxShadow:"0 20px 60px rgba(0,0,0,.4)"}}>
-<label style={{display:"block",color:"rgba(255,255,255,.6)",fontSize:12,fontWeight:600,marginBottom:6}}>👤 Brugernavn</label>
-<input type="text" value={u} onChange={e=>{sU(e.target.value);sE(false);}} onKeyDown={e=>e.key==="Enter"&&document.getElementById("gp").focus()} style={{width:"100%",padding:"14px 18px",border:err?"2px solid #ff3b30":"2px solid rgba(255,255,255,.15)",borderRadius:12,fontSize:15,outline:"none",background:"rgba(255,255,255,.08)",color:"#f5f5f7",boxSizing:"border-box"}} autoFocus/>
-<label style={{display:"block",color:"rgba(255,255,255,.6)",fontSize:12,fontWeight:600,marginBottom:6,marginTop:16}}>🔒 Adgangskode</label>
-<input id="gp" type="password" value={p} onChange={e=>{sP(e.target.value);sE(false);}} onKeyDown={e=>e.key==="Enter"&&go()} style={{width:"100%",padding:"14px 18px",border:err?"2px solid #ff3b30":"2px solid rgba(255,255,255,.15)",borderRadius:12,fontSize:15,outline:"none",background:"rgba(255,255,255,.08)",color:"#f5f5f7",boxSizing:"border-box"}}/>
-{err&&<div style={{color:"#ff6b6b",fontSize:12,marginTop:10,textAlign:"center",background:"rgba(255,59,48,.1)",padding:8,borderRadius:8}}>⚠️ Forkert brugernavn eller adgangskode</div>}
-<button onClick={go} disabled={loading} style={{width:"100%",padding:14,marginTop:20,background:loading?"#555":"linear-gradient(135deg,#0071e3,#5856d6)",color:"#fff",border:"none",borderRadius:12,fontSize:16,fontWeight:700,cursor:loading?"wait":"pointer"}}>{loading?"...":"Log ind"}</button>
-</div><p style={{color:"rgba(255,255,255,.3)",fontSize:11,marginTop:32}}>Kontakt leverandør for login</p><div style={{color:"rgba(255,255,255,.15)",fontSize:10,marginTop:16}}>goorder.dk</div></div>);}
+/* ── Supabase ── */
+const SB_URL = 'https://jesskkrtdcrjkhqbvwqo.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Implc3Nra3J0ZGNyamtocWJ2d3FvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyOTgyMjAsImV4cCI6MjA5MDg3NDIyMH0.BtJMQ5NOY6oL0HqaSweLtAZZoD0YHWmUTyV_XWK0CDw';
+const sb = createClient(SB_URL, SB_KEY);
 
-export default function App(){
-const[au,setAu]=useState(()=>{try{const s=sessionStorage.getItem("go_u");return s?JSON.parse(s):null;}catch{return null;}});
-const[lang,setLang]=useState("da");const t=T[lang];
-const[cur,setCur]=useState("EUR");const[step,setStep]=useState("brand");const[brand,setBrand]=useState(null);const[cat,setCat]=useState(null);const[selMod,setSelMod]=useState(null);const[picks,setPicks]=useState({sz:null,net:null,stor:null,clr:null});const[qty,setQty]=useState(MOQ);const[cart,setCart]=useState([]);const[cust,setCust]=useState({f:"",k:"",e:"",t:"",a:"",n:""});const[orderNr,setOrderNr]=useState("");const[searchQ,setSearchQ]=useState("");const[showSearch,setShowSearch]=useState(false);
-const[dbO,setDbO]=useState([]);const[dbU,setDbU]=useState([]);const[aView,setAView]=useState("orders");const[selO,setSelO]=useState(null);const[oItems,setOItems]=useState([]);const[nU,setNU]=useState({username:"",password:"",name:"",role:"customer"});const[inv,setInv]=useState({sub:"",ship:"",tot:""});
-const isA=au?.role==="admin";const bd=brand?BRANDS[brand]:null;const ac=bd?.accent||"#0071e3";
-const bi=useMemo(()=>P.filter(p=>p.brand===brand),[brand]);const ci=useMemo(()=>bi.filter(p=>p.kat===cat),[bi,cat]);const mns=useMemo(()=>uniq(ci.map(p=>p.model)),[ci]);const mi=useMemo(()=>ci.filter(p=>p.model===selMod),[ci,selMod]);const szs=useMemo(()=>uniq(mi.map(p=>p.sk)),[mi]);const aSz=useMemo(()=>picks.sz?mi.filter(p=>p.sk===picks.sz):mi,[mi,picks.sz]);const nts=useMemo(()=>uniq(aSz.map(p=>p.net)),[aSz]);const aNt=useMemo(()=>picks.net?aSz.filter(p=>p.net===picks.net):aSz,[aSz,picks.net]);const sts=useMemo(()=>uniq(aNt.map(p=>p.stor).filter(l=>l!=="–")),[aNt]);const aSt=useMemo(()=>picks.stor?aNt.filter(p=>p.stor===picks.stor):aNt,[aNt,picks.stor]);const cls=useMemo(()=>uniq(aSt.map(p=>p.farve)),[aSt]);const fin=useMemo(()=>picks.clr?aSt.find(p=>p.farve===picks.clr):null,[aSt,picks.clr]);const cc=cart.reduce((s,i)=>s+i.qty,0);
-const sr=useMemo(()=>{if(!searchQ||searchQ.length<2)return[];const q=searchQ.toLowerCase();const seen=new Set();return P.filter(p=>{const k=p.brand+p.model;if(seen.has(k))return false;if([p.brand,p.model,p.kat,p.chip,p.mnr].some(v=>v.toLowerCase().includes(q))){seen.add(k);return true;}return false;}).slice(0,12);},[searchQ]);
-useEffect(()=>{if(step!=="configure")return;let ns=picks.sz,nn=picks.net,nt=picks.stor,nc=picks.clr,ch=false;if(!ns&&szs.length===1){ns=szs[0];ch=true;}if(!nn&&nts.length===1){nn=nts[0];ch=true;}if(nn&&!nt&&sts.length===0){nt="–";ch=true;}if(nn&&!nt&&sts.length===1){nt=sts[0];ch=true;}if((nt||sts.length===0)&&!nc&&cls.length===1){nc=cls[0];ch=true;}if(ch)setPicks({sz:ns,net:nn,stor:nt,clr:nc});},[step,selMod,picks]);
-const loadA=useCallback(async()=>{if(!isA)return;setDbO(await dbG("orders","?order=created_at.desc")||[]);setDbU(await dbG("users","?order=id.asc")||[]);},[isA]);
-useEffect(()=>{if(step==="admin")loadA();},[step,loadA]);
+/* ── PayPal ── */
+const PP_CLIENT = 'AWNe2YsLSrlWLWWxPTk4rHiyMPxdbMrLhJGUpzy9gu3Z7esEfhxFaAV6WAonnZxYPRFtkBOStXqbl76Z';
 
-if(!au)return<LoginPortal onLogin={u=>{setAu(u);}}/>;
-const reset=()=>setPicks({sz:null,net:null,stor:null,clr:null});const goHome=()=>{setStep("brand");setBrand(null);setCat(null);setSelMod(null);reset();setQty(MOQ);setShowSearch(false);};
-const goBrand=b=>{setBrand(b);setStep("category");setCat(null);setSelMod(null);reset();};const goCat=c=>{setCat(c);setStep("model");setSelMod(null);reset();};const goMod=m=>{setSelMod(m);setStep("configure");reset();setQty(MOQ);};
-const addCart=()=>{if(!fin||qty<MOQ)return;const idx=cart.findIndex(i=>i.skuEU===fin.skuEU);if(idx>=0)setCart(c=>c.map((x,i)=>i===idx?{...x,qty:x.qty+qty}:x));else setCart(c=>[...c,{...fin,qty}]);reset();setQty(MOQ);setStep("model");};
-const doSubmit=async()=>{const nr=genOrd();setOrderNr(nr);const o=await dbP("orders",{order_nr:nr,user_id:au.id,company:cust.f,contact:cust.k,email:cust.e,phone:cust.t,address:cust.a,notes:cust.n,currency:cur,status:"new"});if(o?.[0]){const items=cart.map(it=>({order_id:o[0].id,brand:it.brand,model:it.model,gen:it.gen,chip:it.chip,screen:it.sk,network:it.net,storage:it.stor,color:it.farve,model_nr:it.mnr,sku_eu:it.skuEU,sku_in:it.skuIn,qty:it.qty}));await dbP("order_items",items);}setStep("invoice");};
-const doExcel=()=>{const rows=cart.map(it=>({Brand:it.brand,Product:it.model,Color:it.farve,Storage:it.stor,Model:it.mnr,SKU:it.skuEU,Qty:it.qty}));const ws=XLSX.utils.json_to_sheet(rows);const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Order");XLSX.writeFile(wb,(orderNr||"order")+".xlsx");};
-const doEmail=()=>{const lines=cart.map((it,i)=>`${i+1}. ${it.brand} ${it.model} | ${it.farve} ${it.stor!=="–"?it.stor:""} | ${it.mnr} | ${it.qty}x`).join("%0A");window.open(`mailto:hello@keap.me?subject=${encodeURIComponent(`PROFORMA ${orderNr} — ${cust.f}`)}&body=${t.orderNr}: ${orderNr}%0A${t.company}: ${cust.f}%0A${t.contact}: ${cust.k}%0A${t.email}: ${cust.e}%0A${t.currency}: ${cur}%0A%0A${lines}%0A%0ATOTAL: ${cc} ${t.pcs}%0A%0A${t.priceLine}`);};
-const goSR=r=>{setBrand(r.brand);setStep("category");setTimeout(()=>{setCat(r.kat);setStep("model");setTimeout(()=>{setSelMod(r.model);setStep("configure");reset();},50);},50);setShowSearch(false);setSearchQ("");};
-const updStatus=async(id,s)=>{await dbU("orders","id=eq."+id,{status:s,updated_at:new Date().toISOString()});loadA();};
-const viewOD=async o=>{setSelO(o);setOItems(await dbG("order_items","?order_id=eq."+o.id)||[]);};
-const addU=async()=>{if(!nU.username||!nU.password||!nU.name)return;await dbP("users",{username:nU.username.toLowerCase(),password:nU.password,name:nU.name,role:nU.role});setNU({username:"",password:"",name:"",role:"customer"});loadA();};
-const delU=async id=>{if(id===au.id)return;await dbD("users","id=eq."+id);loadA();};
-const mkInv=async o=>{const nr="INV-"+o.order_nr.replace("GO-","");const tot=parseFloat(inv.sub||0)+parseFloat(inv.ship||0);await dbP("invoices",{order_id:o.id,invoice_nr:nr,subtotal:inv.sub||0,shipping:inv.ship||0,total:tot,currency:o.currency,status:"sent"});await dbU("orders","id=eq."+o.id,{status:"delivered"});setInv({sub:"",ship:"",tot:""});loadA();setSelO(null);};
+/* ── Currencies ── */
+const CURRENCIES = {
+  DKK: { symbol: 'kr', rate: 1, code: 'DKK', decimals: 2 },
+  EUR: { symbol: '€', rate: 0.134, code: 'EUR', decimals: 2 },
+  USD: { symbol: '$', rate: 0.145, code: 'USD', decimals: 2 },
+  INR: { symbol: '₹', rate: 12.1, code: 'INR', decimals: 0 },
+  CNY: { symbol: '¥', rate: 1.05, code: 'CNY', decimals: 2 },
+};
 
-const f="'SF Pro Display',-apple-system,sans-serif";const oS={color:"#1d1d1f",background:"#fff",fontSize:13,padding:6};
-const S={root:{fontFamily:f,background:"#f5f5f7",minHeight:"100vh",color:"#1d1d1f"},nav:{background:"#000",padding:"10px 16px",display:"flex",justifyContent:"space-between",alignItems:"center",position:"sticky",top:0,zIndex:100,flexWrap:"wrap",gap:6},navR:{display:"flex",alignItems:"center",gap:5,flexWrap:"wrap"},sel:{background:"rgba(255,255,255,.12)",border:"1px solid rgba(255,255,255,.2)",borderRadius:7,padding:"5px 22px 5px 8px",color:"#f5f5f7",fontSize:11,outline:"none",cursor:"pointer",WebkitAppearance:"none",appearance:"none",backgroundImage:"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23fff'/%3E%3C/svg%3E\")",backgroundRepeat:"no-repeat",backgroundPosition:"right 7px center"},nb:{background:"rgba(255,255,255,.12)",border:"1px solid rgba(255,255,255,.2)",borderRadius:7,padding:"5px 10px",color:"#f5f5f7",cursor:"pointer",fontSize:11,fontWeight:600,display:"flex",alignItems:"center",gap:5},main:{padding:"14px 16px 60px",maxWidth:1100,margin:"0 auto"},h1:{fontSize:22,fontWeight:800,letterSpacing:"-1px",marginBottom:3},sub:{fontSize:11,color:"#86868b",marginBottom:14},bg:{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:12},bc2:b=>({background:BRANDS[b].bg,borderRadius:18,padding:"28px 20px",cursor:"pointer",border:"3px solid transparent",textAlign:"center",color:"#f5f5f7",display:"flex",flexDirection:"column",alignItems:"center",gap:8}),sec:{background:"#fff",borderRadius:12,border:"1px solid #e8e8ed",padding:"14px",marginBottom:10},box:{background:"#fff",borderRadius:10,padding:"14px",marginBottom:8,border:"1px solid #e8e8ed"},lbl:{fontSize:10,fontWeight:700,textTransform:"uppercase",letterSpacing:"1px",color:"#86868b",marginBottom:6},og:{display:"flex",flexWrap:"wrap",gap:5},ob:a=>({padding:"7px 14px",borderRadius:8,border:a?`2px solid ${ac}`:"2px solid #e8e8ed",background:a?ac+"15":"#fff",cursor:"pointer",fontSize:12,fontWeight:a?700:500,color:a?ac:"#1d1d1f"}),tbl:{width:"100%",borderCollapse:"collapse",fontSize:9},th:{textAlign:"left",padding:"5px 3px",borderBottom:"2px solid #1d1d1f",fontWeight:700,fontSize:8,textTransform:"uppercase",color:"#86868b"},td:{padding:"5px 3px",borderBottom:"1px solid #f0f0f5"},ig:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6,marginBottom:6},inp:{width:"100%",padding:"8px 10px",border:"1px solid #d2d2d7",borderRadius:6,fontSize:12,outline:"none",boxSizing:"border-box"},il:{display:"block",fontSize:8,fontWeight:700,color:"#86868b",marginBottom:2,textTransform:"uppercase"},pBtn:{background:"#0071e3",color:"#fff",border:"none",borderRadius:8,padding:"8px 18px",fontSize:12,fontWeight:600,cursor:"pointer"},sBtn:{background:"#f5f5f7",color:"#1d1d1f",border:"1px solid #d2d2d7",borderRadius:8,padding:"8px 18px",fontSize:12,fontWeight:600,cursor:"pointer"},bl:{color:ac,cursor:"pointer",fontSize:11,fontWeight:500,border:"none",background:"none",padding:0,marginBottom:8},stamp:c=>({display:"inline-block",border:`2px solid ${c}`,color:c,borderRadius:6,padding:"3px 10px",fontSize:10,fontWeight:700,textTransform:"uppercase",transform:"rotate(-4deg)"}),sb:s=>({display:"inline-block",padding:"2px 8px",borderRadius:6,fontSize:9,fontWeight:700,color:"#fff",background:SC[s]||"#999"})};
+/* ── Translations ── */
+const T = {
+  da: {
+    appName:'GoOrder', login:'Log ind', logout:'Log ud', username:'Brugernavn', password:'Adgangskode',
+    dashboard:'Dashboard', orders:'Ordrer', newOrder:'Ny ordre', products:'Produkter', customers:'Kunder',
+    invoices:'Fakturaer', creditNotes:'Kreditnotaer', reports:'Rapporter', settings:'Indstillinger', profile:'Profil',
+    myOrders:'Mine ordrer', search:'Søg...', save:'Gem', cancel:'Annuller', delete:'Slet', edit:'Rediger',
+    add:'Tilføj', close:'Luk', confirm:'Bekræft', total:'Total', subtotal:'Subtotal', vat:'Moms', qty:'Antal',
+    price:'Pris', status:'Status', date:'Dato', actions:'Handlinger', name:'Navn', email:'E-mail',
+    phone:'Telefon', address:'Adresse', company:'Firma', vatNo:'CVR-nr', city:'By', zip:'Postnr',
+    country:'Land', notes:'Noter', deliveryAddr:'Leveringsadresse', billingAddr:'Faktureringsadresse',
+    received:'Modtaget', processing:'Behandler', shipped:'Afsendt', delivered:'Leveret', cancelled:'Annulleret',
+    proforma:'Proforma', finalInvoice:'Endelig faktura', creditNote:'Kreditnota',
+    payNow:'Betal nu', payWithPayPal:'Betal med PayPal', paid:'Betalt', unpaid:'Ubetalt',
+    partialDelivery:'Dellevering', deliveryProof:'Leveringsbevis', uploadPhoto:'Upload foto',
+    signature:'Signatur', stock:'Lager', inStock:'På lager', lowStock:'Få på lager', outOfStock:'Ikke på lager',
+    exportExcel:'Eksporter Excel', exportPDF:'Eksporter PDF', exportCSV:'Eksporter CSV',
+    language:'Sprog', currency:'Valuta', orderNo:'Ordrenr', invoiceNo:'Fakturanr',
+    from:'Fra', to:'Til', quantity:'Antal', unitPrice:'Enhedspris', lineTotal:'Linjetotal',
+    createOrder:'Opret ordre', updateOrder:'Opdater ordre', brand:'Mærke', model:'Model',
+    category:'Kategori', totalOrders:'Ordrer i alt', revenue:'Omsætning', avgOrder:'Gns. ordre',
+    topProducts:'Top produkter', recentOrders:'Seneste ordrer', noOrders:'Ingen ordrer endnu',
+    selectCustomer:'Vælg kunde', addItem:'Tilføj vare', removeItem:'Fjern', orderCreated:'Ordre oprettet!',
+    orderUpdated:'Ordre opdateret!', savedOk:'Gemt!', error:'Fejl', tryAgain:'Prøv igen',
+    installApp:'Installér app', loginFail:'Forkert brugernavn eller adgangskode',
+    deliveredQty:'Leveret antal', remainingQty:'Resterende', generateInvoice:'Generer faktura',
+    generateCredit:'Opret kreditnota', reason:'Årsag', amount:'Beløb', allBrands:'Alle mærker',
+    allStatuses:'Alle statusser', welcome:'Velkommen', back:'Tilbage', orderDetails:'Ordredetaljer',
+    statusHistory:'Statushistorik', emailSent:'Email sendt', noData:'Ingen data',
+    period:'Periode', today:'I dag', thisWeek:'Denne uge', thisMonth:'Denne måned', allTime:'Al tid',
+    items:'Varer', customer:'Kunde', admin:'Administrator', demo:'Demo', printInvoice:'Print faktura',
+    downloadPDF:'Download PDF', tax:'Moms (25%)', grandTotal:'Total inkl. moms',
+    signatureCapture:'Signatur-optagelse', clear:'Ryd', done:'Færdig',
+    partialShip:'Dellevering', shipQty:'Send antal', markShipped:'Markér afsendt',
+    viewOrder:'Se ordre', editProfile:'Rediger profil', changePassword:'Skift adgangskode',
+    multiAddr:'Leveringsadresser', addAddress:'Tilføj adresse', primaryAddr:'Primær',
+    setPrimary:'Sæt som primær', removeAddr:'Fjern adresse',
+    orderSummary:'Ordreoversigt', paymentStatus:'Betalingsstatus', stockLevel:'Lagerniveau',
+  },
+  en: {
+    appName:'GoOrder', login:'Log in', logout:'Log out', username:'Username', password:'Password',
+    dashboard:'Dashboard', orders:'Orders', newOrder:'New order', products:'Products', customers:'Customers',
+    invoices:'Invoices', creditNotes:'Credit notes', reports:'Reports', settings:'Settings', profile:'Profile',
+    myOrders:'My orders', search:'Search...', save:'Save', cancel:'Cancel', delete:'Delete', edit:'Edit',
+    add:'Add', close:'Close', confirm:'Confirm', total:'Total', subtotal:'Subtotal', vat:'VAT', qty:'Qty',
+    price:'Price', status:'Status', date:'Date', actions:'Actions', name:'Name', email:'Email',
+    phone:'Phone', address:'Address', company:'Company', vatNo:'VAT No', city:'City', zip:'Zip',
+    country:'Country', notes:'Notes', deliveryAddr:'Delivery address', billingAddr:'Billing address',
+    received:'Received', processing:'Processing', shipped:'Shipped', delivered:'Delivered', cancelled:'Cancelled',
+    proforma:'Proforma', finalInvoice:'Final invoice', creditNote:'Credit note',
+    payNow:'Pay now', payWithPayPal:'Pay with PayPal', paid:'Paid', unpaid:'Unpaid',
+    partialDelivery:'Partial delivery', deliveryProof:'Delivery proof', uploadPhoto:'Upload photo',
+    signature:'Signature', stock:'Stock', inStock:'In stock', lowStock:'Low stock', outOfStock:'Out of stock',
+    exportExcel:'Export Excel', exportPDF:'Export PDF', exportCSV:'Export CSV',
+    language:'Language', currency:'Currency', orderNo:'Order no', invoiceNo:'Invoice no',
+    from:'From', to:'To', quantity:'Quantity', unitPrice:'Unit price', lineTotal:'Line total',
+    createOrder:'Create order', updateOrder:'Update order', brand:'Brand', model:'Model',
+    category:'Category', totalOrders:'Total orders', revenue:'Revenue', avgOrder:'Avg order',
+    topProducts:'Top products', recentOrders:'Recent orders', noOrders:'No orders yet',
+    selectCustomer:'Select customer', addItem:'Add item', removeItem:'Remove', orderCreated:'Order created!',
+    orderUpdated:'Order updated!', savedOk:'Saved!', error:'Error', tryAgain:'Try again',
+    installApp:'Install app', loginFail:'Wrong username or password',
+    deliveredQty:'Delivered qty', remainingQty:'Remaining', generateInvoice:'Generate invoice',
+    generateCredit:'Create credit note', reason:'Reason', amount:'Amount', allBrands:'All brands',
+    allStatuses:'All statuses', welcome:'Welcome', back:'Back', orderDetails:'Order details',
+    statusHistory:'Status history', emailSent:'Email sent', noData:'No data',
+    period:'Period', today:'Today', thisWeek:'This week', thisMonth:'This month', allTime:'All time',
+    items:'Items', customer:'Customer', admin:'Admin', demo:'Demo', printInvoice:'Print invoice',
+    downloadPDF:'Download PDF', tax:'Tax (25%)', grandTotal:'Grand total',
+    signatureCapture:'Signature capture', clear:'Clear', done:'Done',
+    partialShip:'Partial ship', shipQty:'Ship qty', markShipped:'Mark shipped',
+    viewOrder:'View order', editProfile:'Edit profile', changePassword:'Change password',
+    multiAddr:'Delivery addresses', addAddress:'Add address', primaryAddr:'Primary',
+    setPrimary:'Set as primary', removeAddr:'Remove address',
+    orderSummary:'Order summary', paymentStatus:'Payment status', stockLevel:'Stock level',
+  },
+  de: {
+    appName:'GoOrder', login:'Anmelden', logout:'Abmelden', username:'Benutzername', password:'Passwort',
+    dashboard:'Dashboard', orders:'Bestellungen', newOrder:'Neue Bestellung', products:'Produkte', customers:'Kunden',
+    invoices:'Rechnungen', creditNotes:'Gutschriften', reports:'Berichte', settings:'Einstellungen', profile:'Profil',
+    myOrders:'Meine Bestellungen', search:'Suchen...', save:'Speichern', cancel:'Abbrechen', delete:'Löschen', edit:'Bearbeiten',
+    add:'Hinzufügen', close:'Schließen', confirm:'Bestätigen', total:'Gesamt', subtotal:'Zwischensumme', vat:'MwSt', qty:'Menge',
+    price:'Preis', status:'Status', date:'Datum', actions:'Aktionen', name:'Name', email:'E-Mail',
+    phone:'Telefon', address:'Adresse', company:'Firma', vatNo:'USt-IdNr', city:'Stadt', zip:'PLZ',
+    country:'Land', notes:'Notizen', deliveryAddr:'Lieferadresse', billingAddr:'Rechnungsadresse',
+    received:'Empfangen', processing:'In Bearbeitung', shipped:'Versandt', delivered:'Geliefert', cancelled:'Storniert',
+    proforma:'Proforma', finalInvoice:'Endrechnung', creditNote:'Gutschrift',
+    payNow:'Jetzt bezahlen', payWithPayPal:'Mit PayPal bezahlen', paid:'Bezahlt', unpaid:'Unbezahlt',
+    partialDelivery:'Teillieferung', deliveryProof:'Liefernachweis', uploadPhoto:'Foto hochladen',
+    signature:'Unterschrift', stock:'Lager', inStock:'Auf Lager', lowStock:'Wenig Lager', outOfStock:'Nicht vorrätig',
+    exportExcel:'Excel exportieren', exportPDF:'PDF exportieren', exportCSV:'CSV exportieren',
+    language:'Sprache', currency:'Währung', orderNo:'Bestell-Nr', invoiceNo:'Rechnungs-Nr',
+    from:'Von', to:'Bis', quantity:'Menge', unitPrice:'Stückpreis', lineTotal:'Zeilensumme',
+    createOrder:'Bestellung erstellen', updateOrder:'Bestellung aktualisieren', brand:'Marke', model:'Modell',
+    category:'Kategorie', totalOrders:'Bestellungen gesamt', revenue:'Umsatz', avgOrder:'Ø Bestellung',
+    topProducts:'Top Produkte', recentOrders:'Letzte Bestellungen', noOrders:'Noch keine Bestellungen',
+    selectCustomer:'Kunde wählen', addItem:'Artikel hinzufügen', removeItem:'Entfernen', orderCreated:'Bestellung erstellt!',
+    orderUpdated:'Bestellung aktualisiert!', savedOk:'Gespeichert!', error:'Fehler', tryAgain:'Erneut versuchen',
+    installApp:'App installieren', loginFail:'Falscher Benutzername oder Passwort',
+    deliveredQty:'Gelieferte Menge', remainingQty:'Verbleibend', generateInvoice:'Rechnung erstellen',
+    generateCredit:'Gutschrift erstellen', reason:'Grund', amount:'Betrag', allBrands:'Alle Marken',
+    allStatuses:'Alle Status', welcome:'Willkommen', back:'Zurück', orderDetails:'Bestelldetails',
+    statusHistory:'Statusverlauf', emailSent:'E-Mail gesendet', noData:'Keine Daten',
+    period:'Zeitraum', today:'Heute', thisWeek:'Diese Woche', thisMonth:'Diesen Monat', allTime:'Gesamt',
+    items:'Artikel', customer:'Kunde', admin:'Administrator', demo:'Demo', printInvoice:'Rechnung drucken',
+    downloadPDF:'PDF herunterladen', tax:'MwSt (25%)', grandTotal:'Gesamtbetrag',
+    signatureCapture:'Unterschrift erfassen', clear:'Löschen', done:'Fertig',
+    partialShip:'Teillieferung', shipQty:'Versandmenge', markShipped:'Als versandt markieren',
+    viewOrder:'Bestellung anzeigen', editProfile:'Profil bearbeiten', changePassword:'Passwort ändern',
+    multiAddr:'Lieferadressen', addAddress:'Adresse hinzufügen', primaryAddr:'Primär',
+    setPrimary:'Als primär setzen', removeAddr:'Adresse entfernen',
+    orderSummary:'Bestellübersicht', paymentStatus:'Zahlungsstatus', stockLevel:'Lagerbestand',
+  },
+  hi: {
+    appName:'GoOrder', login:'लॉग इन', logout:'लॉग आउट', username:'उपयोगकर्ता नाम', password:'पासवर्ड',
+    dashboard:'डैशबोर्ड', orders:'ऑर्डर', newOrder:'नया ऑर्डर', products:'उत्पाद', customers:'ग्राहक',
+    invoices:'चालान', creditNotes:'क्रेडिट नोट', reports:'रिपोर्ट', settings:'सेटिंग्स', profile:'प्रोफ़ाइल',
+    myOrders:'मेरे ऑर्डर', search:'खोजें...', save:'सहेजें', cancel:'रद्द करें', delete:'हटाएं', edit:'संपादित करें',
+    add:'जोड़ें', close:'बंद करें', confirm:'पुष्टि करें', total:'कुल', subtotal:'उप-कुल', vat:'वैट', qty:'मात्रा',
+    price:'कीमत', status:'स्थिति', date:'तारीख', actions:'कार्रवाई', name:'नाम', email:'ईमेल',
+    phone:'फ़ोन', address:'पता', company:'कंपनी', vatNo:'वैट नंबर', city:'शहर', zip:'पिन कोड',
+    country:'देश', notes:'नोट्स', deliveryAddr:'डिलीवरी का पता', billingAddr:'बिलिंग का पता',
+    received:'प्राप्त', processing:'प्रक्रिया में', shipped:'भेजा गया', delivered:'डिलीवर किया', cancelled:'रद्द',
+    proforma:'प्रोफ़ॉर्मा', finalInvoice:'अंतिम चालान', creditNote:'क्रेडिट नोट',
+    payNow:'अभी भुगतान करें', payWithPayPal:'PayPal से भुगतान', paid:'भुगतान किया', unpaid:'अवैतनिक',
+    partialDelivery:'आंशिक डिलीवरी', deliveryProof:'डिलीवरी प्रमाण', uploadPhoto:'फोटो अपलोड',
+    signature:'हस्ताक्षर', stock:'स्टॉक', inStock:'स्टॉक में', lowStock:'कम स्टॉक', outOfStock:'स्टॉक में नहीं',
+    exportExcel:'Excel निर्यात', exportPDF:'PDF निर्यात', exportCSV:'CSV निर्यात',
+    language:'भाषा', currency:'मुद्रा', orderNo:'ऑर्डर नं', invoiceNo:'चालान नं',
+    from:'से', to:'तक', quantity:'मात्रा', unitPrice:'इकाई मूल्य', lineTotal:'कुल',
+    createOrder:'ऑर्डर बनाएं', updateOrder:'ऑर्डर अपडेट', brand:'ब्रांड', model:'मॉडल',
+    category:'श्रेणी', totalOrders:'कुल ऑर्डर', revenue:'राजस्व', avgOrder:'औसत ऑर्डर',
+    topProducts:'शीर्ष उत्पाद', recentOrders:'हाल के ऑर्डर', noOrders:'कोई ऑर्डर नहीं',
+    selectCustomer:'ग्राहक चुनें', addItem:'आइटम जोड़ें', removeItem:'हटाएं', orderCreated:'ऑर्डर बनाया!',
+    orderUpdated:'ऑर्डर अपडेट किया!', savedOk:'सहेजा!', error:'त्रुटि', tryAgain:'फिर कोशिश करें',
+    installApp:'ऐप इंस्टॉल', loginFail:'गलत उपयोगकर्ता नाम या पासवर्ड',
+    deliveredQty:'डिलीवर मात्रा', remainingQty:'शेष', generateInvoice:'चालान बनाएं',
+    generateCredit:'क्रेडिट नोट बनाएं', reason:'कारण', amount:'राशि', allBrands:'सभी ब्रांड',
+    allStatuses:'सभी स्थितियां', welcome:'स्वागत', back:'वापस', orderDetails:'ऑर्डर विवरण',
+    statusHistory:'स्थिति इतिहास', emailSent:'ईमेल भेजा', noData:'कोई डेटा नहीं',
+    period:'अवधि', today:'आज', thisWeek:'इस सप्ताह', thisMonth:'इस महीने', allTime:'सभी समय',
+    items:'आइटम', customer:'ग्राहक', admin:'व्यवस्थापक', demo:'डेमो', printInvoice:'चालान प्रिंट',
+    downloadPDF:'PDF डाउनलोड', tax:'कर (25%)', grandTotal:'कुल राशि',
+    signatureCapture:'हस्ताक्षर', clear:'साफ़', done:'हो गया',
+    partialShip:'आंशिक शिपमेंट', shipQty:'शिपमेंट मात्रा', markShipped:'भेजा गया चिह्नित',
+    viewOrder:'ऑर्डर देखें', editProfile:'प्रोफ़ाइल संपादित', changePassword:'पासवर्ड बदलें',
+    multiAddr:'डिलीवरी पते', addAddress:'पता जोड़ें', primaryAddr:'प्राथमिक',
+    setPrimary:'प्राथमिक सेट करें', removeAddr:'पता हटाएं',
+    orderSummary:'ऑर्डर सारांश', paymentStatus:'भुगतान स्थिति', stockLevel:'स्टॉक स्तर',
+  },
+  zh: {
+    appName:'GoOrder', login:'登录', logout:'退出', username:'用户名', password:'密码',
+    dashboard:'仪表板', orders:'订单', newOrder:'新订单', products:'产品', customers:'客户',
+    invoices:'发票', creditNotes:'贷方通知单', reports:'报告', settings:'设置', profile:'个人资料',
+    myOrders:'我的订单', search:'搜索...', save:'保存', cancel:'取消', delete:'删除', edit:'编辑',
+    add:'添加', close:'关闭', confirm:'确认', total:'合计', subtotal:'小计', vat:'增值税', qty:'数量',
+    price:'价格', status:'状态', date:'日期', actions:'操作', name:'姓名', email:'电子邮件',
+    phone:'电话', address:'地址', company:'公司', vatNo:'税号', city:'城市', zip:'邮编',
+    country:'国家', notes:'备注', deliveryAddr:'送货地址', billingAddr:'账单地址',
+    received:'已接收', processing:'处理中', shipped:'已发货', delivered:'已送达', cancelled:'已取消',
+    proforma:'形式发票', finalInvoice:'最终发票', creditNote:'贷方通知单',
+    payNow:'立即支付', payWithPayPal:'用PayPal支付', paid:'已付', unpaid:'未付',
+    partialDelivery:'部分交付', deliveryProof:'交付证明', uploadPhoto:'上传照片',
+    signature:'签名', stock:'库存', inStock:'有货', lowStock:'库存不足', outOfStock:'缺货',
+    exportExcel:'导出Excel', exportPDF:'导出PDF', exportCSV:'导出CSV',
+    language:'语言', currency:'货币', orderNo:'订单号', invoiceNo:'发票号',
+    from:'从', to:'至', quantity:'数量', unitPrice:'单价', lineTotal:'行合计',
+    createOrder:'创建订单', updateOrder:'更新订单', brand:'品牌', model:'型号',
+    category:'类别', totalOrders:'总订单', revenue:'收入', avgOrder:'平均订单',
+    topProducts:'热门产品', recentOrders:'最近订单', noOrders:'暂无订单',
+    selectCustomer:'选择客户', addItem:'添加商品', removeItem:'移除', orderCreated:'订单已创建!',
+    orderUpdated:'订单已更新!', savedOk:'已保存!', error:'错误', tryAgain:'重试',
+    installApp:'安装应用', loginFail:'用户名或密码错误',
+    deliveredQty:'已交付数量', remainingQty:'剩余', generateInvoice:'生成发票',
+    generateCredit:'创建贷方通知', reason:'原因', amount:'金额', allBrands:'所有品牌',
+    allStatuses:'所有状态', welcome:'欢迎', back:'返回', orderDetails:'订单详情',
+    statusHistory:'状态历史', emailSent:'邮件已发送', noData:'无数据',
+    period:'时期', today:'今天', thisWeek:'本周', thisMonth:'本月', allTime:'全部',
+    items:'商品', customer:'客户', admin:'管理员', demo:'演示', printInvoice:'打印发票',
+    downloadPDF:'下载PDF', tax:'税 (25%)', grandTotal:'总计',
+    signatureCapture:'签名采集', clear:'清除', done:'完成',
+    partialShip:'部分发货', shipQty:'发货数量', markShipped:'标记已发货',
+    viewOrder:'查看订单', editProfile:'编辑资料', changePassword:'更改密码',
+    multiAddr:'送货地址', addAddress:'添加地址', primaryAddr:'主要',
+    setPrimary:'设为主要', removeAddr:'移除地址',
+    orderSummary:'订单摘要', paymentStatus:'支付状态', stockLevel:'库存水平',
+  },
+};
 
-return(<div style={S.root}>
-<div style={S.nav}><div style={{color:"#f5f5f7",fontSize:14,fontWeight:700,display:"flex",alignItems:"center",gap:6,cursor:"pointer"}} onClick={goHome}><span style={{fontSize:14}}>📦</span><div><span>GoOrder</span><div style={{fontSize:7,opacity:.5,textTransform:"uppercase",letterSpacing:"1.5px"}}>goorder.dk</div></div></div>
-<div style={S.navR}><button style={{...S.nb,fontSize:12}} onClick={()=>setShowSearch(true)}>🔍</button>
-<select style={S.sel} value={lang} onChange={e=>setLang(e.target.value)}>{Object.entries(LANGS).map(([k,v])=><option key={k} value={k} style={oS}>{v}</option>)}</select>
-<select style={S.sel} value={cur} onChange={e=>setCur(e.target.value)}>{Object.entries(CUR).map(([k,v])=><option key={k} value={k} style={oS}>{v.l}</option>)}</select>
-<button style={S.nb} onClick={()=>setStep("cart")}>🛒{cc>0&&<span style={{background:ac,borderRadius:7,padding:"1px 6px",fontSize:9,fontWeight:800,color:"#fff"}}>{cc}</span>}</button>
-{isA&&<button style={{...S.nb,background:"rgba(255,200,0,.2)",border:"1px solid rgba(255,200,0,.4)"}} onClick={()=>setStep("admin")}>⚙️</button>}
-<button onClick={()=>{setAu(null);try{sessionStorage.removeItem("go_u");}catch{}}} style={{...S.nb,color:"rgba(255,255,255,.6)",fontSize:10}}><span style={{color:"rgba(255,255,255,.9)",fontWeight:600}}>{au.name}</span> ↩</button>
-</div></div>
-{showSearch&&<div style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,.5)",zIndex:200,display:"flex",justifyContent:"center",paddingTop:80}} onClick={()=>setShowSearch(false)}><div style={{background:"#fff",borderRadius:16,width:"90%",maxWidth:520,maxHeight:"70vh",overflow:"auto",padding:20}} onClick={e=>e.stopPropagation()}><input autoFocus style={{width:"100%",padding:"12px 16px",border:"2px solid #e8e8ed",borderRadius:10,fontSize:15,outline:"none",boxSizing:"border-box"}} placeholder={t.search} value={searchQ} onChange={e=>setSearchQ(e.target.value)}/>{searchQ.length>=2&&<div style={{marginTop:8,fontSize:11,color:"#86868b"}}>{sr.length} {t.results}</div>}{sr.map((r,i)=>(<div key={i} style={{padding:"10px 12px",borderBottom:"1px solid #f0f0f5",cursor:"pointer",display:"flex",justifyContent:"space-between"}} onClick={()=>goSR(r)}><div><div style={{fontWeight:600,fontSize:13}}>{r.model}</div><div style={{fontSize:10,color:"#86868b"}}>{r.brand} · {r.kat} · {r.chip}</div></div><span style={{fontSize:10,color:ac,fontWeight:600}}>{t.goTo} →</span></div>))}</div></div>}
-{!["brand","invoice","admin"].includes(step)&&<div style={{padding:"8px 16px",display:"flex",alignItems:"center",gap:5,fontSize:11,color:"#86868b",background:"#fff",borderBottom:"1px solid #e8e8ed",flexWrap:"wrap"}}><button style={S.bl} onClick={goHome}>{t.brands}</button>{brand&&<><span style={{color:"#ccc"}}>›</span><button style={S.bl} onClick={()=>{setStep("category");setCat(null);setSelMod(null);reset();}}>{brand}</button></>}{cat&&<><span style={{color:"#ccc"}}>›</span><button style={S.bl} onClick={()=>{setStep("model");setSelMod(null);reset();}}>{cat}</button></>}{selMod&&step==="configure"&&<><span style={{color:"#ccc"}}>›</span><span style={{fontWeight:600,color:"#1d1d1f"}}>{selMod}</span></>}</div>}
+const LANG_LABELS = { da:'Dansk', en:'English', de:'Deutsch', hi:'हिन्दी', zh:'中文' };
 
-{step==="brand"&&<div style={S.main}><h1 style={S.h1}>{t.pickBrand}</h1><p style={S.sub}>{t.pickBrandSub}</p><div style={S.bg}>{Object.keys(BRANDS).map(b=>(<div key={b} style={S.bc2(b)} onClick={()=>goBrand(b)}><BrandLogo brand={b}/><div style={{fontSize:11,opacity:.7}}>{BRANDS[b].cats.length} {t.cats} · {P.filter(p=>p.brand===b).length} {t.variants}</div><a href={BRANDS[b].url} target="_blank" rel="noopener noreferrer" onClick={e=>e.stopPropagation()} style={{fontSize:10,color:"rgba(255,255,255,.8)",textDecoration:"underline"}}>🔗 {t.visit}</a></div>))}</div><div style={{marginTop:16,padding:"14px",background:"#fff",borderRadius:10,border:"1px solid #e8e8ed",display:"flex",gap:10}}><span>ℹ️</span><div style={{fontSize:11,color:"#555",lineHeight:1.5}}>{t.priceNote}</div></div></div>}
+/* ── Product Catalog ── */
+const PRODUCTS = [
+  // Apple — iPhone
+  { id:'aip16pm',brand:'Apple',cat:'iPhone',model:'iPhone 16 Pro Max',price:13499,stock:24 },
+  { id:'aip16p', brand:'Apple',cat:'iPhone',model:'iPhone 16 Pro',price:11499,stock:32 },
+  { id:'aip16',  brand:'Apple',cat:'iPhone',model:'iPhone 16',price:8499,stock:45 },
+  { id:'aip16pl',brand:'Apple',cat:'iPhone',model:'iPhone 16 Plus',price:9499,stock:28 },
+  { id:'aip15pm',brand:'Apple',cat:'iPhone',model:'iPhone 15 Pro Max',price:11999,stock:15 },
+  { id:'aip15p', brand:'Apple',cat:'iPhone',model:'iPhone 15 Pro',price:9999,stock:20 },
+  { id:'aip15',  brand:'Apple',cat:'iPhone',model:'iPhone 15',price:7299,stock:38 },
+  { id:'aise3',  brand:'Apple',cat:'iPhone',model:'iPhone SE (2024)',price:4499,stock:52 },
+  // Apple — iPad
+  { id:'aippm7', brand:'Apple',cat:'iPad',model:'iPad Pro M4 13"',price:13499,stock:18 },
+  { id:'aippm4s',brand:'Apple',cat:'iPad',model:'iPad Pro M4 11"',price:10499,stock:22 },
+  { id:'aipa6',  brand:'Apple',cat:'iPad',model:'iPad Air M3 13"',price:8499,stock:25 },
+  { id:'aipa6s', brand:'Apple',cat:'iPad',model:'iPad Air M3 11"',price:6499,stock:30 },
+  { id:'aip10',  brand:'Apple',cat:'iPad',model:'iPad 10. gen',price:3999,stock:60 },
+  { id:'aipm7',  brand:'Apple',cat:'iPad',model:'iPad mini 7',price:5499,stock:35 },
+  // Apple — MacBook
+  { id:'ambp16m4p',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M4 Pro',price:22999,stock:12 },
+  { id:'ambp14m4p',brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M4 Pro',price:18999,stock:16 },
+  { id:'ambp14m4', brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M4',price:14499,stock:22 },
+  { id:'ambp16m4m',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M4 Max',price:32999,stock:6 },
+  { id:'amba15m4', brand:'Apple',cat:'MacBook',model:'MacBook Air 15" M4',price:12999,stock:28 },
+  { id:'amba13m4', brand:'Apple',cat:'MacBook',model:'MacBook Air 13" M4',price:10499,stock:34 },
+  // Apple — Watch
+  { id:'awu2',  brand:'Apple',cat:'Watch',model:'Apple Watch Ultra 2',price:6999,stock:18 },
+  { id:'aws10', brand:'Apple',cat:'Watch',model:'Apple Watch Series 10',price:3499,stock:40 },
+  { id:'awse2', brand:'Apple',cat:'Watch',model:'Apple Watch SE (2024)',price:2199,stock:55 },
+  // Apple — AirPods
+  { id:'aap4anc', brand:'Apple',cat:'AirPods',model:'AirPods 4 (ANC)',price:1799,stock:65 },
+  { id:'aap4',    brand:'Apple',cat:'AirPods',model:'AirPods 4',price:1299,stock:72 },
+  { id:'aapp3',   brand:'Apple',cat:'AirPods',model:'AirPods Pro 3',price:2199,stock:48 },
+  { id:'aapm',    brand:'Apple',cat:'AirPods',model:'AirPods Max (USB-C)',price:4499,stock:15 },
+  // JBL — Headphones
+  { id:'jt770nc', brand:'JBL',cat:'Headphones',model:'JBL Tour One M2',price:2499,stock:30 },
+  { id:'jl670nc', brand:'JBL',cat:'Headphones',model:'JBL Live 670NC',price:999,stock:45 },
+  { id:'jt560bt', brand:'JBL',cat:'Headphones',model:'JBL Tune 560BT',price:449,stock:60 },
+  { id:'jt720bt', brand:'JBL',cat:'Headphones',model:'JBL Tune 720BT',price:599,stock:50 },
+  // JBL — Earbuds
+  { id:'jt2nc',  brand:'JBL',cat:'Earbuds',model:'JBL Tour Pro 3',price:1899,stock:35 },
+  { id:'jlb3',   brand:'JBL',cat:'Earbuds',model:'JBL Live Beam 3',price:1299,stock:40 },
+  { id:'jv200',  brand:'JBL',cat:'Earbuds',model:'JBL Vibe 200TWS',price:399,stock:70 },
+  { id:'jeb2nc', brand:'JBL',cat:'Earbuds',model:'JBL Endurance Race 2',price:599,stock:48 },
+  // JBL — Speakers
+  { id:'jch6',  brand:'JBL',cat:'Speakers',model:'JBL Charge 5',price:1399,stock:32 },
+  { id:'jfl2',  brand:'JBL',cat:'Speakers',model:'JBL Flip 6',price:899,stock:55 },
+  { id:'jxt4',  brand:'JBL',cat:'Speakers',model:'JBL Xtreme 4',price:2499,stock:18 },
+  { id:'jbm3',  brand:'JBL',cat:'Speakers',model:'JBL Boombox 3',price:3999,stock:10 },
+  { id:'jgo4',  brand:'JBL',cat:'Speakers',model:'JBL Go 4',price:349,stock:80 },
+  { id:'jpa500',brand:'JBL',cat:'Speakers',model:'JBL PartyBox 500',price:4499,stock:8 },
+  // Marshall — Headphones
+  { id:'mm4anc', brand:'Marshall',cat:'Headphones',model:'Marshall Monitor III ANC',price:2999,stock:20 },
+  { id:'mmj4',   brand:'Marshall',cat:'Headphones',model:'Marshall Major V',price:1099,stock:38 },
+  { id:'mmid',   brand:'Marshall',cat:'Headphones',model:'Marshall Mid ANC',price:1799,stock:22 },
+  // Marshall — Earbuds
+  { id:'mmi3',  brand:'Marshall',cat:'Earbuds',model:'Marshall Motif III ANC',price:1599,stock:28 },
+  { id:'mmn2',  brand:'Marshall',cat:'Earbuds',model:'Marshall Minor IV',price:899,stock:42 },
+  // Marshall — Speakers
+  { id:'mwb3',  brand:'Marshall',cat:'Speakers',model:'Marshall Woburn III',price:4499,stock:10 },
+  { id:'mst2',  brand:'Marshall',cat:'Speakers',model:'Marshall Stanmore III',price:3499,stock:15 },
+  { id:'mac3',  brand:'Marshall',cat:'Speakers',model:'Marshall Acton III',price:2299,stock:22 },
+  { id:'mem',   brand:'Marshall',cat:'Speakers',model:'Marshall Emberton II',price:1199,stock:35 },
+  { id:'mwl',   brand:'Marshall',cat:'Speakers',model:'Marshall Willen II',price:799,stock:50 },
+  { id:'mtuf',  brand:'Marshall',cat:'Speakers',model:'Marshall Tufton',price:3999,stock:8 },
+  // Marshall — Soundbars
+  { id:'msb01', brand:'Marshall',cat:'Soundbars',model:'Marshall Motif SB',price:5999,stock:6 },
+];
 
-{step==="category"&&<div style={S.main}><div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:3}}><h1 style={S.h1}>{bd.name}</h1><a href={bd.url} target="_blank" rel="noopener noreferrer" style={{fontSize:10,color:ac,fontWeight:600,textDecoration:"none"}}>🔗 {bd.url.replace("https://www.","")}</a></div><p style={S.sub}>{t.pickCat}</p><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(135px,1fr))",gap:8}}>{bd.cats.map(c=>{const n=bi.filter(p=>p.kat===c).length;return<div key={c} style={{borderRadius:12,padding:"18px 10px",cursor:"pointer",border:"2px solid transparent",textAlign:"center",color:"#f5f5f7",background:bd.bg}} onClick={()=>goCat(c)}><span style={{fontSize:24,display:"block",marginBottom:3}}>{bd.ci[c]}</span><div style={{fontSize:12,fontWeight:700}}>{c}</div><div style={{fontSize:9,opacity:.6}}>{n} {t.variants}</div></div>;})}</div></div>}
+const BRANDS = [...new Set(PRODUCTS.map(p=>p.brand))];
+const STATUS_FLOW = ['received','processing','shipped','delivered'];
+const STATUS_COLORS = { received:'badge-info', processing:'badge-warning', shipped:'badge-accent', delivered:'badge-success', cancelled:'badge-danger' };
 
-{step==="model"&&<div style={S.main}><h1 style={S.h1}>{cat}</h1><p style={S.sub}>{t.pickModel}</p><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(200px,1fr))",gap:8}}>{mns.map(m=>{const its=ci.filter(p=>p.model===m);return<div key={m} style={{background:"#fff",borderRadius:10,padding:"14px 12px",cursor:"pointer",border:"2px solid #e8e8ed"}} onClick={()=>goMod(m)}><div style={{fontSize:13,fontWeight:700,marginBottom:2}}>{m}</div><div style={{fontSize:10,color:"#86868b"}}>{uniq(its.map(i=>i.chip)).join("/")} · {uniq(its.map(i=>i.sk)).join("/")} · {its[0].gen}</div><div style={{display:"inline-block",background:"#f0f0f5",borderRadius:4,padding:"1px 6px",fontSize:9,fontWeight:600,marginTop:4,color:"#555"}}>{its.length} {t.configs}</div></div>;})}</div></div>}
+/* ── Helpers ── */
+const fmtMoney = (v, cur) => { const c = CURRENCIES[cur]; return `${c.symbol} ${(v * c.rate).toFixed(c.decimals)}`; };
+const fmtDate = d => new Date(d).toLocaleDateString('da-DK', { day:'2-digit', month:'short', year:'numeric' });
+const genId = () => crypto.randomUUID().slice(0,8).toUpperCase();
+const stockInfo = (s, t) => s > 20 ? { cls:'stock-high', label: t.inStock } : s > 0 ? { cls: s > 5 ? 'stock-medium' : 'stock-low', label: t.lowStock +' ('+s+')' } : { cls:'stock-out', label: t.outOfStock };
 
-{step==="configure"&&(()=>{const ref=mi[0];const ready=!!fin;const pc=picks.clr||cls[0]||"Black";const bg=CM[pc]||"#999";
-return<div style={S.main}><h1 style={S.h1}>{selMod}</h1><p style={S.sub}>{ref?.chip} · {ref?.sk} · {ref?.gen}</p>
-<div style={{display:"flex",justifyContent:"center",padding:14,background:"linear-gradient(180deg,#f5f5f7,#e8e8ed)",borderRadius:10,marginBottom:8}}><div style={{width:80,height:80,borderRadius:14,background:bg,border:`3px solid ${LC.includes(pc)?"#ccc":"#333"}`,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 6px 24px rgba(0,0,0,.15)"}}><span style={{fontSize:9,color:LC.includes(pc)?"#333":"#eee",fontWeight:700,textAlign:"center",padding:6}}>{selMod}</span></div></div>
-{szs.length>1&&<div style={S.box}><div style={S.lbl}>{t.size}</div><div style={S.og}>{szs.map(sz=><button key={sz} style={S.ob(picks.sz===sz)} onClick={()=>setPicks({sz,net:null,stor:null,clr:null})}>{sz}</button>)}</div></div>}
-{(picks.sz||szs.length<=1)&&nts.length>1&&<div style={S.box}><div style={S.lbl}>{t.network}</div><div style={S.og}>{nts.map(n=><button key={n} style={S.ob(picks.net===n)} onClick={()=>setPicks(p=>({...p,net:n,stor:null,clr:null}))}>{n}</button>)}</div></div>}
-{(picks.net||nts.length<=1)&&sts.length>0&&<div style={S.box}><div style={S.lbl}>{t.storage}</div><div style={S.og}>{sts.map(s=><button key={s} style={S.ob(picks.stor===s)} onClick={()=>setPicks(p=>({...p,stor:s,clr:null}))}>{s}</button>)}</div></div>}
-{(picks.stor||sts.length===0)&&cls.length>0&&<div style={S.box}><div style={S.lbl}>{t.color}</div><div style={S.og}>{cls.map(c=><div key={c} style={{display:"flex",flexDirection:"column",alignItems:"center",cursor:"pointer"}} onClick={()=>setPicks(p=>({...p,clr:c}))}><div style={{width:28,height:28,borderRadius:"50%",border:picks.clr===c?`3px solid ${ac}`:`2px solid ${LC.includes(c)?"#ddd":"#555"}`,background:CM[c]||"#ccc"}}/><div style={{fontSize:8,color:"#86868b",maxWidth:40,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",marginTop:1}}>{c}</div></div>)}</div></div>}
-{ready&&<div style={S.box}><div style={S.lbl}>{t.qty} ({t.moq}: {MOQ})</div><div style={{display:"flex",alignItems:"center",gap:6,marginBottom:3}}><button style={{padding:"5px 12px",fontSize:16,border:"2px solid #e8e8ed",borderRadius:6,background:"#fff",cursor:"pointer",fontWeight:700}} onClick={()=>setQty(q=>Math.max(MOQ,q-1))}>−</button><input type="number" min={MOQ} value={qty} onChange={e=>setQty(Math.max(MOQ,+e.target.value||MOQ))} style={{width:50,padding:5,border:"1px solid #d2d2d7",borderRadius:6,fontSize:13,textAlign:"center",outline:"none"}}/><button style={{padding:"5px 12px",fontSize:16,border:"2px solid #e8e8ed",borderRadius:6,background:"#fff",cursor:"pointer",fontWeight:700}} onClick={()=>setQty(q=>q+1)}>+</button></div>
-<div style={{background:"#f5f5f7",borderRadius:8,padding:10,marginTop:8,border:"1px solid #e8e8ed"}}>{[[t.brand,fin.brand],[t.product,fin.model],[t.chip,fin.chip],[t.clr,fin.farve],[t.storage,fin.stor],[t.modelNr,fin.mnr],["SKU",fin.skuEU],[t.qty,qty+" "+t.pcs]].filter(([,v])=>v&&v!=="–").map(([l,v])=><div key={l} style={{display:"flex",justifyContent:"space-between",padding:"3px 0",fontSize:11}}><span style={{color:"#86868b"}}>{l}</span><span style={{fontWeight:600,fontSize:10}}>{v}</span></div>)}</div>
-<button style={{background:ac,color:"#fff",border:"none",borderRadius:10,padding:10,fontSize:13,fontWeight:700,cursor:"pointer",width:"100%",marginTop:10}} onClick={addCart}>{t.add} ({qty} {t.pcs})</button></div>}
-</div>;})()}
+/* ── SVG Icons (inline) ── */
+const IC = {
+  dashboard: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>,
+  orders: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 3H8l-4 8h16l-4-8z"/><path d="M4 11v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><line x1="12" y1="15" x2="12" y2="15.01"/></svg>,
+  plus: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>,
+  users: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>,
+  invoice: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>,
+  credit: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>,
+  chart: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
+  settings: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>,
+  profile: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+  menu: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>,
+  x: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>,
+  back: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>,
+  download: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
+  check: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>,
+  camera: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>,
+  products: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>,
+};
 
-{step==="cart"&&<div style={S.main} data-noprint><button style={S.bl} onClick={goHome}>{t.back}</button>{cart.length===0?<div style={{textAlign:"center",padding:30,color:"#86868b"}}><div style={{fontSize:34,opacity:.3}}>🛒</div><div style={{fontSize:13,fontWeight:600,marginTop:6}}>{t.empty}</div></div>:<>
-<div style={S.sec}><div style={{fontSize:14,fontWeight:700,marginBottom:10}}>{t.summary} ({cc} {t.units})</div><div style={{overflowX:"auto"}}><table style={S.tbl}><thead><tr>{["#",t.brand,t.product,t.clr,t.storage,t.modelNr,t.amount,""].map(h=><th key={h} style={S.th}>{h}</th>)}</tr></thead><tbody>{cart.map((it,i)=><tr key={i}><td style={S.td}>{i+1}</td><td style={{...S.td,fontWeight:600,fontSize:8}}>{it.brand}</td><td style={{...S.td,fontWeight:600}}>{it.model}</td><td style={S.td}>{it.farve}</td><td style={S.td}>{it.stor}</td><td style={{...S.td,fontSize:8}}>{it.mnr}</td><td style={S.td}><input type="number" min={MOQ} value={it.qty} onChange={e=>{const v=Math.max(MOQ,+e.target.value||MOQ);setCart(c=>c.map((x,j)=>j===i?{...x,qty:v}:x));}} style={{width:44,padding:3,border:"1px solid #d2d2d7",borderRadius:4,fontSize:11,textAlign:"center"}}/></td><td style={S.td}><button style={{background:"none",border:"none",color:"#ff3b30",cursor:"pointer",fontSize:9,fontWeight:600}} onClick={()=>setCart(c=>c.filter((_,j)=>j!==i))}>✕</button></td></tr>)}</tbody></table></div></div>
-<div style={S.sec}><div style={{fontSize:14,fontWeight:700,marginBottom:10}}>{t.custInfo}</div><div style={S.ig}><div><label style={S.il}>{t.company} *</label><input style={S.inp} value={cust.f} onChange={e=>setCust(c=>({...c,f:e.target.value}))}/></div><div><label style={S.il}>{t.contact} *</label><input style={S.inp} value={cust.k} onChange={e=>setCust(c=>({...c,k:e.target.value}))}/></div></div><div style={S.ig}><div><label style={S.il}>{t.email} *</label><input style={S.inp} type="email" value={cust.e} onChange={e=>setCust(c=>({...c,e:e.target.value}))}/></div><div><label style={S.il}>{t.phone}</label><input style={S.inp} value={cust.t} onChange={e=>setCust(c=>({...c,t:e.target.value}))}/></div></div><div style={{marginBottom:6}}><label style={S.il}>{t.address}</label><input style={S.inp} value={cust.a} onChange={e=>setCust(c=>({...c,a:e.target.value}))}/></div><div style={{marginBottom:6}}><label style={S.il}>{t.notes}</label><textarea style={{...S.inp,minHeight:36,resize:"vertical",fontFamily:f}} value={cust.n} onChange={e=>setCust(c=>({...c,n:e.target.value}))}/></div></div>
-<div style={{display:"flex",gap:6,justifyContent:"flex-end",flexWrap:"wrap"}}><button style={S.sBtn} onClick={goHome}>{t.contShop}</button><button style={{...S.pBtn,opacity:(!cust.f||!cust.k||!cust.e)?.5:1}} onClick={doSubmit} disabled={!cust.f||!cust.k||!cust.e}>{t.submit}</button></div></>}</div>}
+/* ═══════════════════════════════════════
+   MAIN APP COMPONENT
+   ═══════════════════════════════════════ */
+export default function App() {
+  /* ── ALL hooks at top, before any conditional return ── */
+  const [lang, setLang] = useState(() => localStorage.getItem('go_lang') || 'da');
+  const [cur, setCur] = useState(() => localStorage.getItem('go_cur') || 'DKK');
+  const [user, setUser] = useState(null);
+  const [view, setView] = useState('dashboard');
+  const [sideOpen, setSideOpen] = useState(false);
+  const [toast, setToast] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-{step==="invoice"&&(()=>{const now=new Date();const d1=now.toLocaleDateString(lang==="da"?"da-DK":"en-GB",{day:"numeric",month:"long",year:"numeric"});const d2=new Date(now.getTime()+14*864e5).toLocaleDateString(lang==="da"?"da-DK":"en-GB",{day:"numeric",month:"long",year:"numeric"});
-return<div style={S.main}><div data-noprint style={{display:"flex",gap:5,marginBottom:10,flexWrap:"wrap"}}><button style={S.sBtn} onClick={()=>window.print()}>🖨 {t.print}</button><button style={S.sBtn} onClick={doExcel}>📊 {t.excel}</button><button style={S.sBtn} onClick={doEmail}>📧 {t.mail}</button><button style={S.pBtn} onClick={()=>{setCart([]);setCust({f:"",k:"",e:"",t:"",a:"",n:""});setOrderNr("");goHome();}}>+ {t.newOrd}</button></div>
-<div className="print-doc" style={{...S.sec,maxWidth:1000,margin:"0 auto"}}><div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:16,flexWrap:"wrap",gap:8}}><div><div style={{fontSize:18,fontWeight:800,marginBottom:1}}>{t.proforma}</div><div style={{color:"#86868b",fontSize:10}}>{uniq(cart.map(i=>i.brand)).join(" · ")}</div></div><div style={S.stamp("#34c759")}>PROFORMA</div></div>
-<div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14,marginBottom:14}}><div><div style={{fontSize:8,fontWeight:700,color:"#86868b",textTransform:"uppercase",marginBottom:3}}>{t.billTo}</div><div style={{fontWeight:700,fontSize:12}}>{cust.f}</div><div style={{fontSize:10}}>{cust.k} · {cust.e}</div>{cust.t&&<div style={{fontSize:10}}>{cust.t}</div>}{cust.a&&<div style={{fontSize:10}}>{cust.a}</div>}</div><div style={{textAlign:"right"}}>{[[t.orderNr+":",orderNr],[t.date+":",d1],[t.due+":",d2],[t.currency+":",CUR[cur]?.n+" ("+CUR[cur]?.s+")"]].map(([l,v])=><div key={l} style={{fontSize:10,marginBottom:2}}><span style={{color:"#86868b"}}>{l} </span><span style={{fontWeight:600}}>{v}</span></div>)}</div></div>
-<div style={{overflowX:"auto"}}><table style={S.tbl}><thead><tr>{["#",t.brand,t.product,t.clr,t.storage,t.modelNr,"SKU",t.amount].map(h=><th key={h} style={S.th}>{h}</th>)}</tr></thead><tbody>{cart.map((it,i)=><tr key={i}><td style={S.td}>{i+1}</td><td style={{...S.td,fontWeight:600,fontSize:8}}>{it.brand}</td><td style={{...S.td,fontWeight:600}}>{it.model}</td><td style={S.td}>{it.farve}</td><td style={S.td}>{it.stor}</td><td style={{...S.td,fontSize:8}}>{it.mnr}</td><td style={{...S.td,fontFamily:"monospace",fontSize:7}}>{it.skuEU}</td><td style={{...S.td,fontWeight:700,textAlign:"center"}}>{it.qty}</td></tr>)}</tbody><tfoot><tr style={{background:"#0a0a0a",color:"#fff"}}><td colSpan={7} style={{...S.td,textAlign:"right",fontWeight:700,fontSize:10,color:"#fff"}}>{t.total}</td><td style={{...S.td,fontWeight:700,fontSize:10,color:"#fff",textAlign:"center"}}>{cc} {t.pcs}</td></tr></tfoot></table></div>
-{cust.n&&<div style={{marginTop:10,padding:8,background:"#f5f5f7",borderRadius:6,fontSize:9}}><strong>{t.notes}:</strong> {cust.n}</div>}
-<div style={{marginTop:12,paddingTop:8,borderTop:"1px solid #e8e8ed",fontSize:8,color:"#86868b",textAlign:"center"}}>{t.profNote} {t.moq}: {MOQ} {t.pcs}.</div>
-<div style={{marginTop:8,padding:"8px 12px",background:"#fffbeb",border:"1px solid #f5e6a3",borderRadius:6,fontSize:9,color:"#92700c",textAlign:"center",fontWeight:600}}>⚠️ {t.priceLine} — {t.prefCur}: {CUR[cur]?.n}</div>
-</div></div>;})()}
+  // Data
+  const [orders, setOrders] = useState([]);
+  const [customers, setCustomers] = useState([]);
+  const [invoicesData, setInvoicesData] = useState([]);
+  const [creditNotesData, setCreditNotesData] = useState([]);
 
-{step==="admin"&&isA&&<div style={S.main}><h1 style={S.h1}>⚙️ {t.admin}</h1>
-<div style={{display:"flex",gap:6,marginBottom:14}}><button style={aView==="orders"?S.pBtn:S.sBtn} onClick={()=>{setAView("orders");loadA();}}>📋 {t.orders} ({dbO.length})</button><button style={aView==="users"?S.pBtn:S.sBtn} onClick={()=>{setAView("users");loadA();}}>👥 {t.users} ({dbU.length})</button><button style={S.sBtn} onClick={goHome}>{t.back}</button></div>
-{aView==="orders"&&<>{selO?<div style={S.sec}><div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}><div style={{fontSize:14,fontWeight:700}}>{t.orderNr}: {selO.order_nr}</div><button style={S.sBtn} onClick={()=>setSelO(null)}>✕ {t.close}</button></div>
-<div style={S.ig}><div><strong>{t.company}:</strong> {selO.company}</div><div><strong>{t.contact}:</strong> {selO.contact}</div><div><strong>{t.email}:</strong> {selO.email}</div><div><strong>{t.phone}:</strong> {selO.phone||"–"}</div></div>
-<div style={{marginTop:8,marginBottom:8}}><strong>{t.status}:</strong> <select value={selO.status} onChange={e=>{updStatus(selO.id,e.target.value);setSelO({...selO,status:e.target.value});}} style={S.inp}>{STS.map(s=><option key={s} value={s}>{t["s"+s.charAt(0).toUpperCase()+s.slice(1)]||s}</option>)}</select></div>
-<table style={S.tbl}><thead><tr>{[t.brand,t.product,t.clr,t.storage,t.modelNr,t.amount].map(h=><th key={h} style={S.th}>{h}</th>)}</tr></thead><tbody>{oItems.map((it,i)=><tr key={i}><td style={S.td}>{it.brand}</td><td style={{...S.td,fontWeight:600}}>{it.model}</td><td style={S.td}>{it.color}</td><td style={S.td}>{it.storage}</td><td style={{...S.td,fontSize:8}}>{it.model_nr}</td><td style={{...S.td,fontWeight:700}}>{it.qty}</td></tr>)}</tbody></table>
-<div style={{marginTop:14,padding:12,background:"#f0f8ff",borderRadius:8,border:"1px solid #d0e8ff"}}><div style={{fontWeight:700,marginBottom:8}}>💰 {t.invoice}</div><div style={S.ig}><div><label style={S.il}>{t.subtotal}</label><input style={S.inp} type="number" value={inv.sub} onChange={e=>setInv(f=>({...f,sub:e.target.value,tot:String(parseFloat(e.target.value||0)+parseFloat(f.ship||0))}))}/></div><div><label style={S.il}>{t.shipping}</label><input style={S.inp} type="number" value={inv.ship} onChange={e=>setInv(f=>({...f,ship:e.target.value,tot:String(parseFloat(f.sub||0)+parseFloat(e.target.value||0))}))}/></div></div>
-<div style={{fontSize:14,fontWeight:700,marginBottom:8}}>{t.total}: {CUR[selO.currency]?.s}{inv.tot||"0"}</div>
-<button style={S.pBtn} onClick={()=>mkInv(selO)} disabled={!inv.sub}>📧 {t.sendInv}</button></div>
-</div>:<div style={S.sec}><div style={{fontSize:14,fontWeight:700,marginBottom:10}}>{t.all}</div><div style={{overflowX:"auto"}}><table style={S.tbl}><thead><tr>{[t.orderNr,t.company,t.contact,t.status,t.currency,t.ordered,t.actions].map(h=><th key={h} style={S.th}>{h}</th>)}</tr></thead><tbody>{dbO.map(o=><tr key={o.id}><td style={{...S.td,fontWeight:600,fontSize:10}}>{o.order_nr}</td><td style={S.td}>{o.company}</td><td style={S.td}>{o.contact}</td><td style={S.td}><span style={S.sb(o.status)}>{t["s"+o.status.charAt(0).toUpperCase()+o.status.slice(1)]||o.status}</span></td><td style={S.td}>{o.currency}</td><td style={{...S.td,fontSize:9}}>{new Date(o.created_at).toLocaleDateString("da-DK")}</td><td style={S.td}><button style={{...S.pBtn,padding:"4px 10px",fontSize:10}} onClick={()=>viewOD(o)}>{t.view}</button></td></tr>)}</tbody></table></div>{dbO.length===0&&<div style={{textAlign:"center",padding:20,color:"#86868b"}}>Ingen ordrer endnu</div>}</div>}</>}
-{aView==="users"&&<div style={S.sec}><div style={{fontSize:14,fontWeight:700,marginBottom:10}}>👥 {t.users}</div>
-<table style={S.tbl}><thead><tr>{["ID",t.user,t.name,t.role,t.status,t.actions].map(h=><th key={h} style={S.th}>{h}</th>)}</tr></thead><tbody>{dbU.map(u=><tr key={u.id}><td style={S.td}>{u.id}</td><td style={{...S.td,fontWeight:600}}>{u.username}</td><td style={S.td}>{u.name}</td><td style={S.td}><span style={S.sb(u.role==="admin"?"processing":"delivered")}>{u.role}</span></td><td style={S.td}>{u.active?"✅":"❌"}</td><td style={S.td}>{u.id!==au.id&&<button style={{background:"none",border:"none",color:"#ff3b30",cursor:"pointer",fontSize:9,fontWeight:600}} onClick={()=>delU(u.id)}>{t.delete}</button>}</td></tr>)}</tbody></table>
-<div style={{marginTop:14,padding:12,background:"#f0fff0",borderRadius:8,border:"1px solid #d0e8d0"}}><div style={{fontWeight:700,marginBottom:8}}>➕ {t.addUser}</div><div style={S.ig}><div><label style={S.il}>{t.user}</label><input style={S.inp} value={nU.username} onChange={e=>setNU(u=>({...u,username:e.target.value}))}/></div><div><label style={S.il}>{t.pass}</label><input style={S.inp} value={nU.password} onChange={e=>setNU(u=>({...u,password:e.target.value}))}/></div><div><label style={S.il}>{t.name}</label><input style={S.inp} value={nU.name} onChange={e=>setNU(u=>({...u,name:e.target.value}))}/></div><div><label style={S.il}>{t.role}</label><select style={S.inp} value={nU.role} onChange={e=>setNU(u=>({...u,role:e.target.value}))}><option value="customer">Customer</option><option value="admin">Admin</option></select></div></div>
-<button style={S.pBtn} onClick={addU} disabled={!nU.username||!nU.password||!nU.name}>{t.save}</button></div></div>}
-</div>}
-</div>);}
+  // Form states
+  const [loginForm, setLoginForm] = useState({ username: '', password: '' });
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [editingProfile, setEditingProfile] = useState(null);
+  const [orderForm, setOrderForm] = useState({ customerId: '', items: [], notes: '', deliveryAddrIdx: 0 });
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterBrand, setFilterBrand] = useState('');
+  const [filterStatus, setFilterStatus] = useState('');
+  const [reportPeriod, setReportPeriod] = useState('allTime');
+  const [showPayPal, setShowPayPal] = useState(null);
+  const [creditForm, setCreditForm] = useState({ orderId:'', reason:'', items:[], amount:0 });
+  const [showCreditModal, setShowCreditModal] = useState(false);
+  const [partialShipModal, setPartialShipModal] = useState(null);
+  const [deliveryProofModal, setDeliveryProofModal] = useState(null);
+  const signatureRef = useRef(null);
+  const [isDrawing, setIsDrawing] = useState(false);
+  const canvasRef = useRef(null);
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+
+  const t = useMemo(() => T[lang] || T.da, [lang]);
+
+  const isAdmin = useMemo(() => user && (user.role === 'admin' || user.role === 'demo'), [user]);
+
+  // Filtered orders
+  const filteredOrders = useMemo(() => {
+    let list = orders;
+    if (!isAdmin && user) list = list.filter(o => o.customer_id === user.id);
+    if (filterStatus) list = list.filter(o => o.status === filterStatus);
+    if (searchTerm) {
+      const q = searchTerm.toLowerCase();
+      list = list.filter(o => o.order_no?.toLowerCase().includes(q) || o.customer_name?.toLowerCase().includes(q));
+    }
+    return list.sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
+  }, [orders, isAdmin, user, filterStatus, searchTerm]);
+
+  // Filtered products
+  const filteredProducts = useMemo(() => {
+    let list = PRODUCTS;
+    if (filterBrand) list = list.filter(p => p.brand === filterBrand);
+    if (searchTerm) {
+      const q = searchTerm.toLowerCase();
+      list = list.filter(p => p.model.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q));
+    }
+    return list;
+  }, [filterBrand, searchTerm]);
+
+  // Dashboard stats
+  const stats = useMemo(() => {
+    const relevantOrders = isAdmin ? orders : orders.filter(o => o.customer_id === user?.id);
+    const total = relevantOrders.length;
+    const rev = relevantOrders.reduce((s, o) => s + (o.total || 0), 0);
+    return { total, revenue: rev, avg: total ? rev / total : 0 };
+  }, [orders, isAdmin, user]);
+
+  // PWA install
+  useEffect(() => {
+    const handler = (e) => { e.preventDefault(); setDeferredPrompt(e); };
+    window.addEventListener('beforeinstallprompt', handler);
+    return () => window.removeEventListener('beforeinstallprompt', handler);
+  }, []);
+
+  // Persist lang/cur
+  useEffect(() => { localStorage.setItem('go_lang', lang); }, [lang]);
+  useEffect(() => { localStorage.setItem('go_cur', cur); }, [cur]);
+
+  // Load data when user logs in
+  const loadData = useCallback(async () => {
+    if (!user) return;
+    try {
+      const { data: ordersD } = await sb.from('orders').select('*').order('created_at', { ascending: false });
+      if (ordersD) setOrders(ordersD);
+      const { data: usersD } = await sb.from('users').select('*');
+      if (usersD) setCustomers(usersD);
+      const { data: invD } = await sb.from('invoices').select('*').order('created_at', { ascending: false });
+      if (invD) setInvoicesData(invD);
+    } catch (e) { console.error(e); }
+  }, [user]);
+
+  useEffect(() => { loadData(); }, [loadData]);
+
+  // Toast helper
+  const showToast = useCallback((msg, type = 'success') => {
+    setToast({ msg, type });
+    setTimeout(() => setToast(null), 3000);
+  }, []);
+
+  // Login
+  const handleLogin = useCallback(async () => {
+    setLoading(true);
+    try {
+      const { data, error } = await sb.from('users').select('*').eq('username', loginForm.username).eq('password_hash', loginForm.password).single();
+      if (error || !data) { showToast(t.loginFail, 'error'); setLoading(false); return; }
+      setUser(data);
+      setView('dashboard');
+    } catch { showToast(t.error, 'error'); }
+    setLoading(false);
+  }, [loginForm, showToast, t]);
+
+  // Logout
+  const handleLogout = useCallback(() => {
+    setUser(null);
+    setView('dashboard');
+    setOrders([]);
+    setLoginForm({ username: '', password: '' });
+  }, []);
+
+  // Change order status (triggers email simulation)
+  const changeStatus = useCallback(async (orderId, newStatus) => {
+    const order = orders.find(o => o.id === orderId);
+    if (!order) return;
+    const history = order.status_history || [];
+    history.push({ status: newStatus, time: new Date().toISOString(), by: user.username });
+    const { error } = await sb.from('orders').update({ status: newStatus, status_history: history }).eq('id', orderId);
+    if (!error) {
+      setOrders(prev => prev.map(o => o.id === orderId ? { ...o, status: newStatus, status_history: history } : o));
+      showToast(`Status → ${t[newStatus]} ✓`);
+      // Simulate email notification
+      console.log(`📧 Email sent to ${order.customer_email || 'customer'}: Order ${order.order_no} is now ${newStatus}`);
+    }
+  }, [orders, user, showToast, t]);
+
+  // Create order
+  const createOrder = useCallback(async () => {
+    if (!orderForm.customerId || orderForm.items.length === 0) return;
+    setLoading(true);
+    const cust = customers.find(c => c.id === orderForm.customerId);
+    const items = orderForm.items.map(it => {
+      const p = PRODUCTS.find(pr => pr.id === it.productId);
+      return { ...it, model: p?.model, brand: p?.brand, unitPrice: p?.price || 0, total: (p?.price || 0) * it.qty, delivered_qty: 0 };
+    });
+    const subtotal = items.reduce((s, i) => s + i.total, 0);
+    const vatAmt = subtotal * 0.25;
+    const orderNo = 'GO-' + genId();
+    const newOrder = {
+      order_no: orderNo,
+      customer_id: orderForm.customerId,
+      customer_name: cust?.company || cust?.full_name || cust?.username,
+      customer_email: cust?.email,
+      items: items,
+      subtotal,
+      vat: vatAmt,
+      total: subtotal + vatAmt,
+      status: 'received',
+      status_history: [{ status: 'received', time: new Date().toISOString(), by: user.username }],
+      payment_status: 'unpaid',
+      notes: orderForm.notes,
+      delivery_address: cust?.addresses?.[orderForm.deliveryAddrIdx] || cust?.address || '',
+      created_at: new Date().toISOString(),
+    };
+    const { data, error } = await sb.from('orders').insert(newOrder).select().single();
+    if (!error && data) {
+      setOrders(prev => [data, ...prev]);
+      showToast(t.orderCreated);
+      setOrderForm({ customerId: '', items: [], notes: '', deliveryAddrIdx: 0 });
+      setView('orders');
+    } else {
+      showToast(t.error, 'error');
+    }
+    setLoading(false);
+  }, [orderForm, customers, user, showToast, t]);
+
+  // Generate PDF invoice
+  const generateInvoicePDF = useCallback((order, type = 'proforma') => {
+    const doc = new jsPDF();
+    const isCredit = type === 'credit';
+    // Header
+    doc.setFontSize(22);
+    doc.setFont(undefined, 'bold');
+    doc.text('GoOrder', 14, 22);
+    doc.setFontSize(10);
+    doc.setFont(undefined, 'normal');
+    doc.text('goorder.dk | hello@keap.me', 14, 30);
+    // Invoice info
+    doc.setFontSize(14);
+    const title = isCredit ? 'CREDIT NOTE / KREDITNOTA' : type === 'final' ? 'INVOICE / FAKTURA' : 'PROFORMA INVOICE / PROFORMA FAKTURA';
+    doc.text(title, 14, 45);
+    doc.setFontSize(10);
+    const invNo = (isCredit ? 'CN-' : 'INV-') + genId();
+    doc.text(`${t.invoiceNo}: ${invNo}`, 14, 55);
+    doc.text(`${t.date}: ${fmtDate(new Date())}`, 14, 61);
+    doc.text(`${t.orderNo}: ${order.order_no}`, 14, 67);
+    doc.text(`${t.customer}: ${order.customer_name}`, 14, 73);
+    if (order.delivery_address) doc.text(`${t.address}: ${typeof order.delivery_address === 'string' ? order.delivery_address : order.delivery_address.street || ''}`, 14, 79);
+    // Items table
+    const items = (order.items || []).map(it => [
+      it.model || it.brand,
+      it.qty,
+      fmtMoney(it.unitPrice, cur),
+      fmtMoney(it.total, cur),
+    ]);
+    autoTable(doc, {
+      startY: 88,
+      head: [[t.model, t.qty, t.unitPrice, t.lineTotal]],
+      body: items,
+      theme: 'grid',
+      headStyles: { fillColor: [10, 10, 11], textColor: [205, 255, 71] },
+      styles: { fontSize: 9 },
+    });
+    const finalY = doc.lastAutoTable?.finalY || 130;
+    doc.setFontSize(10);
+    doc.text(`${t.subtotal}: ${fmtMoney(order.subtotal, cur)}`, 140, finalY + 10);
+    doc.text(`${t.tax}: ${fmtMoney(order.vat, cur)}`, 140, finalY + 17);
+    doc.setFont(undefined, 'bold');
+    doc.text(`${t.grandTotal}: ${fmtMoney(order.total, cur)}`, 140, finalY + 26);
+    // Save
+    doc.save(`${invNo}.pdf`);
+    // Save invoice record
+    const inv = { invoice_no: invNo, order_id: order.id, type, total: isCredit ? -order.total : order.total, created_at: new Date().toISOString() };
+    sb.from('invoices').insert(inv);
+    setInvoicesData(prev => [inv, ...prev]);
+    return invNo;
+  }, [cur, t]);
+
+  // Export reports
+  const exportReport = useCallback((format) => {
+    const data = filteredOrders.map(o => ({
+      [t.orderNo]: o.order_no,
+      [t.customer]: o.customer_name,
+      [t.date]: fmtDate(o.created_at),
+      [t.status]: t[o.status] || o.status,
+      [t.total]: o.total,
+      [t.paymentStatus]: o.payment_status === 'paid' ? t.paid : t.unpaid,
+    }));
+    if (format === 'excel' || format === 'csv') {
+      const ws = XLSX.utils.json_to_sheet(data);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Orders');
+      if (format === 'excel') XLSX.writeFile(wb, 'GoOrder_Report.xlsx');
+      else XLSX.writeFile(wb, 'GoOrder_Report.csv', { bookType: 'csv' });
+    } else if (format === 'pdf') {
+      const doc = new jsPDF();
+      doc.setFontSize(16);
+      doc.text('GoOrder — ' + t.reports, 14, 20);
+      doc.setFontSize(8);
+      doc.text(fmtDate(new Date()), 14, 27);
+      autoTable(doc, {
+        startY: 32,
+        head: [Object.keys(data[0] || {})],
+        body: data.map(d => Object.values(d)),
+        theme: 'grid',
+        headStyles: { fillColor: [10, 10, 11], textColor: [205, 255, 71], fontSize: 7 },
+        styles: { fontSize: 7 },
+      });
+      doc.save('GoOrder_Report.pdf');
+    }
+  }, [filteredOrders, t, cur]);
+
+  // Save profile
+  const saveProfile = useCallback(async (profileData) => {
+    const { error } = await sb.from('users').update(profileData).eq('id', user.id);
+    if (!error) {
+      setUser(prev => ({ ...prev, ...profileData }));
+      showToast(t.savedOk);
+      setEditingProfile(null);
+    } else showToast(t.error, 'error');
+  }, [user, showToast, t]);
+
+  // Partial shipment
+  const handlePartialShip = useCallback(async (orderId, shipItems) => {
+    const order = orders.find(o => o.id === orderId);
+    if (!order) return;
+    const updatedItems = order.items.map(it => {
+      const ship = shipItems.find(s => s.productId === it.productId);
+      return ship ? { ...it, delivered_qty: (it.delivered_qty || 0) + ship.shipQty } : it;
+    });
+    const allDelivered = updatedItems.every(it => (it.delivered_qty || 0) >= it.qty);
+    const newStatus = allDelivered ? 'delivered' : 'shipped';
+    const history = [...(order.status_history || []), { status: newStatus, time: new Date().toISOString(), by: user.username, partial: !allDelivered }];
+    await sb.from('orders').update({ items: updatedItems, status: newStatus, status_history: history }).eq('id', orderId);
+    setOrders(prev => prev.map(o => o.id === orderId ? { ...o, items: updatedItems, status: newStatus, status_history: history } : o));
+    setPartialShipModal(null);
+    showToast(allDelivered ? t.delivered : t.partialDelivery);
+  }, [orders, user, showToast, t]);
+
+  // Delivery proof — signature canvas handlers
+  const startDraw = useCallback((e) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    setIsDrawing(true);
+    const ctx = canvas.getContext('2d');
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  }, []);
+
+  const draw = useCallback((e) => {
+    if (!isDrawing) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#cdff47';
+    ctx.lineTo(x, y);
+    ctx.stroke();
+  }, [isDrawing]);
+
+  const endDraw = useCallback(() => setIsDrawing(false), []);
+
+  const saveDeliveryProof = useCallback(async (orderId, photoData, signatureData) => {
+    const order = orders.find(o => o.id === orderId);
+    if (!order) return;
+    const proof = { photo: photoData, signature: signatureData, timestamp: new Date().toISOString() };
+    await sb.from('orders').update({ delivery_proof: proof }).eq('id', orderId);
+    setOrders(prev => prev.map(o => o.id === orderId ? { ...o, delivery_proof: proof } : o));
+    setDeliveryProofModal(null);
+    showToast(t.savedOk);
+  }, [orders, showToast, t]);
+
+  // Credit note
+  const createCreditNote = useCallback(async () => {
+    const order = orders.find(o => o.id === creditForm.orderId);
+    if (!order) return;
+    const cn = {
+      credit_no: 'CN-' + genId(),
+      order_id: order.id,
+      order_no: order.order_no,
+      customer_name: order.customer_name,
+      reason: creditForm.reason,
+      amount: creditForm.amount || order.total,
+      items: creditForm.items.length > 0 ? creditForm.items : order.items,
+      created_at: new Date().toISOString(),
+    };
+    setCreditNotesData(prev => [cn, ...prev]);
+    generateInvoicePDF({ ...order, total: cn.amount, subtotal: cn.amount / 1.25, vat: cn.amount - cn.amount / 1.25 }, 'credit');
+    setShowCreditModal(false);
+    showToast(t.creditNote + ' ✓');
+  }, [creditForm, orders, generateInvoicePDF, showToast, t]);
+
+  /* ══════════════════════════════════════════════
+     RENDER
+     ══════════════════════════════════════════════ */
+
+  // LOGIN SCREEN
+  if (!user) {
+    return (
+      <div style={{ minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', padding:20, background:'var(--bg)' }}>
+        <div className="card fade-in" style={{ maxWidth:400, width:'100%' }}>
+          <div style={{ textAlign:'center', marginBottom:32 }}>
+            <div style={{ fontSize:'2rem', fontWeight:900, color:'var(--accent)', letterSpacing:'-0.03em' }}>GO</div>
+            <div style={{ fontSize:'1.4rem', fontWeight:700, marginTop:4 }}>GoOrder</div>
+            <div style={{ color:'var(--text-muted)', fontSize:'0.85rem', marginTop:4 }}>B2B Bestillingssystem</div>
+          </div>
+          <div className="form-group" style={{ marginBottom:16 }}>
+            <label className="form-label">{t.username}</label>
+            <input type="text" value={loginForm.username} onChange={e => setLoginForm(p=>({...p,username:e.target.value}))}
+              onKeyDown={e => e.key === 'Enter' && handleLogin()} autoFocus />
+          </div>
+          <div className="form-group" style={{ marginBottom:24 }}>
+            <label className="form-label">{t.password}</label>
+            <input type="password" value={loginForm.password} onChange={e => setLoginForm(p=>({...p,password:e.target.value}))}
+              onKeyDown={e => e.key === 'Enter' && handleLogin()} />
+          </div>
+          <button className="btn-primary" style={{ width:'100%' }} onClick={handleLogin} disabled={loading}>
+            {loading ? '...' : t.login}
+          </button>
+          <div style={{ marginTop:20, display:'flex', gap:8, justifyContent:'center' }}>
+            {Object.entries(LANG_LABELS).map(([k,v]) => (
+              <button key={k} className={`btn-ghost btn-sm ${lang===k?'':''}` } style={lang===k?{color:'var(--accent)'}:{}} onClick={()=>setLang(k)}>{v}</button>
+            ))}
+          </div>
+          <div style={{ marginTop:16, textAlign:'center', fontSize:'0.75rem', color:'var(--text-muted)' }}>
+            admin/GoOrder2026! · demo/demo123 · kunde1/Bestil2026
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // NAV ITEMS
+  const navItems = isAdmin ? [
+    { key:'dashboard', icon:IC.dashboard, label:t.dashboard },
+    { key:'orders', icon:IC.orders, label:t.orders },
+    { key:'newOrder', icon:IC.plus, label:t.newOrder },
+    { key:'products', icon:IC.products, label:t.products },
+    { key:'customers', icon:IC.users, label:t.customers },
+    { key:'invoices', icon:IC.invoice, label:t.invoices },
+    { key:'creditNotes', icon:IC.credit, label:t.creditNotes },
+    { key:'reports', icon:IC.chart, label:t.reports },
+    { key:'profile', icon:IC.profile, label:t.profile },
+    { key:'settings', icon:IC.settings, label:t.settings },
+  ] : [
+    { key:'dashboard', icon:IC.dashboard, label:t.dashboard },
+    { key:'orders', icon:IC.orders, label:t.myOrders },
+    { key:'products', icon:IC.products, label:t.products },
+    { key:'profile', icon:IC.profile, label:t.profile },
+    { key:'settings', icon:IC.settings, label:t.settings },
+  ];
+
+  /* ── PAGE RENDERERS ── */
+
+  // DASHBOARD
+  const renderDashboard = () => (
+    <div className="fade-in">
+      <h2 style={{ fontSize:'1.5rem', fontWeight:700, marginBottom:24 }}>{t.welcome}, {user.full_name || user.username}!</h2>
+      <div className="grid-4" style={{ marginBottom:32 }}>
+        <div className="stat-card">
+          <div className="stat-label">{t.totalOrders}</div>
+          <div className="stat-value" style={{ color:'var(--accent)' }}>{stats.total}</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">{t.revenue}</div>
+          <div className="stat-value">{fmtMoney(stats.revenue, cur)}</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">{t.avgOrder}</div>
+          <div className="stat-value">{fmtMoney(stats.avg, cur)}</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">{t.products}</div>
+          <div className="stat-value">{PRODUCTS.length}</div>
+        </div>
+      </div>
+
+      <div className="card" style={{ marginBottom:24 }}>
+        <h3 style={{ marginBottom:16, fontWeight:600 }}>{t.recentOrders}</h3>
+        {filteredOrders.length === 0 ? (
+          <div className="empty-state"><span style={{fontSize:'2rem'}}>📦</span><span>{t.noOrders}</span></div>
+        ) : (
+          <div style={{ overflowX:'auto' }}>
+            <table>
+              <thead><tr><th>{t.orderNo}</th><th>{t.customer}</th><th>{t.date}</th><th>{t.status}</th><th>{t.total}</th><th></th></tr></thead>
+              <tbody>
+                {filteredOrders.slice(0, 8).map(o => (
+                  <tr key={o.id}>
+                    <td style={{ fontFamily:'var(--mono)', fontSize:'0.85rem' }}>{o.order_no}</td>
+                    <td>{o.customer_name}</td>
+                    <td style={{ color:'var(--text-secondary)' }}>{fmtDate(o.created_at)}</td>
+                    <td><span className={`badge ${STATUS_COLORS[o.status]||'badge-info'}`}>{t[o.status]||o.status}</span></td>
+                    <td style={{ fontFamily:'var(--mono)' }}>{fmtMoney(o.total, cur)}</td>
+                    <td><button className="btn-ghost btn-sm" onClick={()=>{setSelectedOrder(o);setView('orderDetail')}}>{t.viewOrder}</button></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
+      {isAdmin && (
+        <div className="card">
+          <h3 style={{ marginBottom:16, fontWeight:600 }}>{t.topProducts}</h3>
+          <div className="grid-3">
+            {PRODUCTS.slice(0, 6).map(p => {
+              const si = stockInfo(p.stock, t);
+              return (
+                <div key={p.id} style={{ padding:12, borderRadius:'var(--radius)', border:'1px solid var(--border)', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+                  <div>
+                    <div style={{ fontWeight:600, fontSize:'0.9rem' }}>{p.model}</div>
+                    <div style={{ fontSize:'0.8rem', color:'var(--text-muted)' }}>{p.brand}</div>
+                  </div>
+                  <div style={{ textAlign:'right' }}>
+                    <div style={{ fontFamily:'var(--mono)', fontSize:'0.85rem' }}>{fmtMoney(p.price, cur)}</div>
+                    <div style={{ fontSize:'0.75rem' }}><span className={`stock-dot ${si.cls}`}/>{si.label}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {deferredPrompt && (
+        <button className="btn-secondary" style={{ marginTop:24 }} onClick={async () => {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          if (outcome === 'accepted') setDeferredPrompt(null);
+        }}>
+          📱 {t.installApp}
+        </button>
+      )}
+    </div>
+  );
+
+  // ORDERS LIST
+  const renderOrders = () => (
+    <div className="fade-in">
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:20, flexWrap:'wrap', gap:12 }}>
+        <h2 style={{ fontSize:'1.3rem', fontWeight:700 }}>{isAdmin ? t.orders : t.myOrders}</h2>
+        {isAdmin && <button className="btn-primary btn-sm" onClick={()=>setView('newOrder')}>{IC.plus} {t.newOrder}</button>}
+      </div>
+      <div style={{ display:'flex', gap:10, marginBottom:20, flexWrap:'wrap' }}>
+        <input type="search" placeholder={t.search} value={searchTerm} onChange={e=>setSearchTerm(e.target.value)} style={{ maxWidth:250 }}/>
+        <select value={filterStatus} onChange={e=>setFilterStatus(e.target.value)} style={{ maxWidth:180 }}>
+          <option value="">{t.allStatuses}</option>
+          {STATUS_FLOW.map(s => <option key={s} value={s}>{t[s]}</option>)}
+          <option value="cancelled">{t.cancelled}</option>
+        </select>
+      </div>
+      {filteredOrders.length === 0 ? (
+        <div className="card empty-state"><span style={{fontSize:'3rem'}}>📦</span><p>{t.noOrders}</p></div>
+      ) : (
+        <div className="card" style={{ padding:0, overflow:'hidden' }}>
+          <div style={{ overflowX:'auto' }}>
+            <table>
+              <thead><tr><th>{t.orderNo}</th><th>{t.customer}</th><th>{t.date}</th><th>{t.items}</th><th>{t.status}</th><th>{t.paymentStatus}</th><th>{t.total}</th><th>{t.actions}</th></tr></thead>
+              <tbody>
+                {filteredOrders.map(o => (
+                  <tr key={o.id}>
+                    <td style={{ fontFamily:'var(--mono)', fontSize:'0.85rem' }}>{o.order_no}</td>
+                    <td>{o.customer_name}</td>
+                    <td style={{ color:'var(--text-secondary)' }}>{fmtDate(o.created_at)}</td>
+                    <td>{(o.items||[]).length}</td>
+                    <td><span className={`badge ${STATUS_COLORS[o.status]||'badge-info'}`}>{t[o.status]||o.status}</span></td>
+                    <td><span className={`badge ${o.payment_status==='paid'?'badge-success':'badge-warning'}`}>{o.payment_status==='paid'?t.paid:t.unpaid}</span></td>
+                    <td style={{ fontFamily:'var(--mono)' }}>{fmtMoney(o.total, cur)}</td>
+                    <td>
+                      <div style={{ display:'flex', gap:6 }}>
+                        <button className="btn-ghost btn-sm" onClick={()=>{setSelectedOrder(o);setView('orderDetail')}}>{t.viewOrder}</button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+
+  // ORDER DETAIL
+  const renderOrderDetail = () => {
+    if (!selectedOrder) return null;
+    const o = selectedOrder;
+    const currentIdx = STATUS_FLOW.indexOf(o.status);
+    return (
+      <div className="fade-in">
+        <button className="btn-ghost" style={{ marginBottom:16 }} onClick={()=>{setSelectedOrder(null);setView('orders')}}>{IC.back} {t.back}</button>
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', flexWrap:'wrap', gap:16, marginBottom:24 }}>
+          <div>
+            <h2 style={{ fontSize:'1.3rem', fontWeight:700 }}>{t.orderDetails}: {o.order_no}</h2>
+            <p style={{ color:'var(--text-secondary)', marginTop:4 }}>{o.customer_name} · {fmtDate(o.created_at)}</p>
+          </div>
+          <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
+            <span className={`badge ${STATUS_COLORS[o.status]}`}>{t[o.status]}</span>
+            <span className={`badge ${o.payment_status==='paid'?'badge-success':'badge-warning'}`}>{o.payment_status==='paid'?t.paid:t.unpaid}</span>
+          </div>
+        </div>
+
+        {/* Status progress */}
+        <div className="card" style={{ marginBottom:20 }}>
+          <div style={{ display:'flex', justifyContent:'space-between', marginBottom:12 }}>
+            {STATUS_FLOW.map((s, i) => (
+              <div key={s} style={{ textAlign:'center', flex:1, opacity: i <= currentIdx ? 1 : 0.3 }}>
+                <div style={{ width:28, height:28, borderRadius:'50%', background: i <= currentIdx ? 'var(--accent)' : 'var(--bg-elevated)', display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto 6px', fontSize:'0.75rem', color: i <= currentIdx ? 'var(--bg)' : 'var(--text-muted)', fontWeight:700 }}>{i+1}</div>
+                <div style={{ fontSize:'0.75rem', fontWeight:600 }}>{t[s]}</div>
+              </div>
+            ))}
+          </div>
+          <div className="progress-bar">
+            <div className="progress-bar-fill" style={{ width: `${((currentIdx + 1) / STATUS_FLOW.length) * 100}%`, background:'var(--accent)' }}/>
+          </div>
+        </div>
+
+        {/* Items */}
+        <div className="card" style={{ marginBottom:20 }}>
+          <h3 style={{ marginBottom:12, fontWeight:600 }}>{t.items}</h3>
+          <table>
+            <thead><tr><th>{t.model}</th><th>{t.brand}</th><th>{t.qty}</th><th>{t.deliveredQty}</th><th>{t.unitPrice}</th><th>{t.lineTotal}</th><th>{t.stockLevel}</th></tr></thead>
+            <tbody>
+              {(o.items||[]).map((it, i) => {
+                const prod = PRODUCTS.find(p => p.id === it.productId);
+                const si = stockInfo(prod?.stock || 0, t);
+                return (
+                  <tr key={i}>
+                    <td style={{ fontWeight:500 }}>{it.model}</td>
+                    <td>{it.brand}</td>
+                    <td>{it.qty}</td>
+                    <td>{it.delivered_qty || 0} / {it.qty}</td>
+                    <td style={{ fontFamily:'var(--mono)' }}>{fmtMoney(it.unitPrice, cur)}</td>
+                    <td style={{ fontFamily:'var(--mono)' }}>{fmtMoney(it.total, cur)}</td>
+                    <td><span className={`stock-dot ${si.cls}`}/>{si.label}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <div style={{ marginTop:16, textAlign:'right' }}>
+            <div style={{ color:'var(--text-secondary)' }}>{t.subtotal}: {fmtMoney(o.subtotal, cur)}</div>
+            <div style={{ color:'var(--text-secondary)' }}>{t.tax}: {fmtMoney(o.vat, cur)}</div>
+            <div style={{ fontSize:'1.2rem', fontWeight:700, marginTop:4 }}>{t.grandTotal}: {fmtMoney(o.total, cur)}</div>
+          </div>
+        </div>
+
+        {/* Action buttons */}
+        <div style={{ display:'flex', gap:10, flexWrap:'wrap', marginBottom:20 }}>
+          {isAdmin && o.status !== 'delivered' && o.status !== 'cancelled' && (
+            <>
+              {currentIdx < STATUS_FLOW.length - 1 && (
+                <button className="btn-primary btn-sm" onClick={() => changeStatus(o.id, STATUS_FLOW[currentIdx + 1])}>
+                  → {t[STATUS_FLOW[currentIdx + 1]]}
+                </button>
+              )}
+              {(o.status === 'processing' || o.status === 'received') && (
+                <button className="btn-secondary btn-sm" onClick={() => setPartialShipModal(o)}>
+                  📦 {t.partialShip}
+                </button>
+              )}
+              {o.status === 'shipped' && (
+                <button className="btn-secondary btn-sm" onClick={() => setDeliveryProofModal(o)}>
+                  {IC.camera} {t.deliveryProof}
+                </button>
+              )}
+              <button className="btn-secondary btn-sm" onClick={() => changeStatus(o.id, 'cancelled')}>
+                ✕ {t.cancelled}
+              </button>
+            </>
+          )}
+          <button className="btn-secondary btn-sm" onClick={() => generateInvoicePDF(o, 'proforma')}>{IC.download} {t.proforma}</button>
+          {(o.status === 'delivered' || o.status === 'shipped') && (
+            <button className="btn-secondary btn-sm" onClick={() => generateInvoicePDF(o, 'final')}>{IC.download} {t.finalInvoice}</button>
+          )}
+          {isAdmin && <button className="btn-secondary btn-sm" onClick={() => { setCreditForm({ orderId:o.id, reason:'', items:[], amount:o.total }); setShowCreditModal(true); }}>💳 {t.creditNote}</button>}
+          {o.payment_status !== 'paid' && (
+            <button className="btn-primary btn-sm" onClick={() => setShowPayPal(o)}>💰 {t.payNow}</button>
+          )}
+        </div>
+
+        {/* PayPal */}
+        {showPayPal && showPayPal.id === o.id && (
+          <div className="card" style={{ marginBottom:20 }}>
+            <h3 style={{ marginBottom:12 }}>{t.payWithPayPal}</h3>
+            <PayPalScriptProvider options={{ "client-id": PP_CLIENT, currency: CURRENCIES[cur].code === 'DKK' ? 'USD' : CURRENCIES[cur].code }}>
+              <PayPalButtons
+                style={{ layout:'horizontal', color:'gold', shape:'rect', label:'pay' }}
+                createOrder={(data, actions) => actions.order.create({
+                  purchase_units: [{ amount: { value: (o.total * CURRENCIES.USD.rate).toFixed(2) } }]
+                })}
+                onApprove={async (data, actions) => {
+                  await actions.order.capture();
+                  await sb.from('orders').update({ payment_status:'paid', paypal_id: data.orderID }).eq('id', o.id);
+                  setOrders(prev => prev.map(ord => ord.id === o.id ? { ...ord, payment_status:'paid' } : ord));
+                  setSelectedOrder(prev => prev ? { ...prev, payment_status:'paid' } : prev);
+                  setShowPayPal(null);
+                  showToast(t.paid + ' ✓');
+                }}
+              />
+            </PayPalScriptProvider>
+          </div>
+        )}
+
+        {/* Status history */}
+        {o.status_history && o.status_history.length > 0 && (
+          <div className="card" style={{ marginBottom:20 }}>
+            <h3 style={{ marginBottom:12, fontWeight:600 }}>{t.statusHistory}</h3>
+            {o.status_history.map((h, i) => (
+              <div key={i} style={{ display:'flex', gap:12, alignItems:'center', padding:'8px 0', borderBottom: i < o.status_history.length-1 ? '1px solid var(--border)' : 'none' }}>
+                <span className={`badge ${STATUS_COLORS[h.status]||'badge-info'}`}>{t[h.status]||h.status}</span>
+                <span style={{ fontSize:'0.85rem', color:'var(--text-secondary)' }}>{fmtDate(h.time)}</span>
+                <span style={{ fontSize:'0.85rem', color:'var(--text-muted)' }}>{h.by}</span>
+                {h.partial && <span className="badge badge-warning">{t.partialDelivery}</span>}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Delivery proof */}
+        {o.delivery_proof && (
+          <div className="card">
+            <h3 style={{ marginBottom:12, fontWeight:600 }}>{t.deliveryProof}</h3>
+            <p style={{ fontSize:'0.85rem', color:'var(--text-secondary)' }}>{fmtDate(o.delivery_proof.timestamp)}</p>
+            {o.delivery_proof.photo && <img src={o.delivery_proof.photo} alt="proof" style={{ maxWidth:300, borderRadius:'var(--radius)', marginTop:8 }}/>}
+            {o.delivery_proof.signature && <img src={o.delivery_proof.signature} alt="signature" style={{ maxWidth:300, borderRadius:'var(--radius)', marginTop:8, background:'var(--bg-elevated)', padding:8 }}/>}
+          </div>
+        )}
+
+        {o.notes && <div className="card" style={{ marginTop:20 }}><h4 style={{ marginBottom:8 }}>{t.notes}</h4><p style={{ color:'var(--text-secondary)' }}>{o.notes}</p></div>}
+      </div>
+    );
+  };
+
+  // NEW ORDER
+  const renderNewOrder = () => (
+    <div className="fade-in">
+      <h2 style={{ fontSize:'1.3rem', fontWeight:700, marginBottom:20 }}>{t.createOrder}</h2>
+      <div className="card" style={{ marginBottom:20 }}>
+        <div className="form-group" style={{ marginBottom:16 }}>
+          <label className="form-label">{t.selectCustomer}</label>
+          <select value={orderForm.customerId} onChange={e => setOrderForm(p=>({...p, customerId:e.target.value}))}>
+            <option value="">— {t.selectCustomer} —</option>
+            {customers.filter(c=>c.role==='customer'||c.role==='demo').map(c => (
+              <option key={c.id} value={c.id}>{c.company || c.full_name || c.username}</option>
+            ))}
+          </select>
+        </div>
+        {orderForm.customerId && (() => {
+          const cust = customers.find(c => c.id === orderForm.customerId);
+          const addrs = cust?.addresses || [cust?.address || ''];
+          return addrs.length > 1 ? (
+            <div className="form-group" style={{ marginBottom:16 }}>
+              <label className="form-label">{t.deliveryAddr}</label>
+              <select value={orderForm.deliveryAddrIdx} onChange={e => setOrderForm(p=>({...p, deliveryAddrIdx: +e.target.value}))}>
+                {addrs.map((a, i) => <option key={i} value={i}>{typeof a === 'string' ? a : `${a.street}, ${a.city}`}</option>)}
+              </select>
+            </div>
+          ) : null;
+        })()}
+      </div>
+
+      <div className="card" style={{ marginBottom:20 }}>
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:16 }}>
+          <h3 style={{ fontWeight:600 }}>{t.items}</h3>
+          <button className="btn-secondary btn-sm" onClick={() => setOrderForm(p=>({...p, items:[...p.items, {productId:'', qty:1}]}))}>
+            {IC.plus} {t.addItem}
+          </button>
+        </div>
+        {orderForm.items.map((item, idx) => {
+          const prod = PRODUCTS.find(p => p.id === item.productId);
+          return (
+            <div key={idx} style={{ display:'flex', gap:10, marginBottom:10, alignItems:'center', flexWrap:'wrap' }}>
+              <select style={{ flex:2, minWidth:200 }} value={item.productId} onChange={e => {
+                const items = [...orderForm.items]; items[idx].productId = e.target.value; setOrderForm(p=>({...p, items}));
+              }}>
+                <option value="">— {t.model} —</option>
+                {PRODUCTS.map(p => <option key={p.id} value={p.id}>{p.brand} · {p.model} — {fmtMoney(p.price, cur)}</option>)}
+              </select>
+              <input type="number" min={1} max={prod?.stock || 999} style={{ width:80 }} value={item.qty} onChange={e => {
+                const items = [...orderForm.items]; items[idx].qty = Math.max(1, +e.target.value); setOrderForm(p=>({...p, items}));
+              }}/>
+              {prod && <span style={{ fontFamily:'var(--mono)', fontSize:'0.85rem', minWidth:100 }}>{fmtMoney(prod.price * item.qty, cur)}</span>}
+              {prod && <span style={{ fontSize:'0.75rem' }}><span className={`stock-dot ${stockInfo(prod.stock, t).cls}`}/>{stockInfo(prod.stock, t).label}</span>}
+              <button className="btn-icon" onClick={() => { const items = orderForm.items.filter((_, i) => i !== idx); setOrderForm(p=>({...p, items})); }}>{IC.x}</button>
+            </div>
+          );
+        })}
+        {orderForm.items.length > 0 && (() => {
+          const sub = orderForm.items.reduce((s, it) => { const p = PRODUCTS.find(pr=>pr.id===it.productId); return s + (p?.price||0)*it.qty; }, 0);
+          const vat = sub * 0.25;
+          return (
+            <div style={{ marginTop:16, textAlign:'right', borderTop:'1px solid var(--border)', paddingTop:12 }}>
+              <div style={{ color:'var(--text-secondary)' }}>{t.subtotal}: {fmtMoney(sub, cur)}</div>
+              <div style={{ color:'var(--text-secondary)' }}>{t.tax}: {fmtMoney(vat, cur)}</div>
+              <div style={{ fontSize:'1.2rem', fontWeight:700, marginTop:4 }}>{t.grandTotal}: {fmtMoney(sub+vat, cur)}</div>
+            </div>
+          );
+        })()}
+      </div>
+
+      <div className="card" style={{ marginBottom:20 }}>
+        <div className="form-group">
+          <label className="form-label">{t.notes}</label>
+          <textarea rows={3} value={orderForm.notes} onChange={e => setOrderForm(p=>({...p,notes:e.target.value}))}/>
+        </div>
+      </div>
+
+      <div style={{ display:'flex', gap:10 }}>
+        <button className="btn-primary" onClick={createOrder} disabled={loading || !orderForm.customerId || orderForm.items.length===0}>
+          {loading ? '...' : t.createOrder}
+        </button>
+        <button className="btn-secondary" onClick={()=>setView('orders')}>{t.cancel}</button>
+      </div>
+    </div>
+  );
+
+  // PRODUCTS
+  const renderProducts = () => (
+    <div className="fade-in">
+      <h2 style={{ fontSize:'1.3rem', fontWeight:700, marginBottom:20 }}>{t.products} ({filteredProducts.length})</h2>
+      <div style={{ display:'flex', gap:10, marginBottom:20, flexWrap:'wrap' }}>
+        <input type="search" placeholder={t.search} value={searchTerm} onChange={e=>setSearchTerm(e.target.value)} style={{ maxWidth:250 }}/>
+        <select value={filterBrand} onChange={e=>setFilterBrand(e.target.value)} style={{ maxWidth:180 }}>
+          <option value="">{t.allBrands}</option>
+          {BRANDS.map(b => <option key={b} value={b}>{b}</option>)}
+        </select>
+      </div>
+      <div className="grid-3">
+        {filteredProducts.map(p => {
+          const si = stockInfo(p.stock, t);
+          return (
+            <div key={p.id} className="card" style={{ padding:16 }}>
+              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:8 }}>
+                <span className="badge badge-accent">{p.brand}</span>
+                <span style={{ fontSize:'0.75rem', color:'var(--text-muted)' }}>{p.cat}</span>
+              </div>
+              <div style={{ fontWeight:600, marginBottom:4 }}>{p.model}</div>
+              <div style={{ fontFamily:'var(--mono)', fontSize:'1.1rem', marginBottom:8 }}>{fmtMoney(p.price, cur)}</div>
+              <div style={{ fontSize:'0.8rem' }}><span className={`stock-dot ${si.cls}`}/>{si.label}</div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+
+  // CUSTOMERS
+  const renderCustomers = () => (
+    <div className="fade-in">
+      <h2 style={{ fontSize:'1.3rem', fontWeight:700, marginBottom:20 }}>{t.customers}</h2>
+      <div className="card" style={{ padding:0, overflow:'hidden' }}>
+        <div style={{ overflowX:'auto' }}>
+          <table>
+            <thead><tr><th>{t.username}</th><th>{t.name}</th><th>{t.company}</th><th>{t.email}</th><th>{t.phone}</th><th>{t.vatNo}</th><th>{t.actions}</th></tr></thead>
+            <tbody>
+              {customers.map(c => (
+                <tr key={c.id}>
+                  <td style={{ fontFamily:'var(--mono)' }}>{c.username}</td>
+                  <td>{c.full_name}</td>
+                  <td>{c.company || '—'}</td>
+                  <td>{c.email || '—'}</td>
+                  <td>{c.phone || '—'}</td>
+                  <td>{c.vat_no || '—'}</td>
+                  <td><button className="btn-ghost btn-sm" onClick={()=>{setEditingProfile(c);setView('editCustomer')}}>{t.edit}</button></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+
+  // INVOICES
+  const renderInvoices = () => (
+    <div className="fade-in">
+      <h2 style={{ fontSize:'1.3rem', fontWeight:700, marginBottom:20 }}>{t.invoices}</h2>
+      {invoicesData.length === 0 ? (
+        <div className="card empty-state"><span style={{fontSize:'3rem'}}>📄</span><p>{t.noData}</p></div>
+      ) : (
+        <div className="card" style={{ padding:0, overflow:'hidden' }}>
+          <table>
+            <thead><tr><th>{t.invoiceNo}</th><th>{t.orderNo}</th><th>Type</th><th>{t.total}</th><th>{t.date}</th></tr></thead>
+            <tbody>
+              {invoicesData.map((inv, i) => (
+                <tr key={i}>
+                  <td style={{ fontFamily:'var(--mono)' }}>{inv.invoice_no}</td>
+                  <td style={{ fontFamily:'var(--mono)' }}>{inv.order_id?.slice(0,8) || '—'}</td>
+                  <td><span className={`badge ${inv.type==='credit'?'badge-danger':'badge-accent'}`}>{inv.type}</span></td>
+                  <td style={{ fontFamily:'var(--mono)' }}>{fmtMoney(Math.abs(inv.total||0), cur)}</td>
+                  <td>{fmtDate(inv.created_at)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+
+  // CREDIT NOTES
+  const renderCreditNotes = () => (
+    <div className="fade-in">
+      <h2 style={{ fontSize:'1.3rem', fontWeight:700, marginBottom:20 }}>{t.creditNotes}</h2>
+      {creditNotesData.length === 0 ? (
+        <div className="card empty-state"><span style={{fontSize:'3rem'}}>💳</span><p>{t.noData}</p></div>
+      ) : (
+        <div className="card" style={{ padding:0, overflow:'hidden' }}>
+          <table>
+            <thead><tr><th>CN#</th><th>{t.orderNo}</th><th>{t.customer}</th><th>{t.reason}</th><th>{t.amount}</th><th>{t.date}</th></tr></thead>
+            <tbody>
+              {creditNotesData.map((cn, i) => (
+                <tr key={i}>
+                  <td style={{ fontFamily:'var(--mono)' }}>{cn.credit_no}</td>
+                  <td>{cn.order_no}</td>
+                  <td>{cn.customer_name}</td>
+                  <td>{cn.reason || '—'}</td>
+                  <td style={{ fontFamily:'var(--mono)', color:'var(--danger)' }}>-{fmtMoney(cn.amount, cur)}</td>
+                  <td>{fmtDate(cn.created_at)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+
+  // REPORTS
+  const renderReports = () => (
+    <div className="fade-in">
+      <h2 style={{ fontSize:'1.3rem', fontWeight:700, marginBottom:20 }}>{t.reports}</h2>
+      <div className="card" style={{ marginBottom:20 }}>
+        <div style={{ display:'flex', gap:10, flexWrap:'wrap', marginBottom:20 }}>
+          <button className="btn-primary btn-sm" onClick={() => exportReport('excel')}>{IC.download} {t.exportExcel}</button>
+          <button className="btn-secondary btn-sm" onClick={() => exportReport('pdf')}>{IC.download} {t.exportPDF}</button>
+          <button className="btn-secondary btn-sm" onClick={() => exportReport('csv')}>{IC.download} {t.exportCSV}</button>
+        </div>
+        <div className="grid-4" style={{ marginBottom:20 }}>
+          <div className="stat-card">
+            <div className="stat-label">{t.totalOrders}</div>
+            <div className="stat-value" style={{ color:'var(--accent)' }}>{stats.total}</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-label">{t.revenue}</div>
+            <div className="stat-value">{fmtMoney(stats.revenue, cur)}</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-label">{t.paid}</div>
+            <div className="stat-value" style={{ color:'var(--success)' }}>{orders.filter(o=>o.payment_status==='paid').length}</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-label">{t.unpaid}</div>
+            <div className="stat-value" style={{ color:'var(--warning)' }}>{orders.filter(o=>o.payment_status!=='paid').length}</div>
+          </div>
+        </div>
+        {/* Orders by status */}
+        <h3 style={{ fontWeight:600, marginBottom:12 }}>{t.status}</h3>
+        <div className="grid-4" style={{ marginBottom:20 }}>
+          {[...STATUS_FLOW, 'cancelled'].map(s => (
+            <div key={s} style={{ padding:12, borderRadius:'var(--radius)', border:'1px solid var(--border)', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+              <span className={`badge ${STATUS_COLORS[s]}`}>{t[s]}</span>
+              <span style={{ fontFamily:'var(--mono)', fontSize:'1.2rem', fontWeight:700 }}>{orders.filter(o=>o.status===s).length}</span>
+            </div>
+          ))}
+        </div>
+        {/* Top sold */}
+        <h3 style={{ fontWeight:600, marginBottom:12 }}>{t.topProducts}</h3>
+        <table>
+          <thead><tr><th>{t.model}</th><th>{t.brand}</th><th>{t.qty}</th><th>{t.revenue}</th></tr></thead>
+          <tbody>
+            {(() => {
+              const map = {};
+              orders.forEach(o => (o.items||[]).forEach(it => {
+                if (!map[it.model]) map[it.model] = { model:it.model, brand:it.brand, qty:0, rev:0 };
+                map[it.model].qty += it.qty;
+                map[it.model].rev += it.total;
+              }));
+              return Object.values(map).sort((a,b)=>b.rev-a.rev).slice(0,10).map((p,i) => (
+                <tr key={i}><td>{p.model}</td><td>{p.brand}</td><td>{p.qty}</td><td style={{fontFamily:'var(--mono)'}}>{fmtMoney(p.rev,cur)}</td></tr>
+              ));
+            })()}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+
+  // PROFILE
+  const renderProfile = () => {
+    const u = editingProfile || user;
+    const addresses = u.addresses || [u.address || ''];
+    return (
+      <div className="fade-in">
+        <h2 style={{ fontSize:'1.3rem', fontWeight:700, marginBottom:20 }}>{t.profile}</h2>
+        <div className="card" style={{ marginBottom:20 }}>
+          <div className="grid-2" style={{ marginBottom:16 }}>
+            <div className="form-group">
+              <label className="form-label">{t.name}</label>
+              <input value={u.full_name || ''} onChange={e => setEditingProfile(p => ({...(p||user), full_name:e.target.value}))}/>
+            </div>
+            <div className="form-group">
+              <label className="form-label">{t.email}</label>
+              <input value={u.email || ''} onChange={e => setEditingProfile(p => ({...(p||user), email:e.target.value}))}/>
+            </div>
+            <div className="form-group">
+              <label className="form-label">{t.phone}</label>
+              <input value={u.phone || ''} onChange={e => setEditingProfile(p => ({...(p||user), phone:e.target.value}))}/>
+            </div>
+            <div className="form-group">
+              <label className="form-label">{t.company}</label>
+              <input value={u.company || ''} onChange={e => setEditingProfile(p => ({...(p||user), company:e.target.value}))}/>
+            </div>
+            <div className="form-group">
+              <label className="form-label">{t.vatNo}</label>
+              <input value={u.vat_no || ''} onChange={e => setEditingProfile(p => ({...(p||user), vat_no:e.target.value}))}/>
+            </div>
+            <div className="form-group">
+              <label className="form-label">{t.country}</label>
+              <input value={u.country || ''} onChange={e => setEditingProfile(p => ({...(p||user), country:e.target.value}))}/>
+            </div>
+          </div>
+
+          <div className="divider"/>
+          <h3 style={{ fontWeight:600, marginBottom:12 }}>{t.billingAddr}</h3>
+          <div className="form-group" style={{ marginBottom:16 }}>
+            <input value={u.billing_address || ''} onChange={e => setEditingProfile(p => ({...(p||user), billing_address:e.target.value}))} placeholder={t.billingAddr}/>
+          </div>
+
+          <div className="divider"/>
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:12 }}>
+            <h3 style={{ fontWeight:600 }}>{t.multiAddr}</h3>
+            <button className="btn-secondary btn-sm" onClick={() => {
+              const addrs = [...(editingProfile || user).addresses || [(editingProfile||user).address||''], ''];
+              setEditingProfile(p => ({...(p||user), addresses: addrs}));
+            }}>{IC.plus} {t.addAddress}</button>
+          </div>
+          {(editingProfile?.addresses || addresses).map((addr, i) => (
+            <div key={i} style={{ display:'flex', gap:8, marginBottom:8, alignItems:'center' }}>
+              <input style={{ flex:1 }} value={typeof addr === 'string' ? addr : addr.street || ''}
+                onChange={e => {
+                  const addrs = [...(editingProfile?.addresses || addresses)];
+                  addrs[i] = e.target.value;
+                  setEditingProfile(p => ({...(p||user), addresses: addrs}));
+                }}
+                placeholder={`${t.deliveryAddr} ${i+1}`}/>
+              {i === 0 && <span className="badge badge-accent">{t.primaryAddr}</span>}
+              {i > 0 && <button className="btn-icon" onClick={() => {
+                const addrs = (editingProfile?.addresses || addresses).filter((_,j)=>j!==i);
+                setEditingProfile(p => ({...(p||user), addresses:addrs}));
+              }}>{IC.x}</button>}
+            </div>
+          ))}
+
+          <div style={{ marginTop:20, display:'flex', gap:10 }}>
+            <button className="btn-primary" onClick={() => saveProfile(editingProfile || user)}>{t.save}</button>
+            <button className="btn-secondary" onClick={() => setEditingProfile(null)}>{t.cancel}</button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // SETTINGS
+  const renderSettings = () => (
+    <div className="fade-in">
+      <h2 style={{ fontSize:'1.3rem', fontWeight:700, marginBottom:20 }}>{t.settings}</h2>
+      <div className="card">
+        <div className="form-group" style={{ marginBottom:20 }}>
+          <label className="form-label">{t.language}</label>
+          <div className="tab-bar" style={{ maxWidth:500 }}>
+            {Object.entries(LANG_LABELS).map(([k,v]) => (
+              <button key={k} className={`tab-btn ${lang===k?'active':''}`} onClick={()=>setLang(k)}>{v}</button>
+            ))}
+          </div>
+        </div>
+        <div className="form-group" style={{ marginBottom:20 }}>
+          <label className="form-label">{t.currency}</label>
+          <div className="tab-bar" style={{ maxWidth:500 }}>
+            {Object.keys(CURRENCIES).map(k => (
+              <button key={k} className={`tab-btn ${cur===k?'active':''}`} onClick={()=>setCur(k)}>{k} ({CURRENCIES[k].symbol})</button>
+            ))}
+          </div>
+        </div>
+        {deferredPrompt && (
+          <button className="btn-primary" onClick={async () => {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') setDeferredPrompt(null);
+          }}>📱 {t.installApp}</button>
+        )}
+      </div>
+    </div>
+  );
+
+  // EDIT CUSTOMER (admin)
+  const renderEditCustomer = () => {
+    if (!editingProfile) return null;
+    return renderProfile();
+  };
+
+  // VIEW ROUTER
+  const renderView = () => {
+    switch (view) {
+      case 'dashboard': return renderDashboard();
+      case 'orders': return renderOrders();
+      case 'orderDetail': return renderOrderDetail();
+      case 'newOrder': return renderNewOrder();
+      case 'products': return renderProducts();
+      case 'customers': return renderCustomers();
+      case 'invoices': return renderInvoices();
+      case 'creditNotes': return renderCreditNotes();
+      case 'reports': return renderReports();
+      case 'profile': return renderProfile();
+      case 'settings': return renderSettings();
+      case 'editCustomer': return renderEditCustomer();
+      default: return renderDashboard();
+    }
+  };
+
+  return (
+    <div>
+      {/* SIDEBAR */}
+      <div className={`sidebar ${sideOpen ? 'mobile-open' : ''}`}>
+        <div style={{ padding:'20px 20px 16px', borderBottom:'1px solid var(--border)', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+          <div style={{ display:'flex', alignItems:'center', gap:10 }}>
+            <div style={{ width:36, height:36, borderRadius:10, background:'var(--accent)', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:900, fontSize:'0.85rem', color:'var(--bg)' }}>GO</div>
+            <div>
+              <div style={{ fontWeight:700, fontSize:'1rem' }}>GoOrder</div>
+              <div style={{ fontSize:'0.7rem', color:'var(--text-muted)' }}>v2.0</div>
+            </div>
+          </div>
+          <button className="btn-icon" style={{ display:'none' }} onClick={() => setSideOpen(false)}>{IC.x}</button>
+        </div>
+
+        <nav style={{ flex:1, overflowY:'auto', padding:'12px 0' }}>
+          {navItems.map(n => (
+            <div key={n.key} className={`nav-item ${view === n.key ? 'active' : ''}`}
+              onClick={() => { setView(n.key); setSideOpen(false); setSearchTerm(''); setFilterBrand(''); setFilterStatus(''); setSelectedOrder(null); }}>
+              {n.icon}
+              <span>{n.label}</span>
+            </div>
+          ))}
+        </nav>
+
+        <div style={{ padding:16, borderTop:'1px solid var(--border)' }}>
+          <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:12 }}>
+            <div style={{ width:32, height:32, borderRadius:8, background:'var(--bg-elevated)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'0.8rem', fontWeight:600 }}>
+              {(user.full_name || user.username).charAt(0).toUpperCase()}
+            </div>
+            <div>
+              <div style={{ fontSize:'0.85rem', fontWeight:600 }}>{user.full_name || user.username}</div>
+              <div style={{ fontSize:'0.7rem', color:'var(--text-muted)' }}>{user.role}</div>
+            </div>
+          </div>
+          <button className="btn-secondary btn-sm" style={{ width:'100%' }} onClick={handleLogout}>{t.logout}</button>
+        </div>
+      </div>
+
+      {/* MAIN */}
+      <div className="main-content">
+        <div className="topbar">
+          <button className="btn-icon" style={{ display:'block' }} onClick={() => setSideOpen(!sideOpen)}>
+            {IC.menu}
+          </button>
+          <div style={{ display:'flex', gap:12, alignItems:'center' }}>
+            <select value={lang} onChange={e=>setLang(e.target.value)} style={{ width:'auto', padding:'6px 30px 6px 10px', fontSize:'0.8rem' }}>
+              {Object.entries(LANG_LABELS).map(([k,v]) => <option key={k} value={k}>{v}</option>)}
+            </select>
+            <select value={cur} onChange={e=>setCur(e.target.value)} style={{ width:'auto', padding:'6px 30px 6px 10px', fontSize:'0.8rem' }}>
+              {Object.keys(CURRENCIES).map(k => <option key={k} value={k}>{k}</option>)}
+            </select>
+          </div>
+        </div>
+        <div style={{ padding:'24px 28px', maxWidth:1200 }}>
+          {renderView()}
+        </div>
+      </div>
+
+      {/* MODALS */}
+
+      {/* Partial shipment modal */}
+      {partialShipModal && (
+        <div className="modal-overlay" onClick={() => setPartialShipModal(null)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <h3 style={{ marginBottom:16 }}>{t.partialShip}: {partialShipModal.order_no}</h3>
+            {(partialShipModal.items || []).map((it, i) => {
+              const remaining = it.qty - (it.delivered_qty || 0);
+              if (remaining <= 0) return null;
+              return (
+                <div key={i} style={{ display:'flex', gap:10, alignItems:'center', marginBottom:12 }}>
+                  <span style={{ flex:1, fontWeight:500 }}>{it.model}</span>
+                  <span style={{ color:'var(--text-muted)', fontSize:'0.85rem' }}>{t.remainingQty}: {remaining}</span>
+                  <input type="number" min={0} max={remaining} defaultValue={0} style={{ width:80 }}
+                    id={`ship-${i}`}/>
+                </div>
+              );
+            })}
+            <div style={{ display:'flex', gap:10, marginTop:20 }}>
+              <button className="btn-primary" onClick={() => {
+                const shipItems = (partialShipModal.items || []).map((it, i) => {
+                  const el = document.getElementById(`ship-${i}`);
+                  return { productId: it.productId, shipQty: el ? +el.value : 0 };
+                }).filter(s => s.shipQty > 0);
+                if (shipItems.length > 0) handlePartialShip(partialShipModal.id, shipItems);
+              }}>{t.markShipped}</button>
+              <button className="btn-secondary" onClick={() => setPartialShipModal(null)}>{t.cancel}</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delivery proof modal */}
+      {deliveryProofModal && (
+        <div className="modal-overlay" onClick={() => setDeliveryProofModal(null)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <h3 style={{ marginBottom:16 }}>{t.deliveryProof}: {deliveryProofModal.order_no}</h3>
+            <div className="form-group" style={{ marginBottom:16 }}>
+              <label className="form-label">{t.uploadPhoto}</label>
+              <input type="file" accept="image/*" id="proof-photo"
+                onChange={e => {
+                  const file = e.target.files[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (ev) => { document.getElementById('proof-preview').src = ev.target.result; };
+                    reader.readAsDataURL(file);
+                  }
+                }}/>
+              <img id="proof-preview" alt="" style={{ maxWidth:200, marginTop:8, borderRadius:'var(--radius)', display:'block' }}/>
+            </div>
+            <div className="form-group" style={{ marginBottom:16 }}>
+              <label className="form-label">{t.signatureCapture}</label>
+              <canvas ref={canvasRef} width={400} height={150}
+                style={{ border:'1px solid var(--border)', borderRadius:'var(--radius)', cursor:'crosshair', touchAction:'none', background:'var(--bg)' }}
+                onMouseDown={startDraw} onMouseMove={draw} onMouseUp={endDraw}
+                onTouchStart={startDraw} onTouchMove={draw} onTouchEnd={endDraw}/>
+              <button className="btn-ghost btn-sm" style={{ marginTop:8 }} onClick={() => {
+                const canvas = canvasRef.current;
+                if (canvas) canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+              }}>{t.clear}</button>
+            </div>
+            <div style={{ display:'flex', gap:10 }}>
+              <button className="btn-primary" onClick={() => {
+                const photo = document.getElementById('proof-preview')?.src || null;
+                const sig = canvasRef.current?.toDataURL() || null;
+                saveDeliveryProof(deliveryProofModal.id, photo, sig);
+              }}>{t.save}</button>
+              <button className="btn-secondary" onClick={() => setDeliveryProofModal(null)}>{t.cancel}</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Credit note modal */}
+      {showCreditModal && (
+        <div className="modal-overlay" onClick={() => setShowCreditModal(false)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <h3 style={{ marginBottom:16 }}>{t.generateCredit}</h3>
+            <div className="form-group" style={{ marginBottom:16 }}>
+              <label className="form-label">{t.reason}</label>
+              <textarea rows={2} value={creditForm.reason} onChange={e => setCreditForm(p=>({...p, reason:e.target.value}))}/>
+            </div>
+            <div className="form-group" style={{ marginBottom:16 }}>
+              <label className="form-label">{t.amount} ({CURRENCIES[cur].symbol})</label>
+              <input type="number" value={creditForm.amount} onChange={e => setCreditForm(p=>({...p, amount:+e.target.value}))}/>
+            </div>
+            <div style={{ display:'flex', gap:10 }}>
+              <button className="btn-primary" onClick={createCreditNote}>{t.confirm}</button>
+              <button className="btn-secondary" onClick={() => setShowCreditModal(false)}>{t.cancel}</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Toast */}
+      {toast && (
+        <div className="toast" style={{
+          background: toast.type === 'error' ? 'var(--danger)' : toast.type === 'warning' ? 'var(--warning)' : 'var(--accent)',
+          color: toast.type === 'error' ? 'white' : 'var(--bg)'
+        }}>
+          {toast.msg}
+        </div>
+      )}
+
+      {/* Mobile sidebar overlay */}
+      {sideOpen && <div style={{ position:'fixed', inset:0, zIndex:99, background:'rgba(0,0,0,0.5)' }} onClick={()=>setSideOpen(false)}/>}
+    </div>
+  );
+}
