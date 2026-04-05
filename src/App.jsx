@@ -424,8 +424,14 @@ export default function App() {
   const handleLogin = useCallback(async () => {
     setLoading(true);
     try {
-      const { data, error } = await sb.from('users').select('*').eq('username', loginForm.username).eq('password_hash', loginForm.password).single();
+      const { data, error } = await sb.from('users').select('*').eq('username', loginForm.username).eq('password', loginForm.password).single();
       if (error || !data) { showToast(t.loginFail, 'error'); setLoading(false); return; }
+      // Infer role if not in DB
+      if (!data.role) {
+        if (data.username === 'admin') data.role = 'admin';
+        else if (data.username === 'demo') data.role = 'demo';
+        else data.role = 'customer';
+      }
       setUser(data);
       setView('dashboard');
     } catch { showToast(t.error, 'error'); }
@@ -470,7 +476,7 @@ export default function App() {
     const newOrder = {
       order_no: orderNo,
       customer_id: orderForm.customerId,
-      customer_name: cust?.company || cust?.full_name || cust?.username,
+      customer_name: cust?.company || cust?.name || cust?.username,
       customer_email: cust?.email,
       items: items,
       subtotal,
@@ -732,7 +738,7 @@ export default function App() {
   // DASHBOARD
   const renderDashboard = () => (
     <div className="fade-in">
-      <h2 style={{ fontSize:'1.5rem', fontWeight:700, marginBottom:24 }}>{t.welcome}, {user.full_name || user.username}!</h2>
+      <h2 style={{ fontSize:'1.5rem', fontWeight:700, marginBottom:24 }}>{t.welcome}, {user.name || user.username}!</h2>
       <div className="grid-4" style={{ marginBottom:32 }}>
         <div className="stat-card">
           <div className="stat-label">{t.totalOrders}</div>
@@ -1020,7 +1026,7 @@ export default function App() {
           <select value={orderForm.customerId} onChange={e => setOrderForm(p=>({...p, customerId:e.target.value}))}>
             <option value="">— {t.selectCustomer} —</option>
             {customers.filter(c=>c.role==='customer'||c.role==='demo').map(c => (
-              <option key={c.id} value={c.id}>{c.company || c.full_name || c.username}</option>
+              <option key={c.id} value={c.id}>{c.company || c.name || c.username}</option>
             ))}
           </select>
         </div>
@@ -1135,7 +1141,7 @@ export default function App() {
               {customers.map(c => (
                 <tr key={c.id}>
                   <td style={{ fontFamily:'var(--mono)' }}>{c.username}</td>
-                  <td>{c.full_name}</td>
+                  <td>{c.name}</td>
                   <td>{c.company || '—'}</td>
                   <td>{c.email || '—'}</td>
                   <td>{c.phone || '—'}</td>
@@ -1276,7 +1282,7 @@ export default function App() {
           <div className="grid-2" style={{ marginBottom:16 }}>
             <div className="form-group">
               <label className="form-label">{t.name}</label>
-              <input value={u.full_name || ''} onChange={e => setEditingProfile(p => ({...(p||user), full_name:e.target.value}))}/>
+              <input value={u.name || ''} onChange={e => setEditingProfile(p => ({...(p||user), name:e.target.value}))}/>
             </div>
             <div className="form-group">
               <label className="form-label">{t.email}</label>
@@ -1425,10 +1431,10 @@ export default function App() {
         <div style={{ padding:16, borderTop:'1px solid var(--border)' }}>
           <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:12 }}>
             <div style={{ width:32, height:32, borderRadius:8, background:'var(--bg-elevated)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'0.8rem', fontWeight:600 }}>
-              {(user.full_name || user.username).charAt(0).toUpperCase()}
+              {(user.name || user.username).charAt(0).toUpperCase()}
             </div>
             <div>
-              <div style={{ fontSize:'0.85rem', fontWeight:600 }}>{user.full_name || user.username}</div>
+              <div style={{ fontSize:'0.85rem', fontWeight:600 }}>{user.name || user.username}</div>
               <div style={{ fontSize:'0.7rem', color:'var(--text-muted)' }}>{user.role}</div>
             </div>
           </div>
