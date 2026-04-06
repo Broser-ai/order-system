@@ -340,6 +340,7 @@ const PRODUCTS = [
   { id:'mbr4',brand:'Marshall',cat:'Party Speakers',model:'Marshall Bromley 450',price:5999,stock:6 },
   { id:'mh12',brand:'Marshall',cat:'Soundbars',model:'Marshall Heston 120',price:6999,stock:5 },
   { id:'mh60',brand:'Marshall',cat:'Soundbars',model:'Marshall Heston 60',price:4499,stock:8 },
+];
 
 const BRANDS = [...new Set(PRODUCTS.map(p=>p.brand))];
 const STATUS_FLOW = ['received','processing','shipped','delivered'];
