@@ -39,14 +39,14 @@ const T = {
     invoices:'Fakturaer', creditNotes:'Kreditnotaer', reports:'Rapporter', settings:'Indstillinger', profile:'Profil',
     myOrders:'Mine ordrer', search:'Søg...', save:'Gem', cancel:'Annuller', delete:'Slet', edit:'Rediger',
     add:'Tilføj', close:'Luk', confirm:'Bekræft', total:'Total', subtotal:'Subtotal', vat:'Moms', qty:'Antal',
-    price:'Pris', status:'Status', date:'Dato', actions:'Handlinger', name:'Navn', email:'E-mail',
+    price:0'Pris', status:'Status', date:'Dato', actions:'Handlinger', name:'Navn', email:'E-mail',
     phone:'Telefon', address:'Adresse', company:'Firma', vatNo:'CVR-nr', city:'By', zip:'Postnr',
     country:'Land', notes:'Noter', deliveryAddr:'Leveringsadresse', billingAddr:'Faktureringsadresse',
     received:'Modtaget', processing:'Behandler', shipped:'Afsendt', delivered:'Leveret', cancelled:'Annulleret',
     proforma:'Proforma', finalInvoice:'Endelig faktura', creditNote:'Kreditnota',
     payNow:'Betal nu', payWithPayPal:'Betal med PayPal', paid:'Betalt', unpaid:'Ubetalt',
     partialDelivery:'Dellevering', deliveryProof:'Leveringsbevis', uploadPhoto:'Upload foto',
-    signature:'Signatur', stock:'Lager', inStock:'På lager', lowStock:'Få på lager', outOfStock:'Ikke på lager',
+    signature:'Signatur', stock:0'Lager', inStock:'På lager', lowStock:'Få på lager', outOfStock:'Ikke på lager',
     exportExcel:'Eksporter Excel', exportPDF:'Eksporter PDF', exportCSV:'Eksporter CSV',
     language:'Sprog', currency:'Valuta', orderNo:'Ordrenr', invoiceNo:'Fakturanr',
     from:'Fra', to:'Til', quantity:'Antal', unitPrice:'Enhedspris', lineTotal:'Linjetotal',
@@ -76,14 +76,14 @@ const T = {
     invoices:'Invoices', creditNotes:'Credit notes', reports:'Reports', settings:'Settings', profile:'Profile',
     myOrders:'My orders', search:'Search...', save:'Save', cancel:'Cancel', delete:'Delete', edit:'Edit',
     add:'Add', close:'Close', confirm:'Confirm', total:'Total', subtotal:'Subtotal', vat:'VAT', qty:'Qty',
-    price:'Price', status:'Status', date:'Date', actions:'Actions', name:'Name', email:'Email',
+    price:0'Price', status:'Status', date:'Date', actions:'Actions', name:'Name', email:'Email',
     phone:'Phone', address:'Address', company:'Company', vatNo:'VAT No', city:'City', zip:'Zip',
     country:'Country', notes:'Notes', deliveryAddr:'Delivery address', billingAddr:'Billing address',
     received:'Received', processing:'Processing', shipped:'Shipped', delivered:'Delivered', cancelled:'Cancelled',
     proforma:'Proforma', finalInvoice:'Final invoice', creditNote:'Credit note',
     payNow:'Pay now', payWithPayPal:'Pay with PayPal', paid:'Paid', unpaid:'Unpaid',
     partialDelivery:'Partial delivery', deliveryProof:'Delivery proof', uploadPhoto:'Upload photo',
-    signature:'Signature', stock:'Stock', inStock:'In stock', lowStock:'Low stock', outOfStock:'Out of stock',
+    signature:'Signature', stock:0'Stock', inStock:'In stock', lowStock:'Low stock', outOfStock:'Out of stock',
     exportExcel:'Export Excel', exportPDF:'Export PDF', exportCSV:'Export CSV',
     language:'Language', currency:'Currency', orderNo:'Order no', invoiceNo:'Invoice no',
     from:'From', to:'To', quantity:'Quantity', unitPrice:'Unit price', lineTotal:'Line total',
@@ -113,14 +113,14 @@ const T = {
     invoices:'Rechnungen', creditNotes:'Gutschriften', reports:'Berichte', settings:'Einstellungen', profile:'Profil',
     myOrders:'Meine Bestellungen', search:'Suchen...', save:'Speichern', cancel:'Abbrechen', delete:'Löschen', edit:'Bearbeiten',
     add:'Hinzufügen', close:'Schließen', confirm:'Bestätigen', total:'Gesamt', subtotal:'Zwischensumme', vat:'MwSt', qty:'Menge',
-    price:'Preis', status:'Status', date:'Datum', actions:'Aktionen', name:'Name', email:'E-Mail',
+    price:0'Preis', status:'Status', date:'Datum', actions:'Aktionen', name:'Name', email:'E-Mail',
     phone:'Telefon', address:'Adresse', company:'Firma', vatNo:'USt-IdNr', city:'Stadt', zip:'PLZ',
     country:'Land', notes:'Notizen', deliveryAddr:'Lieferadresse', billingAddr:'Rechnungsadresse',
     received:'Empfangen', processing:'In Bearbeitung', shipped:'Versandt', delivered:'Geliefert', cancelled:'Storniert',
     proforma:'Proforma', finalInvoice:'Endrechnung', creditNote:'Gutschrift',
     payNow:'Jetzt bezahlen', payWithPayPal:'Mit PayPal bezahlen', paid:'Bezahlt', unpaid:'Unbezahlt',
     partialDelivery:'Teillieferung', deliveryProof:'Liefernachweis', uploadPhoto:'Foto hochladen',
-    signature:'Unterschrift', stock:'Lager', inStock:'Auf Lager', lowStock:'Wenig Lager', outOfStock:'Nicht vorrätig',
+    signature:'Unterschrift', stock:0'Lager', inStock:'Auf Lager', lowStock:'Wenig Lager', outOfStock:'Nicht vorrätig',
     exportExcel:'Excel exportieren', exportPDF:'PDF exportieren', exportCSV:'CSV exportieren',
     language:'Sprache', currency:'Währung', orderNo:'Bestell-Nr', invoiceNo:'Rechnungs-Nr',
     from:'Von', to:'Bis', quantity:'Menge', unitPrice:'Stückpreis', lineTotal:'Zeilensumme',
@@ -150,14 +150,14 @@ const T = {
     invoices:'चालान', creditNotes:'क्रेडिट नोट', reports:'रिपोर्ट', settings:'सेटिंग्स', profile:'प्रोफ़ाइल',
     myOrders:'मेरे ऑर्डर', search:'खोजें...', save:'सहेजें', cancel:'रद्द करें', delete:'हटाएं', edit:'संपादित करें',
     add:'जोड़ें', close:'बंद करें', confirm:'पुष्टि करें', total:'कुल', subtotal:'उप-कुल', vat:'वैट', qty:'मात्रा',
-    price:'कीमत', status:'स्थिति', date:'तारीख', actions:'कार्रवाई', name:'नाम', email:'ईमेल',
+    price:0'कीमत', status:'स्थिति', date:'तारीख', actions:'कार्रवाई', name:'नाम', email:'ईमेल',
     phone:'फ़ोन', address:'पता', company:'कंपनी', vatNo:'वैट नंबर', city:'शहर', zip:'पिन कोड',
     country:'देश', notes:'नोट्स', deliveryAddr:'डिलीवरी का पता', billingAddr:'बिलिंग का पता',
     received:'प्राप्त', processing:'प्रक्रिया में', shipped:'भेजा गया', delivered:'डिलीवर किया', cancelled:'रद्द',
     proforma:'प्रोफ़ॉर्मा', finalInvoice:'अंतिम चालान', creditNote:'क्रेडिट नोट',
     payNow:'अभी भुगतान करें', payWithPayPal:'PayPal से भुगतान', paid:'भुगतान किया', unpaid:'अवैतनिक',
     partialDelivery:'आंशिक डिलीवरी', deliveryProof:'डिलीवरी प्रमाण', uploadPhoto:'फोटो अपलोड',
-    signature:'हस्ताक्षर', stock:'स्टॉक', inStock:'स्टॉक में', lowStock:'कम स्टॉक', outOfStock:'स्टॉक में नहीं',
+    signature:'हस्ताक्षर', stock:0'स्टॉक', inStock:'स्टॉक में', lowStock:'कम स्टॉक', outOfStock:'स्टॉक में नहीं',
     exportExcel:'Excel निर्यात', exportPDF:'PDF निर्यात', exportCSV:'CSV निर्यात',
     language:'भाषा', currency:'मुद्रा', orderNo:'ऑर्डर नं', invoiceNo:'चालान नं',
     from:'से', to:'तक', quantity:'मात्रा', unitPrice:'इकाई मूल्य', lineTotal:'कुल',
@@ -187,14 +187,14 @@ const T = {
     invoices:'发票', creditNotes:'贷方通知单', reports:'报告', settings:'设置', profile:'个人资料',
     myOrders:'我的订单', search:'搜索...', save:'保存', cancel:'取消', delete:'删除', edit:'编辑',
     add:'添加', close:'关闭', confirm:'确认', total:'合计', subtotal:'小计', vat:'增值税', qty:'数量',
-    price:'价格', status:'状态', date:'日期', actions:'操作', name:'姓名', email:'电子邮件',
+    price:0'价格', status:'状态', date:'日期', actions:'操作', name:'姓名', email:'电子邮件',
     phone:'电话', address:'地址', company:'公司', vatNo:'税号', city:'城市', zip:'邮编',
     country:'国家', notes:'备注', deliveryAddr:'送货地址', billingAddr:'账单地址',
     received:'已接收', processing:'处理中', shipped:'已发货', delivered:'已送达', cancelled:'已取消',
     proforma:'形式发票', finalInvoice:'最终发票', creditNote:'贷方通知单',
     payNow:'立即支付', payWithPayPal:'用PayPal支付', paid:'已付', unpaid:'未付',
     partialDelivery:'部分交付', deliveryProof:'交付证明', uploadPhoto:'上传照片',
-    signature:'签名', stock:'库存', inStock:'有货', lowStock:'库存不足', outOfStock:'缺货',
+    signature:'签名', stock:0'库存', inStock:'有货', lowStock:'库存不足', outOfStock:'缺货',
     exportExcel:'导出Excel', exportPDF:'导出PDF', exportCSV:'导出CSV',
     language:'语言', currency:'货币', orderNo:'订单号', invoiceNo:'发票号',
     from:'从', to:'至', quantity:'数量', unitPrice:'单价', lineTotal:'行合计',
@@ -224,122 +224,122 @@ const LANG_LABELS = { da:'Dansk', en:'English', de:'Deutsch', hi:'हिन्�
 
 /* ── Product Catalog med Step-by-Step Konfigurator ── */
 const PRODUCTS = [
-  { id:'ipiphone17',brand:'Apple',cat:'iPhone',model:'iPhone 17 Pro Max',price:14499,stock:30,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB',add:1500},{v:'1TB',add:4500}]},{k:'color',l:'Farve',ch:[{v:'Natural Titanium'},{v:'Black Titanium'},{v:'White Titanium'},{v:'Desert Titanium'}]}] },
-  { id:'ipiphone17',brand:'Apple',cat:'iPhone',model:'iPhone 17 Pro',price:12499,stock:30,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB',add:1500},{v:'1TB',add:4500}]},{k:'color',l:'Farve',ch:[{v:'Natural Titanium'},{v:'Black Titanium'},{v:'White Titanium'},{v:'Desert Titanium'}]}] },
-  { id:'ipiphone17',brand:'Apple',cat:'iPhone',model:'iPhone 17',price:8999,stock:30,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB',add:800},{v:'512GB',add:2500}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Grøn'},{v:'Blå'},{v:'Pink'}]}] },
-  { id:'ipiphone17',brand:'Apple',cat:'iPhone',model:'iPhone 17 Air',price:9499,stock:30,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB',add:800},{v:'512GB',add:2500}]},{k:'color',l:'Farve',ch:[{v:'Starlight'},{v:'Midnight'},{v:'Sky Blue'},{v:'Green'}]}] },
-  { id:'ipiphone17',brand:'Apple',cat:'iPhone',model:'iPhone 17e',price:4999,stock:30,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB',add:800}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Rød'}]}] },
-  { id:'ipiphone16',brand:'Apple',cat:'iPhone',model:'iPhone 16 Pro Max',price:13499,stock:30,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB',add:1500},{v:'1TB',add:4500}]},{k:'color',l:'Farve',ch:[{v:'Natural Titanium'},{v:'Black Titanium'},{v:'White Titanium'},{v:'Desert Titanium'}]}] },
-  { id:'ipiphone16',brand:'Apple',cat:'iPhone',model:'iPhone 16 Pro',price:11499,stock:30,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB',add:1500},{v:'1TB',add:4500}]},{k:'color',l:'Farve',ch:[{v:'Natural Titanium'},{v:'Black Titanium'},{v:'White Titanium'},{v:'Desert Titanium'}]}] },
-  { id:'ipiphone16',brand:'Apple',cat:'iPhone',model:'iPhone 16',price:8499,stock:30,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB',add:800},{v:'512GB',add:2500}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Grøn'},{v:'Blå'},{v:'Pink'}]}] },
-  { id:'ipiphone16',brand:'Apple',cat:'iPhone',model:'iPhone 16 Plus',price:9499,stock:30,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB',add:800},{v:'512GB',add:2500}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Grøn'},{v:'Blå'},{v:'Pink'}]}] },
-  { id:'ipiphone16',brand:'Apple',cat:'iPhone',model:'iPhone 16e',price:4499,stock:30,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB',add:800}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Rød'}]}] },
-  { id:'ipadprom51',brand:'Apple',cat:'iPad',model:'iPad Pro M5 13"',price:13999,stock:22,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB',add:1500},{v:'1TB',add:3500},{v:'2TB',add:5500}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular',add:1200}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'ipadprom51',brand:'Apple',cat:'iPad',model:'iPad Pro M5 11"',price:10999,stock:22,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB',add:1500},{v:'1TB',add:3500},{v:'2TB',add:5500}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular',add:1200}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'ipadprom41',brand:'Apple',cat:'iPad',model:'iPad Pro M4 13" OLED',price:12999,stock:22,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB',add:1500},{v:'1TB',add:3500},{v:'2TB',add:5500}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular',add:1200}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'ipadprom41',brand:'Apple',cat:'iPad',model:'iPad Pro M4 11" OLED',price:9999,stock:22,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB',add:1500},{v:'1TB',add:3500},{v:'2TB',add:5500}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular',add:1200}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'ipadairm41',brand:'Apple',cat:'iPad',model:'iPad Air M4 13"',price:8499,stock:22,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB',add:800},{v:'512GB',add:2000},{v:'1TB',add:3500}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular',add:1200}]},{k:'color',l:'Farve',ch:[{v:'Space Grey'},{v:'Starlight'},{v:'Blue'},{v:'Purple'}]}] },
-  { id:'ipadairm41',brand:'Apple',cat:'iPad',model:'iPad Air M4 11"',price:6499,stock:22,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB',add:800},{v:'512GB',add:2000},{v:'1TB',add:3500}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular',add:1200}]},{k:'color',l:'Farve',ch:[{v:'Space Grey'},{v:'Starlight'},{v:'Blue'},{v:'Purple'}]}] },
-  { id:'ipad11gen',brand:'Apple',cat:'iPad',model:'iPad 11. gen',price:3499,stock:22,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'64GB'},{v:'256GB',add:1000}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular',add:1200}]},{k:'color',l:'Farve',ch:[{v:'Silver'},{v:'Blue'},{v:'Pink'},{v:'Yellow'}]}] },
-  { id:'ipad10gen',brand:'Apple',cat:'iPad',model:'iPad 10. gen',price:2999,stock:22,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'64GB'},{v:'256GB',add:1000}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular',add:1200}]},{k:'color',l:'Farve',ch:[{v:'Silver'},{v:'Blue'},{v:'Pink'},{v:'Yellow'}]}] },
-  { id:'ipadmini7',brand:'Apple',cat:'iPad',model:'iPad mini 7',price:5499,stock:22,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB',add:800},{v:'512GB',add:2500}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular',add:1200}]},{k:'color',l:'Farve',ch:[{v:'Space Grey'},{v:'Starlight'},{v:'Blue'},{v:'Purple'}]}] },
-  { id:'macbookpro16',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M5 Max',price:34999,stock:15,steps:[{k:'ram',l:'RAM',ch:[{v:'36GB'},{v:'48GB',add:3000},{v:'64GB',add:6000}]},{k:'storage',l:'Lagerplads',ch:[{v:'1TB'},{v:'2TB',add:4500},{v:'4TB',add:9000}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'macbookpro16',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M5 Pro',price:23999,stock:15,steps:[{k:'ram',l:'RAM',ch:[{v:'18GB'},{v:'36GB',add:3000}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB',add:2000},{v:'2TB',add:4500}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'macbookpro14',brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M5 Pro',price:19999,stock:15,steps:[{k:'ram',l:'RAM',ch:[{v:'18GB'},{v:'36GB',add:3000}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB',add:2000},{v:'2TB',add:4500}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'macbookpro14',brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M5',price:14999,stock:15,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB',add:1500}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB',add:2000}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'macbookpro16',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M4 Max',price:32999,stock:15,steps:[{k:'ram',l:'RAM',ch:[{v:'36GB'},{v:'48GB',add:2000},{v:'64GB',add:5000}]},{k:'storage',l:'Lagerplads',ch:[{v:'1TB'},{v:'2TB',add:4500},{v:'4TB',add:9000}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'macbookpro16',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M4 Pro',price:22999,stock:15,steps:[{k:'ram',l:'RAM',ch:[{v:'24GB'},{v:'48GB',add:3000}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB',add:2000},{v:'2TB',add:4500}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'macbookpro14',brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M4 Pro',price:18999,stock:15,steps:[{k:'ram',l:'RAM',ch:[{v:'24GB'},{v:'48GB',add:3000}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB',add:2000},{v:'2TB',add:4500}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'macbookpro14',brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M4',price:13999,stock:15,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB',add:1500}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB',add:2000}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'macbookair15',brand:'Apple',cat:'MacBook',model:'MacBook Air 15" M4',price:12999,stock:15,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB',add:1500}]},{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB',add:1500},{v:'1TB',add:3000}]},{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Space Grey'},{v:'Silver'}]}] },
-  { id:'macbookair13',brand:'Apple',cat:'MacBook',model:'MacBook Air 13" M4',price:10499,stock:15,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB',add:1500}]},{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB',add:1500},{v:'1TB',add:3000}]},{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Space Grey'},{v:'Silver'}]}] },
-  { id:'mbneo',brand:'Apple',cat:'MacBook',model:'MacBook Neo (A18 Pro)',price:4999,stock:40,steps:[{k:'color',l:'Farve',ch:[{v:'Silver'},{v:'Blue'},{v:'Green'},{v:'Pink'},{v:'Orange'},{v:'Yellow'},{v:'Purple'}]}] },
-  { id:'imac24',brand:'Apple',cat:'Mac',model:'iMac 24" M4',price:11499,stock:18,steps:[{k:'config',l:'Konfiguration',ch:[{v:'8-core 16GB 256GB'},{v:'10-core 16GB 512GB',add:2000},{v:'10-core 24GB 1TB',add:4500}]},{k:'color',l:'Farve',ch:[{v:'Blue'},{v:'Purple'},{v:'Pink'},{v:'Orange'},{v:'Yellow'},{v:'Green'},{v:'Silver'}]}] },
-  { id:'mmini',brand:'Apple',cat:'Mac',model:'Mac mini',price:4999,stock:25,steps:[{k:'config',l:'Konfiguration',ch:[{v:'M4 16GB 256GB'},{v:'M4 16GB 512GB',add:1500},{v:'M4 Pro 24GB 512GB',add:6000},{v:'M4 Pro 24GB 1TB',add:8000}]}] },
-  { id:'mstudio',brand:'Apple',cat:'Mac',model:'Mac Studio',price:16999,stock:8,steps:[{k:'config',l:'Konfiguration',ch:[{v:'M4 Max 36GB 512GB'},{v:'M4 Max 36GB 1TB',add:2000},{v:'M3 Ultra 64GB 1TB',add:13000}]}] },
-  { id:'awu3',brand:'Apple',cat:'Watch',model:'Apple Watch Ultra 3',price:7499,stock:15,steps:[{k:'band',l:'Rem',ch:[{v:'Orange Alpine Loop'},{v:'Blue Alpine Loop'},{v:'Green Trail Loop'},{v:'Black Trail Loop'}]}] },
-  { id:'aws11',brand:'Apple',cat:'Watch',model:'Apple Watch Series 11',price:3699,stock:30,steps:[{k:'size',l:'Størrelse',ch:[{v:'42mm'},{v:'46mm',add:400}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'GPS'},{v:'GPS + Cellular',add:800}]},{k:'color',l:'Kasse',ch:[{v:'Sort'},{v:'Sølv'},{v:'Rose Gold'},{v:'Blå'}]},{k:'band',l:'Rem',ch:[{v:'Sport Band'},{v:'Sport Loop'},{v:'Solo Loop',add:300},{v:'Milanese Loop',add:500}]}] },
-  { id:'awse',brand:'Apple',cat:'Watch',model:'Apple Watch SE (2025)',price:2299,stock:40,steps:[{k:'size',l:'Størrelse',ch:[{v:'40mm'},{v:'44mm',add:300}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'GPS'},{v:'GPS + Cellular',add:800}]},{k:'color',l:'Kasse',ch:[{v:'Sort'},{v:'Sølv'},{v:'Rose Gold'},{v:'Blå'}]}] },
-  { id:'awu2',brand:'Apple',cat:'Watch',model:'Apple Watch Ultra 2',price:6499,stock:12,steps:[{k:'band',l:'Rem',ch:[{v:'Orange Alpine Loop'},{v:'Blue Alpine Loop'},{v:'Green Trail Loop'},{v:'Black Trail Loop'}]}] },
-  { id:'aws10',brand:'Apple',cat:'Watch',model:'Apple Watch Series 10',price:3299,stock:25,steps:[{k:'size',l:'Størrelse',ch:[{v:'42mm'},{v:'46mm',add:400}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'GPS'},{v:'GPS + Cellular',add:800}]},{k:'color',l:'Kasse',ch:[{v:'Sort'},{v:'Sølv'},{v:'Rose Gold'},{v:'Blå'}]},{k:'band',l:'Rem',ch:[{v:'Sport Band'},{v:'Sport Loop'},{v:'Solo Loop',add:300},{v:'Milanese Loop',add:500}]}] },
-  { id:'apm2',brand:'Apple',cat:'AirPods',model:'AirPods Max 2 (H2)',price:4999,stock:12,steps:[{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Blue'},{v:'Orange'},{v:'Purple'}]}] },
-  { id:'apm1',brand:'Apple',cat:'AirPods',model:'AirPods Max (USB-C)',price:4299,stock:15,steps:[{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Blue'},{v:'Orange'},{v:'Purple'}]}] },
-  { id:'app3',brand:'Apple',cat:'AirPods',model:'AirPods Pro 3',price:2199,stock:48 },
-  { id:'ap4a',brand:'Apple',cat:'AirPods',model:'AirPods 4 (ANC)',price:1799,stock:65 },
-  { id:'ap4',brand:'Apple',cat:'AirPods',model:'AirPods 4',price:1299,stock:72 },
-  { id:'avp',brand:'Apple',cat:'Vision',model:'Apple Vision Pro',price:29999,stock:3,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB',add:1500},{v:'1TB',add:4000}]}] },
-  { id:'atv',brand:'Apple',cat:'Accessories',model:'Apple TV 4K (3. gen)',price:1199,stock:40 },
-  { id:'hpmin',brand:'Apple',cat:'Accessories',model:'HomePod mini',price:799,stock:45,steps:[{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Blue'},{v:'Orange'},{v:'Yellow'}]}] },
-  { id:'hp2',brand:'Apple',cat:'Accessories',model:'HomePod (2. gen)',price:2499,stock:18 },
-  { id:'at2',brand:'Apple',cat:'Accessories',model:'AirTag 2',price:299,stock:80,steps:[{k:'config',l:'Pakke',ch:[{v:'1-pak'},{v:'4-pak',add:520}]}] },
-  { id:'apcpro',brand:'Apple',cat:'Accessories',model:'Apple Pencil Pro',price:1099,stock:40 },
-  { id:'apcuc',brand:'Apple',cat:'Accessories',model:'Apple Pencil (USB-C)',price:649,stock:50 },
-  { id:'amk',brand:'Apple',cat:'Accessories',model:'Magic Keyboard',price:899,stock:30,steps:[{k:'config',l:'Model',ch:[{v:'Standard'},{v:'Touch ID',add:400},{v:'Touch ID+Numpad',add:700}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'}]}] },
-  { id:'amt',brand:'Apple',cat:'Accessories',model:'Magic Trackpad',price:1099,stock:25,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'}]}] },
-  { id:'amm',brand:'Apple',cat:'Accessories',model:'Magic Mouse',price:699,stock:30,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'}]}] },
-  { id:'ams25',brand:'Apple',cat:'Accessories',model:'MagSafe Charger 25W',price:349,stock:60 },
-  { id:'asd',brand:'Apple',cat:'Accessories',model:'Studio Display',price:12999,stock:6,steps:[{k:'config',l:'Glas',ch:[{v:'Standard'},{v:'Nano-texture',add:1500}]}] },
-  { id:'jtm3',brand:'JBL',cat:'Headphones',model:'JBL Tour One M3',price:2799,stock:25,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
-  { id:'jtm2',brand:'JBL',cat:'Headphones',model:'JBL Tour One M2',price:2499,stock:25,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
-  { id:'jl77',brand:'JBL',cat:'Headphones',model:'JBL Live 770NC',price:1499,stock:25,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
-  { id:'jl67',brand:'JBL',cat:'Headphones',model:'JBL Live 670NC',price:999,stock:25,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
-  { id:'jt77',brand:'JBL',cat:'Headphones',model:'JBL Tune 770NC',price:999,stock:25,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
-  { id:'jt72',brand:'JBL',cat:'Headphones',model:'JBL Tune 720BT',price:599,stock:25,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
-  { id:'jt67',brand:'JBL',cat:'Headphones',model:'JBL Tune 670NC',price:749,stock:25,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
-  { id:'jt52',brand:'JBL',cat:'Headphones',model:'JBL Tune 520BT',price:399,stock:25,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
-  { id:'jt52c',brand:'JBL',cat:'Headphones',model:'JBL Tune 520C (Wired)',price:299,stock:35 },
-  { id:'jj47',brand:'JBL',cat:'Headphones',model:'JBL Junior 470NC',price:499,stock:30,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Rød'}]}] },
-  { id:'jj32',brand:'JBL',cat:'Headphones',model:'JBL Junior 320BT',price:349,stock:30,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Rød'}]}] },
-  { id:'jtp3',brand:'JBL',cat:'Earbuds',model:'JBL Tour Pro 3',price:1899,stock:20,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
-  { id:'jlb3',brand:'JBL',cat:'Earbuds',model:'JBL Live Buds 3',price:1499,stock:20,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
-  { id:'jlm3',brand:'JBL',cat:'Earbuds',model:'JBL Live Beam 3',price:1299,stock:20,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
-  { id:'jtb2',brand:'JBL',cat:'Earbuds',model:'JBL Tune Buds 2',price:749,stock:25,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Turkis'}]}] },
-  { id:'jtm2e',brand:'JBL',cat:'Earbuds',model:'JBL Tune Beam 2',price:699,stock:25,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Turkis'}]}] },
-  { id:'jtf2',brand:'JBL',cat:'Earbuds',model:'JBL Tune Flex 2',price:649,stock:25,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Turkis'}]}] },
-  { id:'jvb2',brand:'JBL',cat:'Earbuds',model:'JBL Vibe Buds 2',price:499,stock:30,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'},{v:'Pink'}]}] },
-  { id:'jvm2',brand:'JBL',cat:'Earbuds',model:'JBL Vibe Beam 2',price:449,stock:30,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'},{v:'Pink'}]}] },
-  { id:'jvf2',brand:'JBL',cat:'Earbuds',model:'JBL Vibe Flex 2',price:399,stock:30,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'},{v:'Pink'}]}] },
-  { id:'jv20',brand:'JBL',cat:'Earbuds',model:'JBL Vibe 200TWS',price:349,stock:40,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
-  { id:'jer2',brand:'JBL',cat:'Earbuds',model:'JBL Endurance Race 2',price:599,stock:25,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Lilla'}]}] },
-  { id:'jep3',brand:'JBL',cat:'Earbuds',model:'JBL Endurance Peak 3',price:699,stock:22,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Lilla'}]}] },
-  { id:'jbm3',brand:'JBL',cat:'Speakers',model:'JBL Boombox 3',price:3999,stock:8,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Camo'}]}] },
-  { id:'jxt4',brand:'JBL',cat:'Speakers',model:'JBL Xtreme 4',price:2499,stock:12,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'}]}] },
-  { id:'jch6',brand:'JBL',cat:'Speakers',model:'JBL Charge 6',price:1599,stock:20,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'}]}] },
-  { id:'jch5',brand:'JBL',cat:'Speakers',model:'JBL Charge 5 WiFi',price:1499,stock:15,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Camo'}]}] },
-  { id:'jfl7',brand:'JBL',cat:'Speakers',model:'JBL Flip 7',price:999,stock:30,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'},{v:'Lilla'}]}] },
-  { id:'jfl6',brand:'JBL',cat:'Speakers',model:'JBL Flip 6',price:849,stock:25,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'},{v:'Lilla'}]}] },
-  { id:'jcl5',brand:'JBL',cat:'Speakers',model:'JBL Clip 5',price:499,stock:40,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'},{v:'Lilla'},{v:'Orange'}]}] },
-  { id:'jgo4',brand:'JBL',cat:'Speakers',model:'JBL Go 4',price:349,stock:50,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'},{v:'Lilla'},{v:'Orange'}]}] },
-  { id:'jpl5',brand:'JBL',cat:'Speakers',model:'JBL Pulse 5',price:1999,stock:10 },
-  { id:'jpbu',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Ultimate',price:7999,stock:3 },
-  { id:'jp520',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox 520',price:5999,stock:5 },
-  { id:'jps32',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Stage 320',price:4499,stock:6 },
-  { id:'jpe2',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Encore 2',price:2999,stock:10 },
-  { id:'jpee2',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Encore Essential 2',price:2249,stock:12 },
-  { id:'jpc12',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Club 120',price:3499,stock:8 },
-  { id:'ja300',brand:'JBL',cat:'Home Audio',model:'JBL Authentics 300',price:3499,stock:8 },
-  { id:'ja200',brand:'JBL',cat:'Home Audio',model:'JBL Authentics 200',price:2499,stock:12 },
-  { id:'jhr3',brand:'JBL',cat:'Home Audio',model:'JBL Horizon 3',price:999,stock:18,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'}]}] },
-  { id:'mmn3',brand:'Marshall',cat:'Headphones',model:'Marshall Monitor III A.N.C.',price:2999,stock:20,steps:[{k:'color',l:'Farve',ch:[{v:'Black & Brass'},{v:'Cream'}]}] },
-  { id:'mmj5',brand:'Marshall',cat:'Headphones',model:'Marshall Major V',price:1099,stock:20,steps:[{k:'color',l:'Farve',ch:[{v:'Black & Brass'},{v:'Cream'}]}] },
-  { id:'mmj4',brand:'Marshall',cat:'Headphones',model:'Marshall Major IV',price:899,stock:20,steps:[{k:'color',l:'Farve',ch:[{v:'Black & Brass'},{v:'Cream'}]}] },
-  { id:'mmot2',brand:'Marshall',cat:'Earbuds',model:'Marshall Motif II A.N.C.',price:1499,stock:22 },
-  { id:'mmin4',brand:'Marshall',cat:'Earbuds',model:'Marshall Minor IV',price:899,stock:35 },
-  { id:'me3',brand:'Marshall',cat:'Speakers',model:'Marshall Emberton III',price:1299,stock:12,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'me2',brand:'Marshall',cat:'Speakers',model:'Marshall Emberton II',price:1099,stock:12,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'mw2',brand:'Marshall',cat:'Speakers',model:'Marshall Willen II',price:799,stock:12,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'mmd2',brand:'Marshall',cat:'Speakers',model:'Marshall Middleton II',price:2199,stock:12,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'mmd1',brand:'Marshall',cat:'Speakers',model:'Marshall Middleton',price:1899,stock:12,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'ms2',brand:'Marshall',cat:'Speakers',model:'Marshall Stockwell II',price:1699,stock:12,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'mk3',brand:'Marshall',cat:'Speakers',model:'Marshall Kilburn III',price:2999,stock:12,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'mtf',brand:'Marshall',cat:'Speakers',model:'Marshall Tufton',price:3999,stock:12,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'mwb3',brand:'Marshall',cat:'Home Audio',model:'Marshall Woburn III',price:4499,stock:10,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'mst3',brand:'Marshall',cat:'Home Audio',model:'Marshall Stanmore III',price:3499,stock:10,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'mac3',brand:'Marshall',cat:'Home Audio',model:'Marshall Acton III',price:2299,stock:10,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'mbr7',brand:'Marshall',cat:'Party Speakers',model:'Marshall Bromley 750',price:8999,stock:4 },
-  { id:'mbr4',brand:'Marshall',cat:'Party Speakers',model:'Marshall Bromley 450',price:5999,stock:6 },
-  { id:'mh12',brand:'Marshall',cat:'Soundbars',model:'Marshall Heston 120',price:6999,stock:5 },
-  { id:'mh60',brand:'Marshall',cat:'Soundbars',model:'Marshall Heston 60',price:4499,stock:8 },
+  { id:'p0',brand:'Apple',cat:'iPhone',model:'iPhone 17 Pro Max',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Natural Titanium'},{v:'Black Titanium'},{v:'White Titanium'},{v:'Desert Titanium'}]}] },
+  { id:'p1',brand:'Apple',cat:'iPhone',model:'iPhone 17 Pro',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Natural Titanium'},{v:'Black Titanium'},{v:'White Titanium'},{v:'Desert Titanium'}]}] },
+  { id:'p2',brand:'Apple',cat:'iPhone',model:'iPhone 17',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Grøn'},{v:'Blå'},{v:'Pink'}]}] },
+  { id:'p3',brand:'Apple',cat:'iPhone',model:'iPhone 17 Air',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'}]},{k:'color',l:'Farve',ch:[{v:'Starlight'},{v:'Midnight'},{v:'Sky Blue'},{v:'Green'}]}] },
+  { id:'p4',brand:'Apple',cat:'iPhone',model:'iPhone 17e',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Rød'}]}] },
+  { id:'p5',brand:'Apple',cat:'iPhone',model:'iPhone 16 Pro Max',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Natural Titanium'},{v:'Black Titanium'},{v:'White Titanium'},{v:'Desert Titanium'}]}] },
+  { id:'p6',brand:'Apple',cat:'iPhone',model:'iPhone 16 Pro',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Natural Titanium'},{v:'Black Titanium'},{v:'White Titanium'},{v:'Desert Titanium'}]}] },
+  { id:'p7',brand:'Apple',cat:'iPhone',model:'iPhone 16',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Grøn'},{v:'Blå'},{v:'Pink'}]}] },
+  { id:'p8',brand:'Apple',cat:'iPhone',model:'iPhone 16 Plus',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Grøn'},{v:'Blå'},{v:'Pink'}]}] },
+  { id:'p9',brand:'Apple',cat:'iPhone',model:'iPhone 16e',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Rød'}]}] },
+  { id:'p10',brand:'Apple',cat:'iPad',model:'iPad Pro M5 13"',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
+  { id:'p11',brand:'Apple',cat:'iPad',model:'iPad Pro M5 11"',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
+  { id:'p12',brand:'Apple',cat:'iPad',model:'iPad Pro M4 13" OLED',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
+  { id:'p13',brand:'Apple',cat:'iPad',model:'iPad Pro M4 11" OLED',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
+  { id:'p14',brand:'Apple',cat:'iPad',model:'iPad Air M4 13"',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Grey'},{v:'Starlight'},{v:'Blue'},{v:'Purple'}]}] },
+  { id:'p15',brand:'Apple',cat:'iPad',model:'iPad Air M4 11"',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Grey'},{v:'Starlight'},{v:'Blue'},{v:'Purple'}]}] },
+  { id:'p16',brand:'Apple',cat:'iPad',model:'iPad 11. gen',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'64GB'},{v:'256GB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Silver'},{v:'Blue'},{v:'Pink'},{v:'Yellow'}]}] },
+  { id:'p17',brand:'Apple',cat:'iPad',model:'iPad 10. gen',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'64GB'},{v:'256GB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Silver'},{v:'Blue'},{v:'Pink'},{v:'Yellow'}]}] },
+  { id:'p18',brand:'Apple',cat:'iPad',model:'iPad mini 7',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Grey'},{v:'Starlight'},{v:'Blue'},{v:'Purple'}]}] },
+  { id:'p19',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M5 Max',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'36GB'},{v:'48GB'},{v:'64GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'1TB'},{v:'2TB'},{v:'4TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
+  { id:'p20',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M5 Pro',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'18GB'},{v:'36GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
+  { id:'p21',brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M5 Pro',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'18GB'},{v:'36GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
+  { id:'p22',brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M5',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
+  { id:'p23',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M4 Max',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'36GB'},{v:'48GB'},{v:'64GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'1TB'},{v:'2TB'},{v:'4TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
+  { id:'p24',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M4 Pro',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'24GB'},{v:'48GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
+  { id:'p25',brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M4 Pro',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'24GB'},{v:'48GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
+  { id:'p26',brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M4',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
+  { id:'p27',brand:'Apple',cat:'MacBook',model:'MacBook Air 15" M4',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Space Grey'},{v:'Silver'}]}] },
+  { id:'p28',brand:'Apple',cat:'MacBook',model:'MacBook Air 13" M4',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Space Grey'},{v:'Silver'}]}] },
+  { id:'p29',brand:'Apple',cat:'MacBook',model:'MacBook Neo (A18 Pro)',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Silver'},{v:'Blue'},{v:'Green'},{v:'Pink'},{v:'Orange'},{v:'Yellow'},{v:'Purple'}]}] },
+  { id:'p30',brand:'Apple',cat:'Mac',model:'iMac 24" M4',price:0,stock:0,steps:[{k:'config',l:'Konfiguration',ch:[{v:'8-core 16GB 256GB'},{v:'10-core 16GB 512GB'},{v:'10-core 24GB 1TB'}]},{k:'color',l:'Farve',ch:[{v:'Blue'},{v:'Purple'},{v:'Pink'},{v:'Orange'},{v:'Yellow'},{v:'Green'},{v:'Silver'}]}] },
+  { id:'p31',brand:'Apple',cat:'Mac',model:'Mac mini',price:0,stock:0,steps:[{k:'config',l:'Konfiguration',ch:[{v:'M4 16GB 256GB'},{v:'M4 16GB 512GB'},{v:'M4 Pro 24GB 512GB'},{v:'M4 Pro 24GB 1TB'}]}] },
+  { id:'p32',brand:'Apple',cat:'Mac',model:'Mac Studio',price:0,stock:0,steps:[{k:'config',l:'Konfiguration',ch:[{v:'M4 Max 36GB 512GB'},{v:'M4 Max 36GB 1TB'},{v:'M3 Ultra 64GB 1TB'}]}] },
+  { id:'p33',brand:'Apple',cat:'Watch',model:'Apple Watch Ultra 3',price:0,stock:0,steps:[{k:'band',l:'Rem',ch:[{v:'Orange Alpine Loop'},{v:'Blue Alpine Loop'},{v:'Green Trail Loop'},{v:'Black Trail Loop'}]}] },
+  { id:'p34',brand:'Apple',cat:'Watch',model:'Apple Watch Series 11',price:0,stock:0,steps:[{k:'size',l:'Størrelse',ch:[{v:'42mm'},{v:'46mm'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'GPS'},{v:'GPS + Cellular'}]},{k:'color',l:'Kasse',ch:[{v:'Sort'},{v:'Sølv'},{v:'Rose Gold'},{v:'Blå'}]},{k:'band',l:'Rem',ch:[{v:'Sport Band'},{v:'Sport Loop'},{v:'Solo Loop'},{v:'Milanese Loop'}]}] },
+  { id:'p35',brand:'Apple',cat:'Watch',model:'Apple Watch SE (2025)',price:0,stock:0,steps:[{k:'size',l:'Størrelse',ch:[{v:'40mm'},{v:'44mm'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'GPS'},{v:'GPS + Cellular'}]},{k:'color',l:'Kasse',ch:[{v:'Sort'},{v:'Sølv'},{v:'Rose Gold'},{v:'Blå'}]}] },
+  { id:'p36',brand:'Apple',cat:'Watch',model:'Apple Watch Ultra 2',price:0,stock:0,steps:[{k:'band',l:'Rem',ch:[{v:'Orange Alpine Loop'},{v:'Blue Alpine Loop'},{v:'Green Trail Loop'},{v:'Black Trail Loop'}]}] },
+  { id:'p37',brand:'Apple',cat:'Watch',model:'Apple Watch Series 10',price:0,stock:0,steps:[{k:'size',l:'Størrelse',ch:[{v:'42mm'},{v:'46mm'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'GPS'},{v:'GPS + Cellular'}]},{k:'color',l:'Kasse',ch:[{v:'Sort'},{v:'Sølv'},{v:'Rose Gold'},{v:'Blå'}]},{k:'band',l:'Rem',ch:[{v:'Sport Band'},{v:'Sport Loop'},{v:'Solo Loop'},{v:'Milanese Loop'}]}] },
+  { id:'p38',brand:'Apple',cat:'AirPods',model:'AirPods Max 2 (H2)',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Blue'},{v:'Orange'},{v:'Purple'}]}] },
+  { id:'p39',brand:'Apple',cat:'AirPods',model:'AirPods Max (USB-C)',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Blue'},{v:'Orange'},{v:'Purple'}]}] },
+  { id:'p40',brand:'Apple',cat:'AirPods',model:'AirPods Pro 3',price:0,stock:0 },
+  { id:'p41',brand:'Apple',cat:'AirPods',model:'AirPods 4 (ANC)',price:0,stock:0 },
+  { id:'p42',brand:'Apple',cat:'AirPods',model:'AirPods 4',price:0,stock:0 },
+  { id:'p43',brand:'Apple',cat:'Vision',model:'Apple Vision Pro',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'}]}] },
+  { id:'p44',brand:'Apple',cat:'Accessories',model:'Apple TV 4K (3. gen)',price:0,stock:0 },
+  { id:'p45',brand:'Apple',cat:'Accessories',model:'HomePod mini',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Blue'},{v:'Orange'},{v:'Yellow'}]}] },
+  { id:'p46',brand:'Apple',cat:'Accessories',model:'HomePod (2. gen)',price:0,stock:0 },
+  { id:'p47',brand:'Apple',cat:'Accessories',model:'AirTag 2',price:0,stock:0,steps:[{k:'config',l:'Pakke',ch:[{v:'1-pak'},{v:'4-pak'}]}] },
+  { id:'p48',brand:'Apple',cat:'Accessories',model:'Apple Pencil Pro',price:0,stock:0 },
+  { id:'p49',brand:'Apple',cat:'Accessories',model:'Apple Pencil (USB-C)',price:0,stock:0 },
+  { id:'p50',brand:'Apple',cat:'Accessories',model:'Magic Keyboard',price:0,stock:0,steps:[{k:'config',l:'Model',ch:[{v:'Standard'},{v:'Touch ID'},{v:'Touch ID+Numpad'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'}]}] },
+  { id:'p51',brand:'Apple',cat:'Accessories',model:'Magic Trackpad',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'}]}] },
+  { id:'p52',brand:'Apple',cat:'Accessories',model:'Magic Mouse',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'}]}] },
+  { id:'p53',brand:'Apple',cat:'Accessories',model:'MagSafe Charger 25W',price:0,stock:0 },
+  { id:'p54',brand:'Apple',cat:'Accessories',model:'Studio Display',price:0,stock:0,steps:[{k:'config',l:'Glas',ch:[{v:'Standard'},{v:'Nano-texture'}]}] },
+  { id:'p55',brand:'JBL',cat:'Headphones',model:'JBL Tour One M3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
+  { id:'p56',brand:'JBL',cat:'Headphones',model:'JBL Tour One M2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
+  { id:'p57',brand:'JBL',cat:'Headphones',model:'JBL Live 770NC',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
+  { id:'p58',brand:'JBL',cat:'Headphones',model:'JBL Live 670NC',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
+  { id:'p59',brand:'JBL',cat:'Headphones',model:'JBL Tune 770NC',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
+  { id:'p60',brand:'JBL',cat:'Headphones',model:'JBL Tune 720BT',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
+  { id:'p61',brand:'JBL',cat:'Headphones',model:'JBL Tune 670NC',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
+  { id:'p62',brand:'JBL',cat:'Headphones',model:'JBL Tune 520BT',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
+  { id:'p63',brand:'JBL',cat:'Headphones',model:'JBL Tune 520C (Wired)',price:0,stock:0 },
+  { id:'p64',brand:'JBL',cat:'Headphones',model:'JBL Junior 470NC',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Rød'}]}] },
+  { id:'p65',brand:'JBL',cat:'Headphones',model:'JBL Junior 320BT',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Rød'}]}] },
+  { id:'p66',brand:'JBL',cat:'Earbuds',model:'JBL Tour Pro 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
+  { id:'p67',brand:'JBL',cat:'Earbuds',model:'JBL Live Buds 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
+  { id:'p68',brand:'JBL',cat:'Earbuds',model:'JBL Live Beam 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
+  { id:'p69',brand:'JBL',cat:'Earbuds',model:'JBL Tune Buds 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Turkis'}]}] },
+  { id:'p70',brand:'JBL',cat:'Earbuds',model:'JBL Tune Beam 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Turkis'}]}] },
+  { id:'p71',brand:'JBL',cat:'Earbuds',model:'JBL Tune Flex 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Turkis'}]}] },
+  { id:'p72',brand:'JBL',cat:'Earbuds',model:'JBL Vibe Buds 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'},{v:'Pink'}]}] },
+  { id:'p73',brand:'JBL',cat:'Earbuds',model:'JBL Vibe Beam 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'},{v:'Pink'}]}] },
+  { id:'p74',brand:'JBL',cat:'Earbuds',model:'JBL Vibe Flex 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'},{v:'Pink'}]}] },
+  { id:'p75',brand:'JBL',cat:'Earbuds',model:'JBL Vibe 200TWS',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
+  { id:'p76',brand:'JBL',cat:'Earbuds',model:'JBL Endurance Race 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Lilla'}]}] },
+  { id:'p77',brand:'JBL',cat:'Earbuds',model:'JBL Endurance Peak 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Lilla'}]}] },
+  { id:'p78',brand:'JBL',cat:'Speakers',model:'JBL Boombox 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Camo'}]}] },
+  { id:'p79',brand:'JBL',cat:'Speakers',model:'JBL Xtreme 4',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'}]}] },
+  { id:'p80',brand:'JBL',cat:'Speakers',model:'JBL Charge 6',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'}]}] },
+  { id:'p81',brand:'JBL',cat:'Speakers',model:'JBL Charge 5 WiFi',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Camo'}]}] },
+  { id:'p82',brand:'JBL',cat:'Speakers',model:'JBL Flip 7',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'},{v:'Lilla'}]}] },
+  { id:'p83',brand:'JBL',cat:'Speakers',model:'JBL Flip 6',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'},{v:'Lilla'}]}] },
+  { id:'p84',brand:'JBL',cat:'Speakers',model:'JBL Clip 5',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'},{v:'Lilla'},{v:'Orange'}]}] },
+  { id:'p85',brand:'JBL',cat:'Speakers',model:'JBL Go 4',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'},{v:'Lilla'},{v:'Orange'}]}] },
+  { id:'p86',brand:'JBL',cat:'Speakers',model:'JBL Pulse 5',price:0,stock:0 },
+  { id:'p87',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Ultimate',price:0,stock:0 },
+  { id:'p88',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox 520',price:0,stock:0 },
+  { id:'p89',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Stage 320',price:0,stock:0 },
+  { id:'p90',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Encore 2',price:0,stock:0 },
+  { id:'p91',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Encore Essential 2',price:0,stock:0 },
+  { id:'p92',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Club 120',price:0,stock:0 },
+  { id:'p93',brand:'JBL',cat:'Home Audio',model:'JBL Authentics 300',price:0,stock:0 },
+  { id:'p94',brand:'JBL',cat:'Home Audio',model:'JBL Authentics 200',price:0,stock:0 },
+  { id:'p95',brand:'JBL',cat:'Home Audio',model:'JBL Horizon 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'}]}] },
+  { id:'p96',brand:'Marshall',cat:'Headphones',model:'Marshall Monitor III A.N.C.',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Black & Brass'},{v:'Cream'}]}] },
+  { id:'p97',brand:'Marshall',cat:'Headphones',model:'Marshall Major V',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Black & Brass'},{v:'Cream'}]}] },
+  { id:'p98',brand:'Marshall',cat:'Headphones',model:'Marshall Major IV',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Black & Brass'},{v:'Cream'}]}] },
+  { id:'p99',brand:'Marshall',cat:'Earbuds',model:'Marshall Motif II A.N.C.',price:0,stock:0 },
+  { id:'p100',brand:'Marshall',cat:'Earbuds',model:'Marshall Minor IV',price:0,stock:0 },
+  { id:'p101',brand:'Marshall',cat:'Speakers',model:'Marshall Emberton III',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
+  { id:'p102',brand:'Marshall',cat:'Speakers',model:'Marshall Emberton II',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
+  { id:'p103',brand:'Marshall',cat:'Speakers',model:'Marshall Willen II',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
+  { id:'p104',brand:'Marshall',cat:'Speakers',model:'Marshall Middleton II',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
+  { id:'p105',brand:'Marshall',cat:'Speakers',model:'Marshall Middleton',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
+  { id:'p106',brand:'Marshall',cat:'Speakers',model:'Marshall Stockwell II',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
+  { id:'p107',brand:'Marshall',cat:'Speakers',model:'Marshall Kilburn III',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
+  { id:'p108',brand:'Marshall',cat:'Speakers',model:'Marshall Tufton',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
+  { id:'p109',brand:'Marshall',cat:'Home Audio',model:'Marshall Woburn III',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
+  { id:'p110',brand:'Marshall',cat:'Home Audio',model:'Marshall Stanmore III',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
+  { id:'p111',brand:'Marshall',cat:'Home Audio',model:'Marshall Acton III',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
+  { id:'p112',brand:'Marshall',cat:'Party Speakers',model:'Marshall Bromley 750',price:0,stock:0 },
+  { id:'p113',brand:'Marshall',cat:'Party Speakers',model:'Marshall Bromley 450',price:0,stock:0 },
+  { id:'p114',brand:'Marshall',cat:'Soundbars',model:'Marshall Heston 120',price:0,stock:0 },
+  { id:'p115',brand:'Marshall',cat:'Soundbars',model:'Marshall Heston 60',price:0,stock:0 },
 ];
 
 const BRANDS = [...new Set(PRODUCTS.map(p=>p.brand))];
@@ -347,9 +347,9 @@ const CATEGORIES = [...new Set(PRODUCTS.map(p=>p.cat))];
 const BRAND_CATS = {};
 PRODUCTS.forEach(p => { if (!BRAND_CATS[p.brand]) BRAND_CATS[p.brand] = {}; if (!BRAND_CATS[p.brand][p.cat]) BRAND_CATS[p.brand][p.cat] = []; BRAND_CATS[p.brand][p.cat].push(p); });
 const BRAND_THEME = {
-  Apple:   { bg:'linear-gradient(135deg,#1a1a2e,#16213e)', color:'#fff', accent:'#0071e3', logo:'', desc:'iPhone · iPad · MacBook · Watch · AirPods' },
-  JBL:     { bg:'linear-gradient(135deg,#ff6b00,#ff8c38)', color:'#fff', accent:'#ff6b00', logo:'JBL', desc:'Headphones · Earbuds · Speakers · PartyBox' },
-  Marshall:{ bg:'linear-gradient(135deg,#8b0000,#c0392b)', color:'#fff', accent:'#c0392b', logo:'MARSHALL', desc:'Headphones · Earbuds · Speakers · Soundbars' },
+  Apple:   { bg:'linear-gradient(135deg,#1a1a2e,#16213e)', color:'#fff', accent:'#0071e3', logo:'', desc:'iPhone · iPad · MacBook · Watch · AirPods', url:'https://www.apple.com/dk/' },
+  JBL:     { bg:'linear-gradient(135deg,#ff6b00,#ff8c38)', color:'#fff', accent:'#ff6b00', logo:'JBL', desc:'Headphones · Earbuds · Speakers · PartyBox', url:'https://dk.jbl.com/' },
+  Marshall:{ bg:'linear-gradient(135deg,#3a3a3a,#1a1a1a)', color:'#fff', accent:'#c0392b', logo:'MARSHALL', desc:'Headphones · Earbuds · Speakers · Soundbars', url:'https://www.marshallheadphones.com/' },
 };
 const CAT_ICONS = { iPhone:'📱',iPad:'📱',MacBook:'💻',Mac:'🖥',Watch:'⌚',AirPods:'🎧',Vision:'🥽',Accessories:'⌨',Headphones:'🎧',Earbuds:'🎵',Speakers:'🔊',PartyBox:'🎶','Party Speakers':'🎶','Home Audio':'🏠',Soundbars:'📺' };
 
@@ -384,7 +384,7 @@ const STATUS_COLORS = { received:'badge-info', processing:'badge-warning', shipp
 const fmtMoney = (v, cur) => { const c = CURRENCIES[cur]; return `${c.symbol} ${(v * c.rate).toFixed(c.decimals)}`; };
 const fmtDate = d => new Date(d).toLocaleDateString('da-DK', { day:'2-digit', month:'short', year:'numeric' });
 const genId = () => crypto.randomUUID().slice(0,8).toUpperCase();
-const stockInfo = (s, t) => s > 20 ? { cls:'stock-high', label: t.inStock } : s > 0 ? { cls: s > 5 ? 'stock-medium' : 'stock-low', label: t.lowStock +' ('+s+')' } : { cls:'stock-out', label: t.outOfStock };
+const stockInfo = (s, t) => ({ cls:'stock-info', label:'📦 Ca. 2 ugers leveringstid' });
 const getStepAdd = (prod, cfg) => { if (!prod?.steps || !cfg) return 0; return (prod.steps||[]).reduce((sum, st) => { const ch = st.ch.find(c => c.v === cfg[st.k]); return sum + (ch?.add || 0); }, 0); };
 const getConfigPrice = (prod, cfg) => (prod?.price || 0) + getStepAdd(prod, cfg);
 const fmtConfig = (cfg) => cfg ? Object.values(cfg).filter(Boolean).join(' · ') : '';
@@ -896,7 +896,7 @@ export default function App() {
                     <div style={{ fontSize:'0.8rem', color:'var(--text-muted)' }}>{p.brand}</div>
                   </div>
                   <div style={{ textAlign:'right' }}>
-                    <div style={{ fontFamily:'var(--mono)', fontSize:'0.85rem' }}>{fmtMoney(p.price, cur)}</div>
+                    
                     <div style={{ fontSize:'0.75rem' }}><span className={`stock-dot ${si.cls}`}/>{si.label}</div>
                   </div>
                 </div>
@@ -1181,8 +1181,8 @@ export default function App() {
             <div style={{ flex:'1 1 340px' }}>
               <div style={{ marginBottom:16 }}>
                 <div style={{ fontSize:'1rem', fontWeight:600 }}>{cp.model} {fmtConfig(cfg)}</div>
-                <div style={{ fontSize:'1.5rem', fontWeight:700, color:'var(--accent)', marginTop:8 }}>{fmtMoney(price, cur)}</div>
-                <div style={{ fontSize:'0.8rem', color:'var(--text-muted)', marginTop:4 }}>{da(lang)?'Inkluderer moms og afgifter':'Includes VAT and duties'}</div>
+                <div style={{ fontSize:'1.2rem', fontWeight:600, color:'var(--accent)', marginTop:8 }}>{da(lang)?'Pris oplyses efter bestilling':'Price upon request'}</div>
+                <div style={{ fontSize:'0.8rem', color:'var(--text-muted)', marginTop:4 }}>📦 {da(lang)?'Ca. 2 ugers leveringstid':'Approx. 2 weeks delivery'}</div>
               </div>
               <div className="divider"/>
               {Object.entries(cfg).map(([k,v]) => (
@@ -1219,7 +1219,7 @@ export default function App() {
           <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:24 }}>
             <h2 style={{ fontSize:'1.8rem', fontWeight:700 }}>{cp.model}</h2>
             <div style={{ textAlign:'right' }}>
-              <div style={{ fontSize:'1.3rem', fontWeight:700 }}>{da(lang)?'Fra':'From'} {fmtMoney(cp.price, cur)}</div>
+              <div style={{ fontSize:'0.9rem', color:'var(--text-muted)' }}>{da(lang)?'Konfigurerbar':'Configurable'}</div>
             </div>
           </div>
           {colorStep && (
@@ -1241,12 +1241,12 @@ export default function App() {
               <h3 style={{ fontWeight:700, fontSize:'1rem', marginBottom:4 }}>{step.l}. <span style={{ color:'var(--text-muted)', fontWeight:400 }}>{da(lang)?'Hvor meget har du brug for?':'How much do you need?'}</span></h3>
               <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
                 {step.ch.map(ch => {
-                  const sel = cfg[step.k] === ch.v; const fullPrice = cp.price + (ch.add || 0);
+                  const sel = cfg[step.k] === ch.v;
                   return (<div key={ch.v} onClick={() => setConfiguring({...configuring, config:{...cfg, [step.k]:ch.v}})}
                     style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'16px 20px', borderRadius:12,
                       border: sel?'2px solid var(--accent)':'1px solid var(--border)', background: sel?'var(--accent-bg)':'var(--bg-card)', cursor:'pointer', transition:'all 0.15s' }}>
                     <span style={{ fontSize:'1.1rem', fontWeight:700, color: sel?'var(--accent)':'var(--text)' }}>{ch.v}</span>
-                    <span style={{ fontSize:'0.95rem', color: sel?'var(--accent)':'var(--text-secondary)' }}>{fmtMoney(fullPrice, cur)}</span>
+                    <span style={{ fontSize:'0.95rem', color: sel?'var(--accent)':'var(--text-secondary)' }}>{sel ? '✓' : ''}</span>
                   </div>);
                 })}
               </div>
@@ -1272,15 +1272,13 @@ export default function App() {
                 </div>
                 <div style={{ display:'flex', alignItems:'center', gap:12 }}>
                   <input type="number" min={1} max={99} value={it.qty} style={{ width:55 }} onChange={e => { const c=[...customerCart]; c[i].qty=Math.max(1,+e.target.value); setCustomerCart(c); }}/>
-                  <span style={{ fontFamily:'var(--mono)', minWidth:90, textAlign:'right' }}>{fmtMoney(it.unitPrice*it.qty, cur)}</span>
                   <button className="btn-icon" onClick={()=>setCustomerCart(prev=>prev.filter((_,j)=>j!==i))}>{IC.x}</button>
                 </div>
               </div>
             ))}
             <div style={{ marginTop:16, paddingTop:12, borderTop:'1px solid var(--border)', textAlign:'right' }}>
-              <div style={{ color:'var(--text-secondary)' }}>{t.subtotal}: {fmtMoney(cartTotal, cur)}</div>
-              <div style={{ color:'var(--text-secondary)' }}>{t.tax}: {fmtMoney(cartTotal*0.25, cur)}</div>
-              <div style={{ fontSize:'1.3rem', fontWeight:700, marginTop:4, color:'var(--accent)' }}>{t.grandTotal}: {fmtMoney(cartTotal*1.25, cur)}</div>
+              <div style={{ color:'var(--text-muted)', fontSize:'0.9rem' }}>📦 {da(lang)?'Ca. 2 ugers leveringstid':'Approx. 2 weeks delivery'}</div>
+              <div style={{ color:'var(--text-muted)', fontSize:'0.85rem', marginTop:4 }}>{da(lang)?'Endelig pris oplyses efter modtagelse af bestilling':'Final price will be provided after receiving order'}</div>
             </div>
           </div>
           <div style={{ display:'flex', gap:10 }}>
@@ -1306,8 +1304,7 @@ export default function App() {
     // BRAND SELECTION
     if (!browseBrand) return (
       <div className="fade-in">
-        {isCustomerView && <h2 style={{ fontSize:'1.5rem', fontWeight:700, marginBottom:4 }}>{da(lang)?'Bestillingssystem':'Order System'}</h2>}
-        {!isCustomerView && <h2 style={{ fontSize:'1.5rem', fontWeight:700, marginBottom:4 }}>{t.products}</h2>}
+        <h2 style={{ fontSize:'1.5rem', fontWeight:700, marginBottom:4 }}>{da(lang)?'Vælg brand':'Select brand'}</h2>
         <p style={{ color:'var(--text-muted)', marginBottom:24 }}>{da(lang) ? 'Vælg en leverandør for at se produkter' : 'Select a brand to view products'}</p>
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(260px, 1fr))', gap:20 }}>
           {BRANDS.map(b => {
@@ -1316,33 +1313,41 @@ export default function App() {
             const total = Object.values(BRAND_CATS[b] || {}).reduce((s,arr)=>s+arr.length,0);
             return (
               <div key={b} onClick={()=>setBrowseBrand(b)} style={{
-                background: th.bg || 'var(--bg-elevated)', borderRadius:'var(--radius-lg)', padding:28, cursor:'pointer',
-                border:'2px solid transparent', transition:'all 0.2s', minHeight:180,
+                background: th.bg || 'var(--bg-elevated)', borderRadius:16, padding:28, cursor:'pointer',
+                border:'2px solid transparent', transition:'all 0.2s', minHeight:200,
                 display:'flex', flexDirection:'column', justifyContent:'space-between',
               }}
               onMouseEnter={e=>e.currentTarget.style.border='2px solid var(--accent)'}
               onMouseLeave={e=>e.currentTarget.style.border='2px solid transparent'}>
-                <div>
-                  <div style={{ fontSize: b==='Apple'?'2.5rem':'1.6rem', fontWeight:900, color:th.color, marginBottom:8, letterSpacing: b==='Marshall'?'0.15em':'0' }}>
-                    {b==='Apple'?'Apple':th.logo||b}
-                  </div>
-                  <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.7)', marginBottom:12 }}>{th.desc}</div>
+                <div style={{ textAlign:'center', flex:1, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center' }}>
+                  {b==='Apple' ? (
+                    <svg width="50" height="60" viewBox="0 0 814 1000" fill="white"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76.5 0-103.7 40.8-165.9 40.8s-105.6-57.4-155.5-127.4c-58.8-82.7-106.3-211.1-106.3-333.7 0-191.2 124.3-292.8 246.7-292.8 65 0 119.1 42.7 159.7 42.7 38.6 0 98.8-45.3 175.4-45.3 28.3 0 130.1 2.6 197.1 99.4zm-135.3-183.1c31.1-36.9 53.1-88.1 53.1-139.3 0-7.1-.6-14.3-1.9-20.1-50.6 1.9-110.8 33.7-147.1 75.8-28.3 32.4-56.4 83.6-56.4 135.5 0 7.8.6 15.6 1.3 18.2 2.6.6 6.4 1.3 10.2 1.3 45.4 0 103-30.4 140.8-71.4z"/></svg>
+                  ) : (
+                    <div style={{ fontSize: b==='Marshall'?'1.8rem':'2.2rem', fontWeight:900, color:th.color, letterSpacing: b==='Marshall'?'0.15em':'0.02em', fontFamily:b==='Marshall'?'Georgia,serif':'inherit' }}>
+                      {th.logo||b}
+                    </div>
+                  )}
                 </div>
-                <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
-                  <span style={{ fontSize:'0.8rem', color:'rgba(255,255,255,0.5)' }}>{cats.length} {da(lang)?'kategorier':'categories'} · {total} {da(lang)?'varianter':'variants'}</span>
-                  <span style={{ color:'rgba(255,255,255,0.8)', fontSize:'1.2rem' }}>→</span>
+                <div>
+                  <div style={{ fontSize:'0.8rem', color:'rgba(255,255,255,0.6)', marginBottom:6 }}>
+                    {cats.length} {da(lang)?'Kategorier':'Categories'} · {total} {da(lang)?'varianter':'variants'}
+                  </div>
+                  <div onClick={e=>{e.stopPropagation();window.open(th.url,'_blank');}} style={{ fontSize:'0.75rem', color:'rgba(255,255,255,0.5)', display:'flex', alignItems:'center', gap:4, cursor:'pointer' }}>
+                    🔗 {da(lang)?'Besøg officiel hjemmeside →':'Visit official website →'}
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
-        <div style={{ marginTop:24, padding:16, borderRadius:'var(--radius)', background:'var(--info-bg)', border:'1px solid rgba(59,130,246,0.2)' }}>
-          <span style={{ color:'var(--info)', fontSize:'0.85rem' }}>ℹ {da(lang)?'Denne bestilling er uden priser. Endelig pris vil blive fremsendt som separat tilbud efter modtagelse af bestilling.':'This order is without prices. Final price will be sent as a separate offer after receiving the order.'}</span>
+        <div style={{ marginTop:24, padding:16, borderRadius:'var(--radius)', background:'rgba(59,130,246,0.05)', border:'1px solid rgba(59,130,246,0.15)', display:'flex', gap:10, alignItems:'flex-start' }}>
+          <span style={{ color:'#3b82f6', fontSize:'1rem' }}>ℹ</span>
+          <span style={{ color:'var(--text-secondary)', fontSize:'0.85rem' }}>{da(lang)?'Bemærk: Denne bestilling er uden priser. Endelig pris inkl. fragt vil blive fremsendt som separat tilbud efter modtagelse af bestilling.':'Note: This order is without prices. Final price incl. shipping will be sent as a separate offer after receiving the order.'}</span>
         </div>
         {customerCart.length > 0 && (
           <div onClick={()=>{setBrowseBrand(null);setBrowseCat(null);}} style={{ marginTop:16, padding:16, borderRadius:'var(--radius)', background:'var(--accent-bg)', border:'1px solid var(--accent)', cursor:'pointer', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
             <span style={{ color:'var(--accent)', fontWeight:600 }}>🛒 {da(lang)?'Din bestilling':'Your order'}: {customerCart.length} {da(lang)?'varer':'items'}</span>
-            <span style={{ color:'var(--accent)', fontWeight:700 }}>{fmtMoney(customerCart.reduce((s,it)=>s+it.unitPrice*it.qty,0)*1.25, cur)} →</span>
+            <span style={{ color:'var(--accent)', fontWeight:700 }}>{da(lang)?'Se bestilling →':'View order →'}</span>
           </div>
         )}
       </div>
@@ -1398,7 +1403,7 @@ export default function App() {
           {productsInCat.map(p => {
             const si = stockInfo(p.stock, t);
             return (
-              <div key={p.id} className="card" style={{ padding:20, transition:'all 0.15s', display:'flex', flexDirection:'column', justifyContent:'space-between' }}
+              <div key={p.model} className="card" style={{ padding:20, transition:'all 0.15s', display:'flex', flexDirection:'column', justifyContent:'space-between' }}
                 onMouseEnter={e=>e.currentTarget.style.borderColor='var(--accent)'}
                 onMouseLeave={e=>e.currentTarget.style.borderColor='var(--border)'}>
                 <div>
@@ -1407,7 +1412,7 @@ export default function App() {
                     <span style={{ fontSize:'0.75rem' }}><span className={`stock-dot ${si.cls}`}/>{si.label}</span>
                   </div>
                   <div style={{ fontWeight:700, fontSize:'1.05rem', marginBottom:6 }}>{p.model}</div>
-                  <div style={{ fontFamily:'var(--mono)', fontSize:'1.2rem', color:'var(--accent)', marginBottom:10 }}>{p.steps?'fra ':''}{fmtMoney(p.price, cur)}</div>
+                  <div style={{ fontFamily:'var(--mono)', fontSize:'1.2rem', color:'var(--accent)', marginBottom:10 }}>{p.steps ? (da(lang)?'Konfigurerbart':'Configurable') : ''}</div>
                   {p.steps && (
                     <div style={{ display:'flex', gap:6, flexWrap:'wrap', marginBottom:12 }}>
                       {p.steps.map((s,i)=>(
@@ -1712,6 +1717,58 @@ export default function App() {
     }
   };
 
+  // ═══ CUSTOMER LAYOUT — Full-width, no sidebar, original design ═══
+  if (!isAdmin) {
+    const custNavItems = [
+      { key:'products', label:da(lang)?'Bestil':'Order', icon:'📦' },
+      { key:'orders', label:t.myOrders, icon:'📋' },
+      { key:'profile', label:t.profile, icon:'👤' },
+      { key:'settings', label:t.settings, icon:'⚙' },
+    ];
+    return (
+      <div style={{ minHeight:'100vh', background:'var(--bg)' }}>
+        {/* TOP BAR */}
+        <div style={{ background:'var(--bg-card)', borderBottom:'1px solid var(--border)', padding:'0 24px', display:'flex', alignItems:'center', justifyContent:'space-between', height:56, position:'sticky', top:0, zIndex:100 }}>
+          <div style={{ display:'flex', alignItems:'center', gap:10 }}>
+            <span style={{ fontSize:'1.3rem' }}>📦</span>
+            <div>
+              <div style={{ fontWeight:700, fontSize:'1rem', lineHeight:1.2 }}>{da(lang)?'Bestillingssystem':'Order System'}</div>
+              <div style={{ fontSize:'0.6rem', color:'var(--accent)', fontWeight:600, letterSpacing:'0.05em', textTransform:'uppercase' }}>Multi-Brand {da(lang)?'Indkøbsordre':'Procurement'}</div>
+            </div>
+          </div>
+          <div style={{ display:'flex', gap:12, alignItems:'center' }}>
+            <select value={lang} onChange={e=>setLang(e.target.value)} style={{ width:'auto', padding:'6px 28px 6px 8px', fontSize:'0.8rem', background:'var(--bg-elevated)', border:'1px solid var(--border)', borderRadius:6, color:'var(--text)' }}>
+              {Object.entries(LANG_LABELS).map(([k,v]) => <option key={k} value={k}>{k.toUpperCase()} {v}</option>)}
+            </select>
+            <select value={cur} onChange={e=>setCur(e.target.value)} style={{ width:'auto', padding:'6px 28px 6px 8px', fontSize:'0.8rem', background:'var(--bg-elevated)', border:'1px solid var(--border)', borderRadius:6, color:'var(--text)' }}>
+              {Object.keys(CURRENCIES).map(k => <option key={k} value={k}>{CURRENCIES[k].symbol} {k}</option>)}
+            </select>
+            {customerCart.length > 0 && (
+              <div onClick={()=>{setBrowseBrand(null);setBrowseCat(null);setConfiguring(null);setView('products');}} style={{ position:'relative', cursor:'pointer', fontSize:'1.2rem' }}>
+                🛒<span style={{ position:'absolute', top:-6, right:-8, background:'var(--accent)', color:'var(--bg)', borderRadius:10, width:18, height:18, display:'flex', alignItems:'center', justifyContent:'center', fontSize:'0.65rem', fontWeight:700 }}>{customerCart.length}</span>
+              </div>
+            )}
+            <button className="btn-ghost btn-sm" onClick={handleLogout} style={{ fontSize:'0.8rem' }}>{t.logout}</button>
+          </div>
+        </div>
+        {/* NAV TABS */}
+        <div style={{ background:'var(--bg-card)', borderBottom:'1px solid var(--border)', display:'flex', justifyContent:'center', gap:0 }}>
+          {custNavItems.map(n => (
+            <button key={n.key} onClick={()=>{setView(n.key);setSearchTerm('');setBrowseBrand(null);setBrowseCat(null);setConfiguring(null);}}
+              style={{ padding:'12px 24px', background:'transparent', border:'none', borderBottom: view===n.key ? '2px solid var(--accent)' : '2px solid transparent',
+                color: view===n.key ? 'var(--accent)' : 'var(--text-muted)', fontWeight: view===n.key?600:400, fontSize:'0.9rem', cursor:'pointer', display:'flex', gap:6, alignItems:'center' }}>
+              <span>{n.icon}</span> {n.label}
+            </button>
+          ))}
+        </div>
+        {/* CONTENT */}
+        <div style={{ maxWidth:1100, margin:'0 auto', padding:'28px 24px' }}>{renderView()}</div>
+        {toast && <div className="toast" style={{ background: toast.type==='error'?'var(--danger)':'var(--accent)', color: toast.type==='error'?'white':'var(--bg)' }}>{toast.msg}</div>}
+      </div>
+    );
+  }
+
+  // ═══ ADMIN LAYOUT — Sidebar ═══
   return (
     <div>
       {/* SIDEBAR */}
@@ -1881,3 +1938,4 @@ export default function App() {
     </div>
   );
 }
+ 
