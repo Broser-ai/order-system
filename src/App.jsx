@@ -343,6 +343,40 @@ const PRODUCTS = [
 ];
 
 const BRANDS = [...new Set(PRODUCTS.map(p=>p.brand))];
+const CATEGORIES = [...new Set(PRODUCTS.map(p=>p.cat))];
+const BRAND_CATS = {};
+PRODUCTS.forEach(p => { if (!BRAND_CATS[p.brand]) BRAND_CATS[p.brand] = {}; if (!BRAND_CATS[p.brand][p.cat]) BRAND_CATS[p.brand][p.cat] = []; BRAND_CATS[p.brand][p.cat].push(p); });
+const BRAND_THEME = {
+  Apple:   { bg:'linear-gradient(135deg,#1a1a2e,#16213e)', color:'#fff', accent:'#0071e3', logo:'', desc:'iPhone · iPad · MacBook · Watch · AirPods' },
+  JBL:     { bg:'linear-gradient(135deg,#ff6b00,#ff8c38)', color:'#fff', accent:'#ff6b00', logo:'JBL', desc:'Headphones · Earbuds · Speakers · PartyBox' },
+  Marshall:{ bg:'linear-gradient(135deg,#8b0000,#c0392b)', color:'#fff', accent:'#c0392b', logo:'MARSHALL', desc:'Headphones · Earbuds · Speakers · Soundbars' },
+};
+const CAT_ICONS = { iPhone:'📱',iPad:'📱',MacBook:'💻',Mac:'🖥',Watch:'⌚',AirPods:'🎧',Vision:'🥽',Accessories:'⌨',Headphones:'🎧',Earbuds:'🎵',Speakers:'🔊',PartyBox:'🎶','Party Speakers':'🎶','Home Audio':'🏠',Soundbars:'📺' };
+
+/* Color hex for swatches */
+const CLR = {'Natural Titanium':'#b5a994','Black Titanium':'#3a3a3c','White Titanium':'#e8e3dc','Desert Titanium':'#c4a97d',
+  'Sort':'#1d1d1f','Hvid':'#f5f5f7','Grøn':'#4a6b3f','Blå':'#2d4e8a','Pink':'#f9d0c7','Midnight':'#1d1d2b','Starlight':'#f0e6d3',
+  'Sky Blue':'#a7c4e0','Green':'#4a6b3f','Rød':'#c0392b','Space Black':'#1d1d1f','Silver':'#e3e4e6','Space Grey':'#6b6b6f',
+  'Blue':'#4a7dc0','Purple':'#8b6baf','Yellow':'#f5d547','Orange':'#f5a623','Cream':'#f5f0e1','Brown':'#6b4c3b',
+  'Black & Brass':'#2d2d2d','Turkis':'#40c4aa','Lilla':'#9b59b6','Camo':'#5a6b4a','Squad (Camo)':'#5a6b4a',
+  'Jet Black':'#0a0a0a','Rose Gold':'#e8b4b8','Sølv':'#c0c0c0','Coral':'#ff7f50','Indigo Trail':'#3f51b5',
+};
+
+/* Product families for Apple-style grouping */
+const FAMILIES = {
+  'iPhone 17 Pro': { models:['iPhone 17 Pro','iPhone 17 Pro Max'], label:'iPhone 17 Pro og\niPhone 17 Pro Max', screen:'6,3" og 6,9"', spec:'A19 Pro · 48 MP kamera · Titanium' },
+  'iPhone 17 Air': { models:['iPhone 17 Air'], label:'iPhone Air', screen:'6,6"', spec:'A19 · Ultratyndt design' },
+  'iPhone 17': { models:['iPhone 17'], label:'iPhone 17', screen:'6,3"', spec:'A19 · ProMotion · 48 MP' },
+  'iPhone 17e': { models:['iPhone 17e'], label:'iPhone 17e', screen:'6,1"', spec:'A19 · Face ID · USB-C' },
+  'iPhone 16 Pro': { models:['iPhone 16 Pro','iPhone 16 Pro Max'], label:'iPhone 16 Pro og\niPhone 16 Pro Max', screen:'6,3" og 6,9"', spec:'A18 Pro · 48 MP · Titanium' },
+  'iPhone 16': { models:['iPhone 16','iPhone 16 Plus'], label:'iPhone 16 og\niPhone 16 Plus', screen:'6,1" og 6,7"', spec:'A18 · 48 MP · Action Button' },
+  'iPhone 16e': { models:['iPhone 16e'], label:'iPhone 16e', screen:'6,1"', spec:'A18 · Face ID · USB-C' },
+  'iPad Pro M5': { models:['iPad Pro M5 13"','iPad Pro M5 11"'], label:'iPad Pro M5', screen:'11" og 13"', spec:'M5 chip · OLED · Thunderbolt' },
+  'iPad Pro M4': { models:['iPad Pro M4 13" OLED','iPad Pro M4 11" OLED'], label:'iPad Pro M4 OLED', screen:'11" og 13"', spec:'M4 chip · OLED · Pencil Pro' },
+  'iPad Air M4': { models:['iPad Air M4 13"','iPad Air M4 11"'], label:'iPad Air M4', screen:'11" og 13"', spec:'M4 chip · Liquid Retina' },
+  'iPad 11. gen': { models:['iPad 11. gen'], label:'iPad', screen:'10,9"', spec:'A16 chip · Apple Intelligence' },
+  'iPad mini 7': { models:['iPad mini 7'], label:'iPad mini', screen:'8,3"', spec:'A17 Pro · Pencil Pro' },
+};
 const STATUS_FLOW = ['received','processing','shipped','delivered'];
 const STATUS_COLORS = { received:'badge-info', processing:'badge-warning', shipped:'badge-accent', delivered:'badge-success', cancelled:'badge-danger' };
 
@@ -354,6 +388,7 @@ const stockInfo = (s, t) => s > 20 ? { cls:'stock-high', label: t.inStock } : s 
 const getStepAdd = (prod, cfg) => { if (!prod?.steps || !cfg) return 0; return (prod.steps||[]).reduce((sum, st) => { const ch = st.ch.find(c => c.v === cfg[st.k]); return sum + (ch?.add || 0); }, 0); };
 const getConfigPrice = (prod, cfg) => (prod?.price || 0) + getStepAdd(prod, cfg);
 const fmtConfig = (cfg) => cfg ? Object.values(cfg).filter(Boolean).join(' · ') : '';
+const da = (l) => l === 'da' || l === 'de';
 
 /* ── SVG Icons (inline) ── */
 const IC = {
@@ -412,6 +447,11 @@ export default function App() {
   const [isDrawing, setIsDrawing] = useState(false);
   const canvasRef = useRef(null);
   const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [browseBrand, setBrowseBrand] = useState(null);
+  const [browseCat, setBrowseCat] = useState(null);
+  const [browseProduct, setBrowseProduct] = useState(null);
+  const [customerCart, setCustomerCart] = useState([]);
+  const [configuring, setConfiguring] = useState(null); // {product, config:{}, stepIdx:0}
 
   const t = useMemo(() => T[lang] || T.da, [lang]);
 
@@ -493,7 +533,7 @@ export default function App() {
         else data.role = 'customer';
       }
       setUser(data);
-      setView('dashboard');
+      setView(data.role === 'admin' || data.role === 'demo' ? 'dashboard' : 'products');
     } catch { showToast(t.error, 'error'); }
     setLoading(false);
   }, [loginForm, showToast, t]);
@@ -787,9 +827,8 @@ export default function App() {
     { key:'profile', icon:IC.profile, label:t.profile },
     { key:'settings', icon:IC.settings, label:t.settings },
   ] : [
-    { key:'dashboard', icon:IC.dashboard, label:t.dashboard },
+    { key:'products', icon:IC.products, label:da(lang)?'Bestil':'Order' },
     { key:'orders', icon:IC.orders, label:t.myOrders },
-    { key:'products', icon:IC.products, label:t.products },
     { key:'profile', icon:IC.profile, label:t.profile },
     { key:'settings', icon:IC.settings, label:t.settings },
   ];
@@ -1077,195 +1116,327 @@ export default function App() {
     );
   };
 
-  // NEW ORDER
+  // NEW ORDER (Admin) — uses same visual flow with customer selector
   const renderNewOrder = () => (
     <div className="fade-in">
-      <h2 style={{ fontSize:'1.3rem', fontWeight:700, marginBottom:20 }}>{t.createOrder}</h2>
-      <div className="card" style={{ marginBottom:20 }}>
-        <div className="form-group" style={{ marginBottom:16 }}>
-          <label className="form-label">{t.selectCustomer}</label>
-          <select value={orderForm.customerId} onChange={e => setOrderForm(p=>({...p, customerId:e.target.value}))}>
-            <option value="">— {t.selectCustomer} —</option>
-            {customers.filter(c=>c.role==='customer'||c.role==='demo').map(c => (
-              <option key={c.id} value={c.id}>{c.company || c.name || c.username}</option>
-            ))}
-          </select>
-        </div>
-        {orderForm.customerId && (() => {
-          const cust = customers.find(c => c.id === orderForm.customerId);
-          const addrs = cust?.addresses || [cust?.address || ''];
-          return addrs.length > 1 ? (
+      {!orderForm.customerId ? (
+        <div>
+          <h2 style={{ fontSize:'1.3rem', fontWeight:700, marginBottom:20 }}>{t.createOrder}</h2>
+          <div className="card" style={{ maxWidth:500 }}>
             <div className="form-group" style={{ marginBottom:16 }}>
-              <label className="form-label">{t.deliveryAddr}</label>
-              <select value={orderForm.deliveryAddrIdx} onChange={e => setOrderForm(p=>({...p, deliveryAddrIdx: +e.target.value}))}>
-                {addrs.map((a, i) => <option key={i} value={i}>{typeof a === 'string' ? a : `${a.street}, ${a.city}`}</option>)}
+              <label className="form-label">{t.selectCustomer}</label>
+              <select value={orderForm.customerId} onChange={e => setOrderForm(p=>({...p, customerId:e.target.value}))}>
+                <option value="">— {t.selectCustomer} —</option>
+                {customers.filter(c=>c.role==='customer'||c.role==='demo').map(c => (
+                  <option key={c.id} value={c.id}>{c.company || c.name || c.username}</option>
+                ))}
               </select>
             </div>
-          ) : null;
-        })()}
-      </div>
-
-      <div className="card" style={{ marginBottom:20 }}>
-        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:16 }}>
-          <h3 style={{ fontWeight:600 }}>{t.items}</h3>
-          <button className="btn-secondary btn-sm" onClick={() => setOrderForm(p=>({...p, items:[...p.items, {productId:'', qty:1, config:{}, stepIdx:0}]}))}>
-            {IC.plus} {t.addItem}
-          </button>
+          </div>
         </div>
-        {orderForm.items.map((item, idx) => {
-          const prod = PRODUCTS.find(p => p.id === item.productId);
-          const cfg = item.config || {};
-          const itemPrice = getConfigPrice(prod, cfg);
-          const steps = prod?.steps || [];
-          const currentStep = steps[item.stepIdx || 0];
-          const allStepsDone = steps.length === 0 || Object.keys(cfg).length >= steps.length;
-          return (
-            <div key={idx} style={{ marginBottom:16, padding:16, borderRadius:'var(--radius-lg)', border:'1px solid var(--border)', background:'var(--bg-elevated)' }}>
-              {/* Product selector */}
-              <div style={{ display:'flex', gap:10, alignItems:'center', flexWrap:'wrap', marginBottom: prod ? 12 : 0 }}>
-                <select style={{ flex:2, minWidth:200 }} value={item.productId} onChange={e => {
-                  const items = [...orderForm.items]; items[idx] = { productId: e.target.value, qty:1, config:{}, stepIdx:0 }; setOrderForm(p=>({...p, items}));
-                }}>
-                  <option value="">— {t.model} —</option>
-                  {PRODUCTS.map(p => <option key={p.id} value={p.id}>{p.brand} · {p.model} — fra {fmtMoney(p.price, cur)}</option>)}
-                </select>
-                <button className="btn-icon" onClick={() => { const items = orderForm.items.filter((_, i) => i !== idx); setOrderForm(p=>({...p, items})); }}>{IC.x}</button>
-              </div>
+      ) : (
+        <div>
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:16 }}>
+            <div style={{ display:'flex', gap:12, alignItems:'center' }}>
+              <button className="btn-ghost" onClick={()=>{setOrderForm(p=>({...p,customerId:''}));setCustomerCart([]);setBrowseBrand(null);setBrowseCat(null);setConfiguring(null);}}>{IC.back}</button>
+              <span style={{ fontWeight:600 }}>{t.customer}: {customers.find(c=>c.id===orderForm.customerId)?.company || customers.find(c=>c.id===orderForm.customerId)?.name || '—'}</span>
+            </div>
+          </div>
+          {renderProducts()}
+        </div>
+      )}
+    </div>
+  );
 
-              {/* Step-by-step configurator */}
-              {prod && steps.length > 0 && (
+  // PRODUCTS — Visual Brand → Category → Product → Configure → Cart flow
+  const renderProducts = () => {
+    const isCustomerView = true; // Both admin and customer use visual flow
+
+    // ═══ APPLE-STYLE CONFIGURATOR ═══
+    if (configuring) {
+      const cp = configuring.product;
+      const cfg = configuring.config || {};
+      const steps = cp.steps || [];
+      const price = getConfigPrice(cp, cfg);
+      const colorStep = steps.find(s => s.k === 'color');
+      const otherSteps = steps.filter(s => s.k !== 'color');
+      const allDone = steps.length === 0 || Object.keys(cfg).length >= steps.length;
+      const selectedColor = cfg.color;
+      const colorHex = CLR[selectedColor] || '#888';
+      const family = Object.values(FAMILIES).find(f => f.models.includes(cp.model));
+      const familyProducts = family ? family.models.map(m => PRODUCTS.find(p => p.model === m)).filter(Boolean) : [cp];
+
+      if (allDone) return (
+        <div className="fade-in" style={{ maxWidth:800, margin:'0 auto' }}>
+          <button className="btn-ghost" onClick={()=>setConfiguring({...configuring, config:{}, stepIdx:0})} style={{ marginBottom:24 }}>{IC.back} {da(lang)?'Ændr konfiguration':'Change configuration'}</button>
+          <div style={{ display:'flex', gap:40, flexWrap:'wrap', alignItems:'flex-start' }}>
+            <div style={{ flex:'1 1 300px' }}>
+              <h1 style={{ fontSize:'2rem', fontWeight:700, lineHeight:1.2, marginBottom:4 }}>{da(lang)?'Din nye':'Your new'}</h1>
+              <h1 style={{ fontSize:'2rem', fontWeight:700, lineHeight:1.2, marginBottom:4 }}>{cp.model}.</h1>
+              <p style={{ fontSize:'1.2rem', color:'var(--text-muted)', marginBottom:24 }}>{da(lang)?'Lige som du vil have den.':'Just the way you want it.'}</p>
+              <div style={{ width:200, height:200, borderRadius:24, background:`linear-gradient(135deg, ${colorHex}33, ${colorHex}11)`, display:'flex', alignItems:'center', justifyContent:'center', fontSize:'5rem', border:'1px solid var(--border)' }}>
+                {CAT_ICONS[cp.cat]||'📦'}
+              </div>
+            </div>
+            <div style={{ flex:'1 1 340px' }}>
+              <div style={{ marginBottom:16 }}>
+                <div style={{ fontSize:'1rem', fontWeight:600 }}>{cp.model} {fmtConfig(cfg)}</div>
+                <div style={{ fontSize:'1.5rem', fontWeight:700, color:'var(--accent)', marginTop:8 }}>{fmtMoney(price, cur)}</div>
+                <div style={{ fontSize:'0.8rem', color:'var(--text-muted)', marginTop:4 }}>{da(lang)?'Inkluderer moms og afgifter':'Includes VAT and duties'}</div>
+              </div>
+              <div className="divider"/>
+              {Object.entries(cfg).map(([k,v]) => (
+                <div key={k} style={{ display:'flex', justifyContent:'space-between', padding:'6px 0' }}>
+                  <span style={{ color:'var(--text-secondary)', textTransform:'capitalize' }}>{steps.find(s=>s.k===k)?.l||k}</span>
+                  <span style={{ fontWeight:600, display:'flex', alignItems:'center', gap:6 }}>{k==='color' && <span style={{width:14,height:14,borderRadius:7,background:CLR[v]||'#888',display:'inline-block',border:'1px solid var(--border)'}}/>}{v}</span>
+                </div>
+              ))}
+              <div className="divider"/>
+              <button className="btn-primary" style={{ width:'100%', padding:'14px 0', fontSize:'1rem', borderRadius:12 }} onClick={() => {
+                setCustomerCart(prev => [...prev, { productId:cp.id, model:cp.model, brand:cp.brand, config:cfg, configLabel:fmtConfig(cfg), unitPrice:price, qty:1, total:price }]);
+                setConfiguring(null);
+                showToast(da(lang)?'Tilføjet til bestilling ✓':'Added to order ✓');
+              }}>{da(lang)?'Læg i bestilling':'Add to order'}</button>
+            </div>
+          </div>
+        </div>
+      );
+
+      return (
+        <div className="fade-in" style={{ maxWidth:800, margin:'0 auto' }}>
+          <button className="btn-ghost" onClick={()=>setConfiguring(null)} style={{ marginBottom:16 }}>{IC.back} {da(lang)?'Tilbage':'Back'}</button>
+          {familyProducts.length > 1 && (
+            <div style={{ display:'flex', gap:4, marginBottom:24, borderBottom:'2px solid var(--border)' }}>
+              {familyProducts.map(fp => (
+                <button key={fp.model} onClick={() => setConfiguring({ product:fp, config:{}, stepIdx:0 })}
+                  style={{ padding:'10px 20px', background:'transparent', border:'none', borderBottom: fp.model===cp.model ? '2px solid var(--text)' : '2px solid transparent',
+                    color: fp.model===cp.model ? 'var(--text)' : 'var(--text-muted)', fontWeight: fp.model===cp.model?700:400, fontSize:'0.95rem', cursor:'pointer', marginBottom:-2 }}>
+                  {fp.model}
+                </button>
+              ))}
+            </div>
+          )}
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:24 }}>
+            <h2 style={{ fontSize:'1.8rem', fontWeight:700 }}>{cp.model}</h2>
+            <div style={{ textAlign:'right' }}>
+              <div style={{ fontSize:'1.3rem', fontWeight:700 }}>{da(lang)?'Fra':'From'} {fmtMoney(cp.price, cur)}</div>
+            </div>
+          </div>
+          {colorStep && (
+            <div style={{ marginBottom:28 }}>
+              <h3 style={{ fontWeight:700, fontSize:'1rem', marginBottom:4 }}>{da(lang)?'Finish.':'Finish.'} <span style={{ color:'var(--text-muted)', fontWeight:400 }}>{da(lang)?'Vælg din favorit.':'Choose your favorite.'}</span></h3>
+              <div style={{ fontSize:'0.85rem', fontWeight:600, marginBottom:8 }}>{da(lang)?'Farve':'Color'}{selectedColor ? ` — ${selectedColor}` : ''}</div>
+              <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
+                {colorStep.ch.map(ch => {
+                  const hex = CLR[ch.v] || '#888'; const sel = cfg.color === ch.v;
+                  return (<div key={ch.v} onClick={() => setConfiguring({...configuring, config:{...cfg, color:ch.v}})}
+                    style={{ width:32, height:32, borderRadius:16, background:hex, cursor:'pointer', border: sel?'3px solid var(--accent)':'2px solid var(--border)',
+                      boxShadow: sel?'0 0 0 2px var(--bg), 0 0 0 4px var(--accent)':'none', transition:'all 0.15s' }} title={ch.v}/>);
+                })}
+              </div>
+            </div>
+          )}
+          {otherSteps.map(step => (
+            <div key={step.k} style={{ marginBottom:28 }}>
+              <h3 style={{ fontWeight:700, fontSize:'1rem', marginBottom:4 }}>{step.l}. <span style={{ color:'var(--text-muted)', fontWeight:400 }}>{da(lang)?'Hvor meget har du brug for?':'How much do you need?'}</span></h3>
+              <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
+                {step.ch.map(ch => {
+                  const sel = cfg[step.k] === ch.v; const fullPrice = cp.price + (ch.add || 0);
+                  return (<div key={ch.v} onClick={() => setConfiguring({...configuring, config:{...cfg, [step.k]:ch.v}})}
+                    style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'16px 20px', borderRadius:12,
+                      border: sel?'2px solid var(--accent)':'1px solid var(--border)', background: sel?'var(--accent-bg)':'var(--bg-card)', cursor:'pointer', transition:'all 0.15s' }}>
+                    <span style={{ fontSize:'1.1rem', fontWeight:700, color: sel?'var(--accent)':'var(--text)' }}>{ch.v}</span>
+                    <span style={{ fontSize:'0.95rem', color: sel?'var(--accent)':'var(--text-secondary)' }}>{fmtMoney(fullPrice, cur)}</span>
+                  </div>);
+                })}
+              </div>
+            </div>
+          ))}
+          {!allDone && <div style={{ textAlign:'center', padding:'20px 0', color:'var(--text-muted)' }}>{da(lang)?'Vælg alle muligheder ovenfor':'Select all options above'}</div>}
+        </div>
+      );
+    }
+
+    // ═══ CART ═══
+    if (customerCart.length > 0 && !browseBrand) {
+      const cartTotal = customerCart.reduce((s,it) => s + it.unitPrice * it.qty, 0);
+      return (
+        <div className="fade-in" style={{ maxWidth:700, margin:'0 auto' }}>
+          <h2 style={{ fontSize:'1.5rem', fontWeight:700, marginBottom:20 }}>{da(lang)?'Din bestilling':'Your order'} ({customerCart.length})</h2>
+          <div className="card" style={{ marginBottom:20 }}>
+            {customerCart.map((it, i) => (
+              <div key={i} style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'14px 0', borderBottom: i < customerCart.length-1 ? '1px solid var(--border)' : 'none' }}>
+                <div style={{ display:'flex', gap:12, alignItems:'center' }}>
+                  {it.config?.color && <span style={{ width:20, height:20, borderRadius:10, background:CLR[it.config.color]||'#888', border:'1px solid var(--border)' }}/>}
+                  <div><div style={{ fontWeight:600 }}>{it.model}</div>{it.configLabel && <div style={{ fontSize:'0.8rem', color:'var(--text-muted)' }}>{it.configLabel}</div>}</div>
+                </div>
+                <div style={{ display:'flex', alignItems:'center', gap:12 }}>
+                  <input type="number" min={1} max={99} value={it.qty} style={{ width:55 }} onChange={e => { const c=[...customerCart]; c[i].qty=Math.max(1,+e.target.value); setCustomerCart(c); }}/>
+                  <span style={{ fontFamily:'var(--mono)', minWidth:90, textAlign:'right' }}>{fmtMoney(it.unitPrice*it.qty, cur)}</span>
+                  <button className="btn-icon" onClick={()=>setCustomerCart(prev=>prev.filter((_,j)=>j!==i))}>{IC.x}</button>
+                </div>
+              </div>
+            ))}
+            <div style={{ marginTop:16, paddingTop:12, borderTop:'1px solid var(--border)', textAlign:'right' }}>
+              <div style={{ color:'var(--text-secondary)' }}>{t.subtotal}: {fmtMoney(cartTotal, cur)}</div>
+              <div style={{ color:'var(--text-secondary)' }}>{t.tax}: {fmtMoney(cartTotal*0.25, cur)}</div>
+              <div style={{ fontSize:'1.3rem', fontWeight:700, marginTop:4, color:'var(--accent)' }}>{t.grandTotal}: {fmtMoney(cartTotal*1.25, cur)}</div>
+            </div>
+          </div>
+          <div style={{ display:'flex', gap:10 }}>
+            <button className="btn-primary" style={{ padding:'14px 36px', fontSize:'1rem', borderRadius:12 }} onClick={async () => {
+              setLoading(true);
+              const items=customerCart.map(it=>({...it,delivered_qty:0})); const subtotal=cartTotal;
+              const custId = orderForm.customerId || user.id;
+              const cust = customers.find(c=>c.id===custId) || user;
+              const newOrder={order_no:'GO-'+genId(),customer_id:custId,customer_name:cust.company||cust.name||cust.username,
+                customer_email:cust.email||cust.username,items,subtotal,vat:subtotal*0.25,total:subtotal*1.25,
+                status:'received',status_history:[{status:'received',time:new Date().toISOString(),by:user.username}],
+                payment_status:'unpaid',notes:'',created_at:new Date().toISOString()};
+              const{data,error}=await sb.from('orders').insert(newOrder).select().single();
+              if(!error&&data){setOrders(prev=>[data,...prev]);setCustomerCart([]);showToast(t.orderCreated);setView('orders');}
+              else showToast(t.error,'error'); setLoading(false);
+            }} disabled={loading}>{loading?'...':da(lang)?'Send bestilling':'Place order'}</button>
+            <button className="btn-secondary" onClick={()=>{setBrowseBrand(null);setBrowseCat(null);}}>{da(lang)?'+ Tilføj flere':'+ Add more'}</button>
+          </div>
+        </div>
+      );
+    }
+
+    // BRAND SELECTION
+    if (!browseBrand) return (
+      <div className="fade-in">
+        {isCustomerView && <h2 style={{ fontSize:'1.5rem', fontWeight:700, marginBottom:4 }}>{da(lang)?'Bestillingssystem':'Order System'}</h2>}
+        {!isCustomerView && <h2 style={{ fontSize:'1.5rem', fontWeight:700, marginBottom:4 }}>{t.products}</h2>}
+        <p style={{ color:'var(--text-muted)', marginBottom:24 }}>{da(lang) ? 'Vælg en leverandør for at se produkter' : 'Select a brand to view products'}</p>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(260px, 1fr))', gap:20 }}>
+          {BRANDS.map(b => {
+            const th = BRAND_THEME[b] || {};
+            const cats = Object.keys(BRAND_CATS[b] || {});
+            const total = Object.values(BRAND_CATS[b] || {}).reduce((s,arr)=>s+arr.length,0);
+            return (
+              <div key={b} onClick={()=>setBrowseBrand(b)} style={{
+                background: th.bg || 'var(--bg-elevated)', borderRadius:'var(--radius-lg)', padding:28, cursor:'pointer',
+                border:'2px solid transparent', transition:'all 0.2s', minHeight:180,
+                display:'flex', flexDirection:'column', justifyContent:'space-between',
+              }}
+              onMouseEnter={e=>e.currentTarget.style.border='2px solid var(--accent)'}
+              onMouseLeave={e=>e.currentTarget.style.border='2px solid transparent'}>
                 <div>
-                  {/* Step progress */}
-                  <div style={{ display:'flex', gap:4, marginBottom:14 }}>
-                    {steps.map((st, si) => (
-                      <div key={si} style={{ flex:1, textAlign:'center' }}>
-                        <div style={{ height:3, borderRadius:2, background: cfg[st.k] ? 'var(--accent)' : si === (item.stepIdx||0) ? 'var(--accent-dim)' : 'var(--border)', marginBottom:4, transition:'background 0.3s' }}/>
-                        <span style={{ fontSize:'0.7rem', color: cfg[st.k] ? 'var(--accent)' : 'var(--text-muted)' }}>{st.l}</span>
-                      </div>
-                    ))}
+                  <div style={{ fontSize: b==='Apple'?'2.5rem':'1.6rem', fontWeight:900, color:th.color, marginBottom:8, letterSpacing: b==='Marshall'?'0.15em':'0' }}>
+                    {b==='Apple'?'Apple':th.logo||b}
                   </div>
-
-                  {/* Current step options */}
-                  {currentStep && !allStepsDone && (
-                    <div className="fade-in">
-                      <div style={{ fontSize:'0.85rem', fontWeight:600, marginBottom:8 }}>
-                        {(item.stepIdx||0) + 1}/{steps.length}: {currentStep.l}
-                      </div>
-                      <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
-                        {currentStep.ch.map(ch => (
-                          <button key={ch.v}
-                            style={{
-                              padding:'8px 16px', borderRadius:'var(--radius-sm)', fontSize:'0.85rem', fontWeight:500,
-                              border: cfg[currentStep.k] === ch.v ? '2px solid var(--accent)' : '1px solid var(--border)',
-                              background: cfg[currentStep.k] === ch.v ? 'var(--accent-bg)' : 'var(--bg)',
-                              color: cfg[currentStep.k] === ch.v ? 'var(--accent)' : 'var(--text)',
-                              cursor:'pointer', transition:'all 0.15s',
-                            }}
-                            onClick={() => {
-                              const items = [...orderForm.items];
-                              const newCfg = { ...cfg, [currentStep.k]: ch.v };
-                              const nextIdx = Math.min((item.stepIdx||0) + 1, steps.length - 1);
-                              const isLast = (item.stepIdx||0) >= steps.length - 1;
-                              items[idx] = { ...items[idx], config: newCfg, stepIdx: isLast ? item.stepIdx : nextIdx };
-                              setOrderForm(p=>({...p, items}));
-                            }}
-                          >
-                            {ch.v}{ch.add ? ` (+${fmtMoney(ch.add, cur)})` : ''}
-                          </button>
-                        ))}
-                      </div>
-                      {(item.stepIdx||0) > 0 && (
-                        <button className="btn-ghost btn-sm" style={{ marginTop:8 }} onClick={() => {
-                          const items = [...orderForm.items]; items[idx].stepIdx = (items[idx].stepIdx||0) - 1; setOrderForm(p=>({...p, items}));
-                        }}>{IC.back} Tilbage</button>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Config summary when done */}
-                  {allStepsDone && Object.keys(cfg).length > 0 && (
-                    <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:8 }}>
-                      <div style={{ fontSize:'0.85rem', color:'var(--accent)', fontWeight:500 }}>✓ {fmtConfig(cfg)}</div>
-                      <button className="btn-ghost btn-sm" onClick={() => {
-                        const items = [...orderForm.items]; items[idx] = { ...items[idx], config:{}, stepIdx:0 }; setOrderForm(p=>({...p, items}));
-                      }}>Ændre</button>
-                    </div>
-                  )}
+                  <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.7)', marginBottom:12 }}>{th.desc}</div>
                 </div>
-              )}
-
-              {/* Qty + price when configured */}
-              {prod && (allStepsDone || steps.length === 0) && (
-                <div style={{ display:'flex', gap:10, alignItems:'center', marginTop:10, flexWrap:'wrap' }}>
-                  <input type="number" min={1} max={prod.stock||999} style={{ width:80 }} value={item.qty} onChange={e => {
-                    const items = [...orderForm.items]; items[idx].qty = Math.max(1, +e.target.value); setOrderForm(p=>({...p, items}));
-                  }}/>
-                  <span style={{ fontFamily:'var(--mono)', fontSize:'1rem', fontWeight:700, color:'var(--accent)' }}>{fmtMoney(itemPrice * item.qty, cur)}</span>
-                  <span style={{ fontSize:'0.75rem' }}><span className={`stock-dot ${stockInfo(prod.stock, t).cls}`}/>{stockInfo(prod.stock, t).label}</span>
+                <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+                  <span style={{ fontSize:'0.8rem', color:'rgba(255,255,255,0.5)' }}>{cats.length} {da(lang)?'kategorier':'categories'} · {total} {da(lang)?'varianter':'variants'}</span>
+                  <span style={{ color:'rgba(255,255,255,0.8)', fontSize:'1.2rem' }}>→</span>
                 </div>
-              )}
-            </div>
-          );
-        })}
-        {orderForm.items.length > 0 && (() => {
-          const sub = orderForm.items.reduce((s, it) => { const p = PRODUCTS.find(pr=>pr.id===it.productId); return s + getConfigPrice(p, it.config)*it.qty; }, 0);
-          const vat = sub * 0.25;
-          return (
-            <div style={{ marginTop:16, textAlign:'right', borderTop:'1px solid var(--border)', paddingTop:12 }}>
-              <div style={{ color:'var(--text-secondary)' }}>{t.subtotal}: {fmtMoney(sub, cur)}</div>
-              <div style={{ color:'var(--text-secondary)' }}>{t.tax}: {fmtMoney(vat, cur)}</div>
-              <div style={{ fontSize:'1.2rem', fontWeight:700, marginTop:4 }}>{t.grandTotal}: {fmtMoney(sub+vat, cur)}</div>
-            </div>
-          );
-        })()}
-      </div>
-
-      <div className="card" style={{ marginBottom:20 }}>
-        <div className="form-group">
-          <label className="form-label">{t.notes}</label>
-          <textarea rows={3} value={orderForm.notes} onChange={e => setOrderForm(p=>({...p,notes:e.target.value}))}/>
-        </div>
-      </div>
-
-      <div style={{ display:'flex', gap:10 }}>
-        <button className="btn-primary" onClick={createOrder} disabled={loading || !orderForm.customerId || orderForm.items.length===0}>
-          {loading ? '...' : t.createOrder}
-        </button>
-        <button className="btn-secondary" onClick={()=>setView('orders')}>{t.cancel}</button>
-      </div>
-    </div>
-  );
-
-  // PRODUCTS
-  const renderProducts = () => (
-    <div className="fade-in">
-      <h2 style={{ fontSize:'1.3rem', fontWeight:700, marginBottom:20 }}>{t.products} ({filteredProducts.length})</h2>
-      <div style={{ display:'flex', gap:10, marginBottom:20, flexWrap:'wrap' }}>
-        <input type="search" placeholder={t.search} value={searchTerm} onChange={e=>setSearchTerm(e.target.value)} style={{ maxWidth:250 }}/>
-        <select value={filterBrand} onChange={e=>setFilterBrand(e.target.value)} style={{ maxWidth:180 }}>
-          <option value="">{t.allBrands}</option>
-          {BRANDS.map(b => <option key={b} value={b}>{b}</option>)}
-        </select>
-      </div>
-      <div className="grid-3">
-        {filteredProducts.map(p => {
-          const si = stockInfo(p.stock, t);
-          return (
-            <div key={p.id} className="card" style={{ padding:16 }}>
-              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:8 }}>
-                <span className="badge badge-accent">{p.brand}</span>
-                <span style={{ fontSize:'0.75rem', color:'var(--text-muted)' }}>{p.cat}</span>
               </div>
-              <div style={{ fontWeight:600, marginBottom:4 }}>{p.model}</div>
-              <div style={{ fontFamily:'var(--mono)', fontSize:'1.1rem', marginBottom:8 }}>{p.steps ? 'fra ' : ''}{fmtMoney(p.price, cur)}</div>
-              <div style={{ fontSize:'0.8rem' }}><span className={`stock-dot ${si.cls}`}/>{si.label}</div>
-              {p.steps && <div style={{ fontSize:'0.7rem', color:'var(--text-muted)', marginTop:6, display:'flex', gap:6, flexWrap:'wrap' }}>{p.steps.map((s,i) => <span key={i} style={{background:'var(--bg)',padding:'2px 8px',borderRadius:4,border:'1px solid var(--border)'}}>{s.l}</span>)}</div>}
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+        <div style={{ marginTop:24, padding:16, borderRadius:'var(--radius)', background:'var(--info-bg)', border:'1px solid rgba(59,130,246,0.2)' }}>
+          <span style={{ color:'var(--info)', fontSize:'0.85rem' }}>ℹ {da(lang)?'Denne bestilling er uden priser. Endelig pris vil blive fremsendt som separat tilbud efter modtagelse af bestilling.':'This order is without prices. Final price will be sent as a separate offer after receiving the order.'}</span>
+        </div>
+        {customerCart.length > 0 && (
+          <div onClick={()=>{setBrowseBrand(null);setBrowseCat(null);}} style={{ marginTop:16, padding:16, borderRadius:'var(--radius)', background:'var(--accent-bg)', border:'1px solid var(--accent)', cursor:'pointer', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+            <span style={{ color:'var(--accent)', fontWeight:600 }}>🛒 {da(lang)?'Din bestilling':'Your order'}: {customerCart.length} {da(lang)?'varer':'items'}</span>
+            <span style={{ color:'var(--accent)', fontWeight:700 }}>{fmtMoney(customerCart.reduce((s,it)=>s+it.unitPrice*it.qty,0)*1.25, cur)} →</span>
+          </div>
+        )}
       </div>
-    </div>
-  );
+    );
+
+    const th = BRAND_THEME[browseBrand] || {};
+    const cats = BRAND_CATS[browseBrand] || {};
+
+    // CATEGORY SELECTION
+    if (!browseCat) return (
+      <div className="fade-in">
+        <button className="btn-ghost" onClick={()=>setBrowseBrand(null)} style={{ marginBottom:16 }}>{IC.back} {da(lang)?'Alle mærker':'All brands'}</button>
+        <div style={{ display:'flex', alignItems:'center', gap:16, marginBottom:24 }}>
+          <div style={{ background:th.bg, padding:'12px 24px', borderRadius:'var(--radius-lg)', display:'inline-block' }}>
+            <span style={{ fontSize:'1.4rem', fontWeight:900, color:th.color, letterSpacing:browseBrand==='Marshall'?'0.15em':'0' }}>{browseBrand==='Apple'?'Apple':th.logo||browseBrand}</span>
+          </div>
+          <div>
+            <h2 style={{ fontSize:'1.3rem', fontWeight:700 }}>{da(lang)?'Vælg kategori':'Select category'}</h2>
+            <p style={{ color:'var(--text-muted)', fontSize:'0.85rem' }}>{Object.keys(cats).length} {da(lang)?'kategorier':'categories'}</p>
+          </div>
+        </div>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(200px, 1fr))', gap:14 }}>
+          {Object.entries(cats).map(([cat, prods]) => (
+            <div key={cat} onClick={()=>setBrowseCat(cat)} className="card" style={{ padding:20, cursor:'pointer', transition:'all 0.15s', borderColor:'transparent' }}
+              onMouseEnter={e=>{e.currentTarget.style.borderColor='var(--accent)';e.currentTarget.style.transform='translateY(-2px)';}}
+              onMouseLeave={e=>{e.currentTarget.style.borderColor='transparent';e.currentTarget.style.transform='none';}}>
+              <div style={{ fontSize:'2rem', marginBottom:8 }}>{CAT_ICONS[cat]||'📦'}</div>
+              <div style={{ fontWeight:700, fontSize:'1rem', marginBottom:4 }}>{cat}</div>
+              <div style={{ color:'var(--text-muted)', fontSize:'0.8rem' }}>{prods.length} {da(lang)?'produkter':'products'}</div>
+            </div>
+          ))}
+        </div>
+        {customerCart.length > 0 && (
+          <div onClick={()=>{setBrowseBrand(null);setBrowseCat(null);}} style={{ marginTop:20, padding:14, borderRadius:'var(--radius)', background:'var(--accent-bg)', border:'1px solid var(--accent)', cursor:'pointer', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+            <span style={{ color:'var(--accent)', fontWeight:600 }}>🛒 {customerCart.length} {da(lang)?'varer i bestilling':'items in order'}</span>
+            <span style={{ color:'var(--accent)' }}>{da(lang)?'Se bestilling →':'View order →'}</span>
+          </div>
+        )}
+      </div>
+    );
+
+    // PRODUCT LIST WITHIN CATEGORY
+    const productsInCat = cats[browseCat] || [];
+    return (
+      <div className="fade-in">
+        <div style={{ display:'flex', gap:8, marginBottom:16 }}>
+          <button className="btn-ghost" onClick={()=>setBrowseCat(null)}>{IC.back} {browseBrand}</button>
+          <span style={{ color:'var(--text-muted)', lineHeight:'36px' }}>/ {browseCat}</span>
+        </div>
+        <h2 style={{ fontSize:'1.3rem', fontWeight:700, marginBottom:8 }}>{browseBrand} {browseCat}</h2>
+        <p style={{ color:'var(--text-muted)', fontSize:'0.85rem', marginBottom:20 }}>{productsInCat.length} {da(lang)?'produkter':'products'}</p>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(280px, 1fr))', gap:16 }}>
+          {productsInCat.map(p => {
+            const si = stockInfo(p.stock, t);
+            return (
+              <div key={p.id} className="card" style={{ padding:20, transition:'all 0.15s', display:'flex', flexDirection:'column', justifyContent:'space-between' }}
+                onMouseEnter={e=>e.currentTarget.style.borderColor='var(--accent)'}
+                onMouseLeave={e=>e.currentTarget.style.borderColor='var(--border)'}>
+                <div>
+                  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:10 }}>
+                    <span className="badge badge-accent">{p.brand}</span>
+                    <span style={{ fontSize:'0.75rem' }}><span className={`stock-dot ${si.cls}`}/>{si.label}</span>
+                  </div>
+                  <div style={{ fontWeight:700, fontSize:'1.05rem', marginBottom:6 }}>{p.model}</div>
+                  <div style={{ fontFamily:'var(--mono)', fontSize:'1.2rem', color:'var(--accent)', marginBottom:10 }}>{p.steps?'fra ':''}{fmtMoney(p.price, cur)}</div>
+                  {p.steps && (
+                    <div style={{ display:'flex', gap:6, flexWrap:'wrap', marginBottom:12 }}>
+                      {p.steps.map((s,i)=>(
+                        <span key={i} style={{ background:'var(--bg)', padding:'3px 10px', borderRadius:20, border:'1px solid var(--border)', fontSize:'0.7rem', color:'var(--text-muted)' }}>{s.l}: {s.ch.length}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                {isCustomerView ? (
+                  <button className="btn-primary btn-sm" style={{ width:'100%', marginTop:8 }} onClick={() => {
+                    if (p.steps && p.steps.length > 0) setConfiguring({ product:p, config:{}, stepIdx:0 });
+                    else { setCustomerCart(prev => [...prev, { productId:p.id, model:p.model, brand:p.brand, config:{}, configLabel:'', unitPrice:p.price, qty:1, total:p.price }]); showToast(da(lang)?'Tilføjet ✓':'Added ✓'); }
+                  }}>
+                    {p.steps ? (da(lang)?'Konfigurer & bestil':'Configure & order') : (da(lang)?'Tilføj til bestilling':'Add to order')}
+                  </button>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+        {customerCart.length > 0 && (
+          <div onClick={()=>{setBrowseBrand(null);setBrowseCat(null);}} style={{ marginTop:20, padding:14, borderRadius:'var(--radius)', background:'var(--accent-bg)', border:'1px solid var(--accent)', cursor:'pointer', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+            <span style={{ color:'var(--accent)', fontWeight:600 }}>🛒 {customerCart.length} {da(lang)?'varer i bestilling':'items in order'}</span>
+            <span style={{ color:'var(--accent)' }}>{da(lang)?'Se bestilling →':'View order →'}</span>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   // CUSTOMERS
   const renderCustomers = () => (
@@ -1559,7 +1730,7 @@ export default function App() {
         <nav style={{ flex:1, overflowY:'auto', padding:'12px 0' }}>
           {navItems.map(n => (
             <div key={n.key} className={`nav-item ${view === n.key ? 'active' : ''}`}
-              onClick={() => { setView(n.key); setSideOpen(false); setSearchTerm(''); setFilterBrand(''); setFilterStatus(''); setSelectedOrder(null); }}>
+              onClick={() => { setView(n.key); setSideOpen(false); setSearchTerm(''); setFilterBrand(''); setFilterStatus(''); setSelectedOrder(null); setBrowseBrand(null); setBrowseCat(null); setBrowseProduct(null); setConfiguring(null); }}>
               {n.icon}
               <span>{n.label}</span>
             </div>
@@ -1710,4 +1881,3 @@ export default function App() {
     </div>
   );
 }
-
