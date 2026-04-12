@@ -224,123 +224,132 @@ const LANG_LABELS = { da:'Dansk', en:'English', de:'Deutsch', hi:'हिन्�
 
 /* ── Product Catalog med Step-by-Step Konfigurator ── */
 const PRODUCTS = [
-  { id:'p0',brand:'Apple',cat:'iPhone',model:'iPhone 17 Pro Max',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Natural Titanium'},{v:'Black Titanium'},{v:'White Titanium'},{v:'Desert Titanium'}]}] },
-  { id:'p1',brand:'Apple',cat:'iPhone',model:'iPhone 17 Pro',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Natural Titanium'},{v:'Black Titanium'},{v:'White Titanium'},{v:'Desert Titanium'}]}] },
+  { id:'p0',brand:'Apple',cat:'iPhone',model:'iPhone 17 Pro Max',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'color',l:'Farve',ch:[{v:'Dybblå'},{v:'Sølv'},{v:'Kosmisk orange'}]}] },
+  { id:'p1',brand:'Apple',cat:'iPhone',model:'iPhone 17 Pro',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Dybblå'},{v:'Sølv'},{v:'Kosmisk orange'}]}] },
   { id:'p2',brand:'Apple',cat:'iPhone',model:'iPhone 17',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Grøn'},{v:'Blå'},{v:'Pink'}]}] },
-  { id:'p3',brand:'Apple',cat:'iPhone',model:'iPhone 17 Air',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'}]},{k:'color',l:'Farve',ch:[{v:'Starlight'},{v:'Midnight'},{v:'Sky Blue'},{v:'Green'}]}] },
-  { id:'p4',brand:'Apple',cat:'iPhone',model:'iPhone 17e',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Rød'}]}] },
-  { id:'p5',brand:'Apple',cat:'iPhone',model:'iPhone 16 Pro Max',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Natural Titanium'},{v:'Black Titanium'},{v:'White Titanium'},{v:'Desert Titanium'}]}] },
-  { id:'p6',brand:'Apple',cat:'iPhone',model:'iPhone 16 Pro',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Natural Titanium'},{v:'Black Titanium'},{v:'White Titanium'},{v:'Desert Titanium'}]}] },
-  { id:'p7',brand:'Apple',cat:'iPhone',model:'iPhone 16',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Grøn'},{v:'Blå'},{v:'Pink'}]}] },
-  { id:'p8',brand:'Apple',cat:'iPhone',model:'iPhone 16 Plus',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Grøn'},{v:'Blå'},{v:'Pink'}]}] },
-  { id:'p9',brand:'Apple',cat:'iPhone',model:'iPhone 16e',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Rød'}]}] },
-  { id:'p10',brand:'Apple',cat:'iPad',model:'iPad Pro M5 13"',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'p11',brand:'Apple',cat:'iPad',model:'iPad Pro M5 11"',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'p12',brand:'Apple',cat:'iPad',model:'iPad Pro M4 13" OLED',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'p13',brand:'Apple',cat:'iPad',model:'iPad Pro M4 11" OLED',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'p14',brand:'Apple',cat:'iPad',model:'iPad Air M4 13"',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Grey'},{v:'Starlight'},{v:'Blue'},{v:'Purple'}]}] },
-  { id:'p15',brand:'Apple',cat:'iPad',model:'iPad Air M4 11"',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Grey'},{v:'Starlight'},{v:'Blue'},{v:'Purple'}]}] },
-  { id:'p16',brand:'Apple',cat:'iPad',model:'iPad 11. gen',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'64GB'},{v:'256GB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Silver'},{v:'Blue'},{v:'Pink'},{v:'Yellow'}]}] },
-  { id:'p17',brand:'Apple',cat:'iPad',model:'iPad 10. gen',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'64GB'},{v:'256GB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Silver'},{v:'Blue'},{v:'Pink'},{v:'Yellow'}]}] },
-  { id:'p18',brand:'Apple',cat:'iPad',model:'iPad mini 7',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Grey'},{v:'Starlight'},{v:'Blue'},{v:'Purple'}]}] },
-  { id:'p19',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M5 Max',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'36GB'},{v:'48GB'},{v:'64GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'1TB'},{v:'2TB'},{v:'4TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'p20',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M5 Pro',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'18GB'},{v:'36GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'p21',brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M5 Pro',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'18GB'},{v:'36GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'p22',brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M5',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'p23',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M4 Max',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'36GB'},{v:'48GB'},{v:'64GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'1TB'},{v:'2TB'},{v:'4TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'p24',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M4 Pro',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'24GB'},{v:'48GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'p25',brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M4 Pro',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'24GB'},{v:'48GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'p26',brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M4',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Silver'}]}] },
-  { id:'p27',brand:'Apple',cat:'MacBook',model:'MacBook Air 15" M4',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Space Grey'},{v:'Silver'}]}] },
-  { id:'p28',brand:'Apple',cat:'MacBook',model:'MacBook Air 13" M4',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Space Grey'},{v:'Silver'}]}] },
-  { id:'p29',brand:'Apple',cat:'MacBook',model:'MacBook Neo (A18 Pro)',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Silver'},{v:'Blue'},{v:'Green'},{v:'Pink'},{v:'Orange'},{v:'Yellow'},{v:'Purple'}]}] },
-  { id:'p30',brand:'Apple',cat:'Mac',model:'iMac 24" M4',price:0,stock:0,steps:[{k:'config',l:'Konfiguration',ch:[{v:'8-core 16GB 256GB'},{v:'10-core 16GB 512GB'},{v:'10-core 24GB 1TB'}]},{k:'color',l:'Farve',ch:[{v:'Blue'},{v:'Purple'},{v:'Pink'},{v:'Orange'},{v:'Yellow'},{v:'Green'},{v:'Silver'}]}] },
-  { id:'p31',brand:'Apple',cat:'Mac',model:'Mac mini',price:0,stock:0,steps:[{k:'config',l:'Konfiguration',ch:[{v:'M4 16GB 256GB'},{v:'M4 16GB 512GB'},{v:'M4 Pro 24GB 512GB'},{v:'M4 Pro 24GB 1TB'}]}] },
-  { id:'p32',brand:'Apple',cat:'Mac',model:'Mac Studio',price:0,stock:0,steps:[{k:'config',l:'Konfiguration',ch:[{v:'M4 Max 36GB 512GB'},{v:'M4 Max 36GB 1TB'},{v:'M3 Ultra 64GB 1TB'}]}] },
-  { id:'p33',brand:'Apple',cat:'Watch',model:'Apple Watch Ultra 3',price:0,stock:0,steps:[{k:'band',l:'Rem',ch:[{v:'Orange Alpine Loop'},{v:'Blue Alpine Loop'},{v:'Green Trail Loop'},{v:'Black Trail Loop'}]}] },
-  { id:'p34',brand:'Apple',cat:'Watch',model:'Apple Watch Series 11',price:0,stock:0,steps:[{k:'size',l:'Størrelse',ch:[{v:'42mm'},{v:'46mm'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'GPS'},{v:'GPS + Cellular'}]},{k:'color',l:'Kasse',ch:[{v:'Sort'},{v:'Sølv'},{v:'Rose Gold'},{v:'Blå'}]},{k:'band',l:'Rem',ch:[{v:'Sport Band'},{v:'Sport Loop'},{v:'Solo Loop'},{v:'Milanese Loop'}]}] },
-  { id:'p35',brand:'Apple',cat:'Watch',model:'Apple Watch SE (2025)',price:0,stock:0,steps:[{k:'size',l:'Størrelse',ch:[{v:'40mm'},{v:'44mm'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'GPS'},{v:'GPS + Cellular'}]},{k:'color',l:'Kasse',ch:[{v:'Sort'},{v:'Sølv'},{v:'Rose Gold'},{v:'Blå'}]}] },
-  { id:'p36',brand:'Apple',cat:'Watch',model:'Apple Watch Ultra 2',price:0,stock:0,steps:[{k:'band',l:'Rem',ch:[{v:'Orange Alpine Loop'},{v:'Blue Alpine Loop'},{v:'Green Trail Loop'},{v:'Black Trail Loop'}]}] },
-  { id:'p37',brand:'Apple',cat:'Watch',model:'Apple Watch Series 10',price:0,stock:0,steps:[{k:'size',l:'Størrelse',ch:[{v:'42mm'},{v:'46mm'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'GPS'},{v:'GPS + Cellular'}]},{k:'color',l:'Kasse',ch:[{v:'Sort'},{v:'Sølv'},{v:'Rose Gold'},{v:'Blå'}]},{k:'band',l:'Rem',ch:[{v:'Sport Band'},{v:'Sport Loop'},{v:'Solo Loop'},{v:'Milanese Loop'}]}] },
-  { id:'p38',brand:'Apple',cat:'AirPods',model:'AirPods Max 2 (H2)',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Blue'},{v:'Orange'},{v:'Purple'}]}] },
-  { id:'p39',brand:'Apple',cat:'AirPods',model:'AirPods Max (USB-C)',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Blue'},{v:'Orange'},{v:'Purple'}]}] },
-  { id:'p40',brand:'Apple',cat:'AirPods',model:'AirPods Pro 3',price:0,stock:0 },
-  { id:'p41',brand:'Apple',cat:'AirPods',model:'AirPods 4 (ANC)',price:0,stock:0 },
-  { id:'p42',brand:'Apple',cat:'AirPods',model:'AirPods 4',price:0,stock:0 },
-  { id:'p43',brand:'Apple',cat:'Vision',model:'Apple Vision Pro',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'}]}] },
-  { id:'p44',brand:'Apple',cat:'Accessories',model:'Apple TV 4K (3. gen)',price:0,stock:0 },
-  { id:'p45',brand:'Apple',cat:'Accessories',model:'HomePod mini',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Blue'},{v:'Orange'},{v:'Yellow'}]}] },
-  { id:'p46',brand:'Apple',cat:'Accessories',model:'HomePod (2. gen)',price:0,stock:0 },
-  { id:'p47',brand:'Apple',cat:'Accessories',model:'AirTag 2',price:0,stock:0,steps:[{k:'config',l:'Pakke',ch:[{v:'1-pak'},{v:'4-pak'}]}] },
-  { id:'p48',brand:'Apple',cat:'Accessories',model:'Apple Pencil Pro',price:0,stock:0 },
-  { id:'p49',brand:'Apple',cat:'Accessories',model:'Apple Pencil (USB-C)',price:0,stock:0 },
-  { id:'p50',brand:'Apple',cat:'Accessories',model:'Magic Keyboard',price:0,stock:0,steps:[{k:'config',l:'Model',ch:[{v:'Standard'},{v:'Touch ID'},{v:'Touch ID+Numpad'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'}]}] },
-  { id:'p51',brand:'Apple',cat:'Accessories',model:'Magic Trackpad',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'}]}] },
-  { id:'p52',brand:'Apple',cat:'Accessories',model:'Magic Mouse',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'}]}] },
-  { id:'p53',brand:'Apple',cat:'Accessories',model:'MagSafe Charger 25W',price:0,stock:0 },
-  { id:'p54',brand:'Apple',cat:'Accessories',model:'Studio Display',price:0,stock:0,steps:[{k:'config',l:'Glas',ch:[{v:'Standard'},{v:'Nano-texture'}]}] },
-  { id:'p55',brand:'JBL',cat:'Headphones',model:'JBL Tour One M3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
-  { id:'p56',brand:'JBL',cat:'Headphones',model:'JBL Tour One M2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
-  { id:'p57',brand:'JBL',cat:'Headphones',model:'JBL Live 770NC',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
-  { id:'p58',brand:'JBL',cat:'Headphones',model:'JBL Live 670NC',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
-  { id:'p59',brand:'JBL',cat:'Headphones',model:'JBL Tune 770NC',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
-  { id:'p60',brand:'JBL',cat:'Headphones',model:'JBL Tune 720BT',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
-  { id:'p61',brand:'JBL',cat:'Headphones',model:'JBL Tune 670NC',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
-  { id:'p62',brand:'JBL',cat:'Headphones',model:'JBL Tune 520BT',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
-  { id:'p63',brand:'JBL',cat:'Headphones',model:'JBL Tune 520C (Wired)',price:0,stock:0 },
-  { id:'p64',brand:'JBL',cat:'Headphones',model:'JBL Junior 470NC',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Rød'}]}] },
-  { id:'p65',brand:'JBL',cat:'Headphones',model:'JBL Junior 320BT',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Rød'}]}] },
-  { id:'p66',brand:'JBL',cat:'Earbuds',model:'JBL Tour Pro 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
-  { id:'p67',brand:'JBL',cat:'Earbuds',model:'JBL Live Buds 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
-  { id:'p68',brand:'JBL',cat:'Earbuds',model:'JBL Live Beam 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
-  { id:'p69',brand:'JBL',cat:'Earbuds',model:'JBL Tune Buds 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Turkis'}]}] },
-  { id:'p70',brand:'JBL',cat:'Earbuds',model:'JBL Tune Beam 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Turkis'}]}] },
-  { id:'p71',brand:'JBL',cat:'Earbuds',model:'JBL Tune Flex 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Turkis'}]}] },
-  { id:'p72',brand:'JBL',cat:'Earbuds',model:'JBL Vibe Buds 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'},{v:'Pink'}]}] },
-  { id:'p73',brand:'JBL',cat:'Earbuds',model:'JBL Vibe Beam 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'},{v:'Pink'}]}] },
-  { id:'p74',brand:'JBL',cat:'Earbuds',model:'JBL Vibe Flex 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'},{v:'Pink'}]}] },
-  { id:'p75',brand:'JBL',cat:'Earbuds',model:'JBL Vibe 200TWS',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
-  { id:'p76',brand:'JBL',cat:'Earbuds',model:'JBL Endurance Race 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Lilla'}]}] },
-  { id:'p77',brand:'JBL',cat:'Earbuds',model:'JBL Endurance Peak 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Lilla'}]}] },
-  { id:'p78',brand:'JBL',cat:'Speakers',model:'JBL Boombox 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Camo'}]}] },
-  { id:'p79',brand:'JBL',cat:'Speakers',model:'JBL Xtreme 4',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'}]}] },
-  { id:'p80',brand:'JBL',cat:'Speakers',model:'JBL Charge 6',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'}]}] },
-  { id:'p81',brand:'JBL',cat:'Speakers',model:'JBL Charge 5 WiFi',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Camo'}]}] },
-  { id:'p82',brand:'JBL',cat:'Speakers',model:'JBL Flip 7',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'},{v:'Lilla'}]}] },
-  { id:'p83',brand:'JBL',cat:'Speakers',model:'JBL Flip 6',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'},{v:'Lilla'}]}] },
-  { id:'p84',brand:'JBL',cat:'Speakers',model:'JBL Clip 5',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'},{v:'Lilla'},{v:'Orange'}]}] },
-  { id:'p85',brand:'JBL',cat:'Speakers',model:'JBL Go 4',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'},{v:'Lilla'},{v:'Orange'}]}] },
-  { id:'p86',brand:'JBL',cat:'Speakers',model:'JBL Pulse 5',price:0,stock:0 },
-  { id:'p87',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Ultimate',price:0,stock:0 },
-  { id:'p88',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox 520',price:0,stock:0 },
-  { id:'p89',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Stage 320',price:0,stock:0 },
-  { id:'p90',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Encore 2',price:0,stock:0 },
-  { id:'p91',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Encore Essential 2',price:0,stock:0 },
-  { id:'p92',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Club 120',price:0,stock:0 },
-  { id:'p93',brand:'JBL',cat:'Home Audio',model:'JBL Authentics 300',price:0,stock:0 },
-  { id:'p94',brand:'JBL',cat:'Home Audio',model:'JBL Authentics 200',price:0,stock:0 },
-  { id:'p95',brand:'JBL',cat:'Home Audio',model:'JBL Horizon 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'}]}] },
-  { id:'p96',brand:'Marshall',cat:'Headphones',model:'Marshall Monitor III A.N.C.',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Black & Brass'},{v:'Cream'}]}] },
-  { id:'p97',brand:'Marshall',cat:'Headphones',model:'Marshall Major V',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Black & Brass'},{v:'Cream'}]}] },
-  { id:'p98',brand:'Marshall',cat:'Headphones',model:'Marshall Major IV',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Black & Brass'},{v:'Cream'}]}] },
-  { id:'p99',brand:'Marshall',cat:'Earbuds',model:'Marshall Motif II A.N.C.',price:0,stock:0 },
-  { id:'p100',brand:'Marshall',cat:'Earbuds',model:'Marshall Minor IV',price:0,stock:0 },
-  { id:'p101',brand:'Marshall',cat:'Speakers',model:'Marshall Emberton III',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'p102',brand:'Marshall',cat:'Speakers',model:'Marshall Emberton II',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'p103',brand:'Marshall',cat:'Speakers',model:'Marshall Willen II',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'p104',brand:'Marshall',cat:'Speakers',model:'Marshall Middleton II',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'p105',brand:'Marshall',cat:'Speakers',model:'Marshall Middleton',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'p106',brand:'Marshall',cat:'Speakers',model:'Marshall Stockwell II',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'p107',brand:'Marshall',cat:'Speakers',model:'Marshall Kilburn III',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'p108',brand:'Marshall',cat:'Speakers',model:'Marshall Tufton',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'p109',brand:'Marshall',cat:'Home Audio',model:'Marshall Woburn III',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'p110',brand:'Marshall',cat:'Home Audio',model:'Marshall Stanmore III',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'p111',brand:'Marshall',cat:'Home Audio',model:'Marshall Acton III',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
-  { id:'p112',brand:'Marshall',cat:'Party Speakers',model:'Marshall Bromley 750',price:0,stock:0 },
-  { id:'p113',brand:'Marshall',cat:'Party Speakers',model:'Marshall Bromley 450',price:0,stock:0 },
-  { id:'p114',brand:'Marshall',cat:'Soundbars',model:'Marshall Heston 120',price:0,stock:0 },
-  { id:'p115',brand:'Marshall',cat:'Soundbars',model:'Marshall Heston 60',price:0,stock:0 },
-];
+  { id:'p200',brand:'Apple',cat:'iPhone',model:'iPhone Air',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'}]},{k:'color',l:'Farve',ch:[{v:'Sølv'},{v:'Sort'},{v:'Himmelblå'},{v:'Grøn'}]}] },
+  { id:'p3',brand:'Apple',cat:'iPhone',model:'iPhone 17e',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Rød'}]}] },
+  { id:'p4',brand:'Apple',cat:'iPhone',model:'iPhone 16 Pro Max',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Natural Titanium'},{v:'Black Titanium'},{v:'White Titanium'},{v:'Desert Titanium'}]}] },
+  { id:'p5',brand:'Apple',cat:'iPhone',model:'iPhone 16 Pro',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'color',l:'Farve',ch:[{v:'Natural Titanium'},{v:'Black Titanium'},{v:'White Titanium'},{v:'Desert Titanium'}]}] },
+  { id:'p6',brand:'Apple',cat:'iPhone',model:'iPhone 16',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Grøn'},{v:'Blå'},{v:'Pink'}]}] },
+  { id:'p7',brand:'Apple',cat:'iPhone',model:'iPhone 16 Plus',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Grøn'},{v:'Blå'},{v:'Pink'}]}] },
+  { id:'p8',brand:'Apple',cat:'iPhone',model:'iPhone 16e',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Rød'}]}] },
+  { id:'p9',brand:'Apple',cat:'iPhone',model:'iPhone 15',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Grøn'},{v:'Gul'},{v:'Pink'}]}] },
+  { id:'p10',brand:'Apple',cat:'iPhone',model:'iPhone 15 Plus',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'}]},{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Grøn'},{v:'Gul'},{v:'Pink'}]}] },
+  { id:'p11',brand:'Apple',cat:'iPad',model:'iPad Pro M5 13"',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Sølv'}]}] },
+  { id:'p12',brand:'Apple',cat:'iPad',model:'iPad Pro M5 11"',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Sølv'}]}] },
+  { id:'p13',brand:'Apple',cat:'iPad',model:'iPad Pro M4 13" OLED',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Sølv'}]}] },
+  { id:'p14',brand:'Apple',cat:'iPad',model:'iPad Pro M4 11" OLED',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Sølv'}]}] },
+  { id:'p15',brand:'Apple',cat:'iPad',model:'iPad Air M4 13"',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Grey'},{v:'Starlight'},{v:'Blue'},{v:'Purple'}]}] },
+  { id:'p16',brand:'Apple',cat:'iPad',model:'iPad Air M4 11"',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Grey'},{v:'Starlight'},{v:'Blue'},{v:'Purple'}]}] },
+  { id:'p17',brand:'Apple',cat:'iPad',model:'iPad Air M3 13"',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Grey'},{v:'Starlight'},{v:'Blue'},{v:'Purple'}]}] },
+  { id:'p18',brand:'Apple',cat:'iPad',model:'iPad Air M3 11"',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'},{v:'1TB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Grey'},{v:'Starlight'},{v:'Blue'},{v:'Purple'}]}] },
+  { id:'p19',brand:'Apple',cat:'iPad',model:'iPad 11. gen',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'64GB'},{v:'256GB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Sølv'},{v:'Blue'},{v:'Pink'},{v:'Yellow'}]}] },
+  { id:'p20',brand:'Apple',cat:'iPad',model:'iPad 10. gen',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'64GB'},{v:'256GB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Sølv'},{v:'Blue'},{v:'Pink'},{v:'Yellow'}]}] },
+  { id:'p21',brand:'Apple',cat:'iPad',model:'iPad mini 7',price:0,stock:0,steps:[{k:'storage',l:'Lagerplads',ch:[{v:'128GB'},{v:'256GB'},{v:'512GB'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'WiFi'},{v:'WiFi + Cellular'}]},{k:'color',l:'Farve',ch:[{v:'Space Grey'},{v:'Starlight'},{v:'Blue'},{v:'Purple'}]}] },
+  { id:'p22',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M5 Max',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'36GB'},{v:'48GB'},{v:'64GB'},{v:'128GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'1TB'},{v:'2TB'},{v:'4TB'},{v:'8TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Sølv'}]}] },
+  { id:'p23',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M5 Pro',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'18GB'},{v:'36GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'},{v:'2TB'},{v:'4TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Sølv'}]}] },
+  { id:'p24',brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M5 Pro',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'18GB'},{v:'36GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'},{v:'2TB'},{v:'4TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Sølv'}]}] },
+  { id:'p25',brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M5',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Sølv'}]}] },
+  { id:'p26',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M4 Max',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'36GB'},{v:'48GB'},{v:'64GB'},{v:'128GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'1TB'},{v:'2TB'},{v:'4TB'},{v:'8TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Sølv'}]}] },
+  { id:'p27',brand:'Apple',cat:'MacBook',model:'MacBook Pro 16" M4 Pro',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'24GB'},{v:'48GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'},{v:'2TB'},{v:'4TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Sølv'}]}] },
+  { id:'p28',brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M4 Pro',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'24GB'},{v:'48GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'},{v:'2TB'},{v:'4TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Sølv'}]}] },
+  { id:'p29',brand:'Apple',cat:'MacBook',model:'MacBook Pro 14" M4',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB'},{v:'32GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'color',l:'Farve',ch:[{v:'Space Black'},{v:'Sølv'}]}] },
+  { id:'p30',brand:'Apple',cat:'MacBook',model:'MacBook Air 15" M5',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB'},{v:'32GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Space Grey'},{v:'Sky Blue'}]}] },
+  { id:'p31',brand:'Apple',cat:'MacBook',model:'MacBook Air 13" M5',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB'},{v:'32GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Space Grey'},{v:'Sky Blue'}]}] },
+  { id:'p32',brand:'Apple',cat:'MacBook',model:'MacBook Air 15" M4',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB'},{v:'32GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Space Grey'},{v:'Sky Blue'}]}] },
+  { id:'p33',brand:'Apple',cat:'MacBook',model:'MacBook Air 13" M4',price:0,stock:0,steps:[{k:'ram',l:'RAM',ch:[{v:'16GB'},{v:'24GB'},{v:'32GB'}]},{k:'storage',l:'Lagerplads',ch:[{v:'256GB'},{v:'512GB'},{v:'1TB'},{v:'2TB'}]},{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Space Grey'},{v:'Sky Blue'}]}] },
+  { id:'p34',brand:'Apple',cat:'Mac',model:'iMac 24" M4',price:0,stock:0,steps:[{k:'config',l:'Konfiguration',ch:[{v:'8-core 16GB 256GB'},{v:'10-core 16GB 512GB'},{v:'10-core 24GB 1TB'},{v:'10-core 32GB 1TB'},{v:'10-core 32GB 2TB'}]},{k:'color',l:'Farve',ch:[{v:'Blue'},{v:'Purple'},{v:'Pink'},{v:'Orange'},{v:'Yellow'},{v:'Green'},{v:'Sølv'}]}] },
+  { id:'p35',brand:'Apple',cat:'Mac',model:'Mac mini M4',price:0,stock:0,steps:[{k:'config',l:'Konfiguration',ch:[{v:'M4 16GB 256GB'},{v:'M4 16GB 512GB'},{v:'M4 24GB 512GB'},{v:'M4 24GB 1TB'}]}] },
+  { id:'p36',brand:'Apple',cat:'Mac',model:'Mac mini M4 Pro',price:0,stock:0,steps:[{k:'config',l:'Konfiguration',ch:[{v:'M4 Pro 24GB 512GB'},{v:'M4 Pro 24GB 1TB'},{v:'M4 Pro 48GB 1TB'}]}] },
+  { id:'p37',brand:'Apple',cat:'Mac',model:'Mac Studio M4 Max',price:0,stock:0,steps:[{k:'config',l:'Konfiguration',ch:[{v:'M4 Max 36GB 512GB'},{v:'M4 Max 36GB 1TB'},{v:'M4 Max 64GB 1TB'},{v:'M4 Max 128GB 2TB'}]}] },
+  { id:'p38',brand:'Apple',cat:'Mac',model:'Mac Studio M4 Ultra',price:0,stock:0,steps:[{k:'config',l:'Konfiguration',ch:[{v:'M4 Ultra 64GB 1TB'},{v:'M4 Ultra 128GB 2TB'},{v:'M4 Ultra 192GB 4TB'}]}] },
+  { id:'p39',brand:'Apple',cat:'Mac',model:'Mac Pro M2 Ultra',price:0,stock:0,steps:[{k:'config',l:'Konfiguration',ch:[{v:'M2 Ultra 64GB 1TB'},{v:'M2 Ultra 128GB 2TB'},{v:'M2 Ultra 192GB 4TB'}]}] },
+  { id:'p40',brand:'Apple',cat:'Watch',model:'Apple Watch Ultra 3',price:0,stock:0,steps:[{k:'band',l:'Rem',ch:[{v:'Orange Alpine Loop'},{v:'Blue Alpine Loop'},{v:'Green Trail Loop'},{v:'Black Trail Loop'},{v:'Indigo Trail Loop'}]}] },
+  { id:'p41',brand:'Apple',cat:'Watch',model:'Apple Watch Series 11',price:0,stock:0,steps:[{k:'size',l:'Størrelse',ch:[{v:'42mm'},{v:'46mm'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'GPS'},{v:'GPS + Cellular'}]},{k:'color',l:'Kasse',ch:[{v:'Jet Black'},{v:'Sølv'},{v:'Rose Gold'},{v:'Gold'}]},{k:'band',l:'Rem',ch:[{v:'Sport Band'},{v:'Sport Loop'},{v:'Solo Loop'},{v:'Braided Solo Loop'},{v:'Milanese Loop'},{v:'Link Bracelet'}]}] },
+  { id:'p42',brand:'Apple',cat:'Watch',model:'Apple Watch SE 3',price:0,stock:0,steps:[{k:'size',l:'Størrelse',ch:[{v:'42mm'},{v:'46mm'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'GPS'},{v:'GPS + Cellular'}]},{k:'color',l:'Kasse',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Sølv'}]}] },
+  { id:'p43',brand:'Apple',cat:'Watch',model:'Apple Watch Ultra 2',price:0,stock:0,steps:[{k:'band',l:'Rem',ch:[{v:'Orange Alpine Loop'},{v:'Blue Alpine Loop'},{v:'Green Trail Loop'},{v:'Black Trail Loop'}]}] },
+  { id:'p44',brand:'Apple',cat:'Watch',model:'Apple Watch Series 10',price:0,stock:0,steps:[{k:'size',l:'Størrelse',ch:[{v:'42mm'},{v:'46mm'}]},{k:'connectivity',l:'Forbindelse',ch:[{v:'GPS'},{v:'GPS + Cellular'}]},{k:'color',l:'Kasse',ch:[{v:'Jet Black'},{v:'Sølv'},{v:'Rose Gold'}]},{k:'band',l:'Rem',ch:[{v:'Sport Band'},{v:'Sport Loop'},{v:'Solo Loop'},{v:'Braided Solo Loop'},{v:'Milanese Loop'}]}] },
+  { id:'p45',brand:'Apple',cat:'AirPods',model:'AirPods Max 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Blue'},{v:'Orange'},{v:'Purple'}]}] },
+  { id:'p46',brand:'Apple',cat:'AirPods',model:'AirPods Max (USB-C)',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Midnight'},{v:'Starlight'},{v:'Blue'},{v:'Orange'},{v:'Purple'}]}] },
+  { id:'p47',brand:'Apple',cat:'AirPods',model:'AirPods Pro 3',price:0,stock:0 },
+  { id:'p48',brand:'Apple',cat:'AirPods',model:'AirPods Pro 2 (USB-C)',price:0,stock:0 },
+  { id:'p49',brand:'Apple',cat:'AirPods',model:'AirPods 4 (ANC)',price:0,stock:0 },
+  { id:'p50',brand:'Apple',cat:'AirPods',model:'AirPods 4',price:0,stock:0 },
+  { id:'p65',brand:'JBL',cat:'Headphones',model:'JBL Tour ONE M3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Mocha'},{v:'Blå'}]}] },
+  { id:'p66',brand:'JBL',cat:'Headphones',model:'JBL Tour ONE M2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Champagne'}]}] },
+  { id:'p67',brand:'JBL',cat:'Headphones',model:'JBL Live 770NC',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
+  { id:'p68',brand:'JBL',cat:'Headphones',model:'JBL Live 670NC',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Rød'}]}] },
+  { id:'p69',brand:'JBL',cat:'Headphones',model:'JBL Tune 780NC',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
+  { id:'p70',brand:'JBL',cat:'Headphones',model:'JBL Tune 680NC',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
+  { id:'p71',brand:'JBL',cat:'Headphones',model:'JBL Tune 730BT',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
+  { id:'p72',brand:'JBL',cat:'Headphones',model:'JBL Tune 530BT',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
+  { id:'p73',brand:'JBL',cat:'Headphones',model:'JBL Tune 530 Wired',price:0,stock:0 },
+  { id:'p74',brand:'JBL',cat:'Headphones',model:'JBL Tune 530C (USB-C)',price:0,stock:0 },
+  { id:'p75',brand:'JBL',cat:'Headphones',model:'JBL Tune 235BT',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
+  { id:'p76',brand:'JBL',cat:'Headphones',model:'JBL Tune 135BT',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'}]}] },
+  { id:'p77',brand:'JBL',cat:'Headphones',model:'JBL Junior 470NC',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Rød'}]}] },
+  { id:'p78',brand:'JBL',cat:'Headphones',model:'JBL Junior 320BT',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Rød'}]}] },
+  { id:'p79',brand:'JBL',cat:'Headphones',model:'JBL Quantum 950X',price:0,stock:0 },
+  { id:'p80',brand:'JBL',cat:'Earbuds',model:'JBL Tour Pro 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
+  { id:'p81',brand:'JBL',cat:'Earbuds',model:'JBL Live Buds 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
+  { id:'p82',brand:'JBL',cat:'Earbuds',model:'JBL Live Beam 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
+  { id:'p83',brand:'JBL',cat:'Earbuds',model:'JBL Tune Buds 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Turkis'}]}] },
+  { id:'p84',brand:'JBL',cat:'Earbuds',model:'JBL Tune Beam 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Turkis'}]}] },
+  { id:'p85',brand:'JBL',cat:'Earbuds',model:'JBL Tune Flex 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Turkis'}]}] },
+  { id:'p86',brand:'JBL',cat:'Earbuds',model:'JBL Vibe Buds 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'},{v:'Pink'}]}] },
+  { id:'p87',brand:'JBL',cat:'Earbuds',model:'JBL Vibe Beam 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'},{v:'Pink'}]}] },
+  { id:'p88',brand:'JBL',cat:'Earbuds',model:'JBL Vibe Flex 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'},{v:'Pink'}]}] },
+  { id:'p89',brand:'JBL',cat:'Earbuds',model:'JBL Vibe 200TWS',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
+  { id:'p90',brand:'JBL',cat:'Earbuds',model:'JBL Endurance Zone',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'}]}] },
+  { id:'p91',brand:'JBL',cat:'Earbuds',model:'JBL Endurance Peak 4',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'}]}] },
+  { id:'p92',brand:'JBL',cat:'Earbuds',model:'JBL Endurance Peak 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Lilla'}]}] },
+  { id:'p93',brand:'JBL',cat:'Earbuds',model:'JBL Endurance Pace',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'}]}] },
+  { id:'p94',brand:'JBL',cat:'Earbuds',model:'JBL Endurance Race 2',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Lilla'}]}] },
+  { id:'p95',brand:'JBL',cat:'Earbuds',model:'JBL Sense Pro',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'}]}] },
+  { id:'p96',brand:'JBL',cat:'Earbuds',model:'JBL Sense Lite',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'}]}] },
+  { id:'p97',brand:'JBL',cat:'Earbuds',model:'JBL Soundgear CLIPS',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'},{v:'Blå'},{v:'Lilla'}]}] },
+  { id:'p98',brand:'JBL',cat:'Speakers',model:'JBL Boombox 4',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'}]}] },
+  { id:'p99',brand:'JBL',cat:'Speakers',model:'JBL Boombox 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Camo'}]}] },
+  { id:'p100',brand:'JBL',cat:'Speakers',model:'JBL Xtreme 4',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'}]}] },
+  { id:'p101',brand:'JBL',cat:'Speakers',model:'JBL Charge 6',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'},{v:'Teal'}]}] },
+  { id:'p102',brand:'JBL',cat:'Speakers',model:'JBL Charge 5 WiFi',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Camo'}]}] },
+  { id:'p103',brand:'JBL',cat:'Speakers',model:'JBL Flip 7',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'},{v:'Lilla'},{v:'Orange'}]}] },
+  { id:'p104',brand:'JBL',cat:'Speakers',model:'JBL Flip 6',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'},{v:'Lilla'},{v:'Orange'},{v:'Teal'}]}] },
+  { id:'p105',brand:'JBL',cat:'Speakers',model:'JBL Clip 5',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'},{v:'Lilla'},{v:'Orange'}]}] },
+  { id:'p106',brand:'JBL',cat:'Speakers',model:'JBL Go 4',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Blå'},{v:'Rød'},{v:'Pink'},{v:'Hvid'},{v:'Grøn'},{v:'Lilla'},{v:'Orange'}]}] },
+  { id:'p107',brand:'JBL',cat:'Speakers',model:'JBL Pulse 5',price:0,stock:0 },
+  { id:'p108',brand:'JBL',cat:'Speakers',model:'JBL Grip',price:0,stock:0 },
+  { id:'p109',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Ultimate',price:0,stock:0 },
+  { id:'p110',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox 520',price:0,stock:0 },
+  { id:'p111',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Stage 320',price:0,stock:0 },
+  { id:'p112',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Encore 2',price:0,stock:0 },
+  { id:'p113',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Encore Essential 2',price:0,stock:0 },
+  { id:'p114',brand:'JBL',cat:'PartyBox',model:'JBL PartyBox Club 120',price:0,stock:0 },
+  { id:'p115',brand:'JBL',cat:'Home Audio',model:'JBL Authentics 500',price:0,stock:0 },
+  { id:'p116',brand:'JBL',cat:'Home Audio',model:'JBL Authentics 300',price:0,stock:0 },
+  { id:'p117',brand:'JBL',cat:'Home Audio',model:'JBL Authentics 200',price:0,stock:0 },
+  { id:'p118',brand:'JBL',cat:'Home Audio',model:'JBL Horizon 3',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Hvid'}]}] },
+  { id:'p119',brand:'Marshall',cat:'Headphones',model:'Marshall Monitor III A.N.C.',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Black & Brass'},{v:'Cream'}]}] },
+  { id:'p120',brand:'Marshall',cat:'Headphones',model:'Marshall Major V',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Black & Brass'},{v:'Cream'},{v:'Brown'}]}] },
+  { id:'p121',brand:'Marshall',cat:'Headphones',model:'Marshall Major IV',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Black & Brass'},{v:'Cream'},{v:'Brown'}]}] },
+  { id:'p122',brand:'Marshall',cat:'Earbuds',model:'Marshall Motif II A.N.C.',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'}]}] },
+  { id:'p123',brand:'Marshall',cat:'Earbuds',model:'Marshall Minor IV',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'}]}] },
+  { id:'p124',brand:'Marshall',cat:'Speakers',model:'Marshall Emberton III',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Forest'}]}] },
+  { id:'p125',brand:'Marshall',cat:'Speakers',model:'Marshall Emberton II',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'}]}] },
+  { id:'p126',brand:'Marshall',cat:'Speakers',model:'Marshall Willen II',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'}]}] },
+  { id:'p127',brand:'Marshall',cat:'Speakers',model:'Marshall Middleton II',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'}]}] },
+  { id:'p128',brand:'Marshall',cat:'Speakers',model:'Marshall Middleton',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'}]}] },
+  { id:'p129',brand:'Marshall',cat:'Speakers',model:'Marshall Stockwell II',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'}]}] },
+  { id:'p130',brand:'Marshall',cat:'Speakers',model:'Marshall Kilburn III',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'}]}] },
+  { id:'p131',brand:'Marshall',cat:'Speakers',model:'Marshall Tufton',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'}]}] },
+  { id:'p132',brand:'Marshall',cat:'Home Audio',model:'Marshall Woburn III',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
+  { id:'p133',brand:'Marshall',cat:'Home Audio',model:'Marshall Stanmore III',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
+  { id:'p134',brand:'Marshall',cat:'Home Audio',model:'Marshall Acton III',price:0,stock:0,steps:[{k:'color',l:'Farve',ch:[{v:'Sort'},{v:'Cream'},{v:'Brown'}]}] },
+  { id:'p135',brand:'Marshall',cat:'Party Speakers',model:'Marshall Bromley 750',price:0,stock:0 },
+  { id:'p136',brand:'Marshall',cat:'Party Speakers',model:'Marshall Bromley 450',price:0,stock:0 },
+  { id:'p137',brand:'Marshall',cat:'Soundbars',model:'Marshall Heston 120',price:0,stock:0 },
+  { id:'p138',brand:'Marshall',cat:'Soundbars',model:'Marshall Heston 60',price:0,stock:0 },];
 
 const BRANDS = [...new Set(PRODUCTS.map(p=>p.brand))];
 const CATEGORIES = [...new Set(PRODUCTS.map(p=>p.cat))];
@@ -351,21 +360,63 @@ const BRAND_THEME = {
   JBL:     { bg:'linear-gradient(135deg,#ff6b00,#ff8c38)', color:'#fff', accent:'#ff6b00', logo:'JBL', desc:'Headphones · Earbuds · Speakers · PartyBox', url:'https://dk.jbl.com/' },
   Marshall:{ bg:'linear-gradient(135deg,#3a3a3a,#1a1a1a)', color:'#fff', accent:'#c0392b', logo:'MARSHALL', desc:'Headphones · Earbuds · Speakers · Soundbars', url:'https://www.marshallheadphones.com/' },
 };
-const CAT_ICONS = { iPhone:'📱',iPad:'📱',MacBook:'💻',Mac:'🖥',Watch:'⌚',AirPods:'🎧',Vision:'🥽',Accessories:'⌨',Headphones:'🎧',Earbuds:'🎵',Speakers:'🔊',PartyBox:'🎶','Party Speakers':'🎶','Home Audio':'🏠',Soundbars:'📺' };
+const CAT_ICONS = { iPhone:'📱',iPad:'📱',MacBook:'💻',Mac:'🖥',Watch:'⌚',AirPods:'🎧',Vision:'🥽',Accessories:'⌨',Tilbehør:'⌨',Headphones:'🎧',Earbuds:'🎵',Speakers:'🔊',PartyBox:'🎶','Party Speakers':'🎶','Home Audio':'🏠',Soundbars:'📺' };
+
+/* Quick specs per model */
+const QSPECS = {
+  'iPhone 17 Pro Max':{chip:'A19 Pro',ram:'12 GB',scr:'6,9"',cam:'48 MP 8x',charge:'USB-C',sim:'Dual eSIM',wifi:'WiFi 7',os:'iOS 26',eu:'A3526',india:'A3527'},
+  'iPhone 17 Pro':{chip:'A19 Pro',ram:'12 GB',scr:'6,3"',cam:'48 MP 8x',charge:'USB-C',sim:'Dual eSIM',wifi:'WiFi 7',os:'iOS 26',eu:'A3523',india:'A3524'},
+  'iPhone Air':{chip:'A19',ram:'8 GB',scr:'6,6"',cam:'48 MP 2x',charge:'USB-C',sim:'eSIM',wifi:'WiFi 7',os:'iOS 26',eu:'A3530',india:'A3531'},
+  'iPhone 17':{chip:'A19',ram:'12 GB',scr:'6,3"',cam:'48 MP',charge:'USB-C',sim:'eSIM',wifi:'WiFi 7',os:'iOS 26',eu:'A3520',india:'A3521'},
+  'iPhone 17e':{chip:'A19',ram:'8 GB',scr:'6,1"',cam:'48 MP',charge:'USB-C',sim:'eSIM',wifi:'WiFi 7',os:'iOS 26',eu:'A3518',india:'A3519'},
+  'iPhone 16 Pro Max':{chip:'A18 Pro',ram:'8 GB',scr:'6,9"',cam:'48 MP 5x',charge:'USB-C',sim:'eSIM',wifi:'WiFi 7',os:'iOS 26',eu:'A3094',india:'A3095'},
+  'iPhone 16 Pro':{chip:'A18 Pro',ram:'8 GB',scr:'6,3"',cam:'48 MP 5x',charge:'USB-C',sim:'eSIM',wifi:'WiFi 7',os:'iOS 26',eu:'A3091',india:'A3092'},
+  'iPhone 16':{chip:'A18',ram:'8 GB',scr:'6,1"',cam:'48 MP',charge:'USB-C',sim:'eSIM',wifi:'WiFi 6E',os:'iOS 26',eu:'A3085',india:'A3086'},
+  'iPhone 16 Plus':{chip:'A18',ram:'8 GB',scr:'6,7"',cam:'48 MP',charge:'USB-C',sim:'eSIM',wifi:'WiFi 6E',os:'iOS 26',eu:'A3088',india:'A3089'},
+  'iPhone 16e':{chip:'A18',ram:'8 GB',scr:'6,1"',cam:'48 MP',charge:'USB-C',sim:'eSIM',wifi:'WiFi 6E',os:'iOS 26',eu:'A3212',india:'A3213'},
+  'MacBook Pro 16" M5 Max':{chip:'M5 Max',ram:'36-128 GB',scr:'16,2"',cam:'1080p',charge:'MagSafe',sim:'—',wifi:'WiFi 7',os:'macOS 27'},
+  'MacBook Pro 16" M5 Pro':{chip:'M5 Pro',ram:'18-36 GB',scr:'16,2"',cam:'1080p',charge:'MagSafe',sim:'—',wifi:'WiFi 7',os:'macOS 27'},
+  'MacBook Pro 14" M5 Pro':{chip:'M5 Pro',ram:'18-36 GB',scr:'14,2"',cam:'1080p',charge:'MagSafe',sim:'—',wifi:'WiFi 7',os:'macOS 27'},
+  'MacBook Pro 14" M5':{chip:'M5',ram:'16-24 GB',scr:'14,2"',cam:'1080p',charge:'MagSafe',sim:'—',wifi:'WiFi 7',os:'macOS 27'},
+  'MacBook Air 15" M5':{chip:'M5',ram:'16-32 GB',scr:'15,3"',cam:'1080p',charge:'MagSafe',sim:'—',wifi:'WiFi 7',os:'macOS 27'},
+  'MacBook Air 13" M5':{chip:'M5',ram:'16-32 GB',scr:'13,6"',cam:'1080p',charge:'MagSafe',sim:'—',wifi:'WiFi 7',os:'macOS 27'},
+  'Apple Watch Ultra 3':{chip:'S11',ram:'—',scr:'49mm',cam:'—',charge:'MagSafe',sim:'eSIM',wifi:'WiFi',os:'watchOS 12'},
+  'Apple Watch Series 11':{chip:'S11',ram:'—',scr:'42/46mm',cam:'—',charge:'MagSafe',sim:'eSIM',wifi:'WiFi',os:'watchOS 12'},
+  'JBL Tour ONE M3':{chip:'—',ram:'—',scr:'—',cam:'—',charge:'USB-C',sim:'—',wifi:'BT 5.3',os:'70t batteri'},
+  'JBL Flip 7':{chip:'—',ram:'—',scr:'—',cam:'—',charge:'USB-C',sim:'—',wifi:'BT 5.4',os:'16t batteri'},
+  'Marshall Monitor III A.N.C.':{chip:'—',ram:'—',scr:'—',cam:'—',charge:'USB-C',sim:'—',wifi:'BT 5.4',os:'70t batteri'},
+};
+const getSpec = (model) => QSPECS[model] || {};
+
+/* SVG product images by category */
+const PROD_SVG = {
+  iPhone: `<svg viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="15" y="5" width="90" height="190" rx="18" stroke="currentColor" stroke-width="2" opacity="0.3"/><rect x="20" y="12" width="80" height="170" rx="14" fill="currentColor" opacity="0.05"/><rect x="48" y="8" width="24" height="5" rx="2.5" fill="currentColor" opacity="0.15"/><circle cx="60" cy="185" r="3" fill="currentColor" opacity="0.1"/></svg>`,
+  iPad: `<svg viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="5" width="140" height="190" rx="14" stroke="currentColor" stroke-width="2" opacity="0.3"/><rect x="16" y="11" width="128" height="178" rx="10" fill="currentColor" opacity="0.05"/><circle cx="80" cy="100" r="4" fill="currentColor" opacity="0.1"/></svg>`,
+  MacBook: `<svg viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="25" y="5" width="150" height="100" rx="8" stroke="currentColor" stroke-width="2" opacity="0.3"/><rect x="30" y="10" width="140" height="90" rx="5" fill="currentColor" opacity="0.05"/><path d="M10 108 H190 Q195 108 195 113 V118 Q195 123 190 123 H10 Q5 123 5 118 V113 Q5 108 10 108Z" stroke="currentColor" stroke-width="2" opacity="0.3"/></svg>`,
+  Watch: `<svg viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="25" y="40" width="50" height="60" rx="12" stroke="currentColor" stroke-width="2" opacity="0.3"/><rect x="29" y="44" width="42" height="52" rx="9" fill="currentColor" opacity="0.05"/><rect x="35" y="10" width="30" height="30" rx="4" stroke="currentColor" stroke-width="1.5" opacity="0.15"/><rect x="35" y="100" width="30" height="30" rx="4" stroke="currentColor" stroke-width="1.5" opacity="0.15"/><rect x="75" y="58" width="8" height="16" rx="3" fill="currentColor" opacity="0.1"/></svg>`,
+  AirPods: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="10" width="80" height="100" rx="20" stroke="currentColor" stroke-width="2" opacity="0.3"/><ellipse cx="45" cy="55" rx="12" ry="20" stroke="currentColor" stroke-width="1.5" opacity="0.2"/><ellipse cx="75" cy="55" rx="12" ry="20" stroke="currentColor" stroke-width="1.5" opacity="0.2"/></svg>`,
+  Headphones: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25 70 Q25 30 60 30 Q95 30 95 70" stroke="currentColor" stroke-width="2.5" opacity="0.3" fill="none"/><rect x="15" y="65" width="20" height="35" rx="8" stroke="currentColor" stroke-width="2" opacity="0.3"/><rect x="85" y="65" width="20" height="35" rx="8" stroke="currentColor" stroke-width="2" opacity="0.3"/></svg>`,
+  Earbuds: `<svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="16" stroke="currentColor" stroke-width="2" opacity="0.3"/><circle cx="80" cy="40" r="16" stroke="currentColor" stroke-width="2" opacity="0.3"/><line x1="40" y1="56" x2="35" y2="80" stroke="currentColor" stroke-width="2" opacity="0.2"/><line x1="80" y1="56" x2="85" y2="80" stroke="currentColor" stroke-width="2" opacity="0.2"/></svg>`,
+  Speakers: `<svg viewBox="0 0 100 140" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="80" height="120" rx="20" stroke="currentColor" stroke-width="2" opacity="0.3"/><circle cx="50" cy="50" r="18" stroke="currentColor" stroke-width="1.5" opacity="0.2"/><circle cx="50" cy="95" r="12" stroke="currentColor" stroke-width="1.5" opacity="0.2"/></svg>`,
+  Mac: `<svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="5" width="140" height="100" rx="8" stroke="currentColor" stroke-width="2" opacity="0.3"/><rect x="60" y="108" width="40" height="8" rx="2" fill="currentColor" opacity="0.1"/><rect x="40" y="118" width="80" height="6" rx="3" stroke="currentColor" stroke-width="1.5" opacity="0.2"/></svg>`,
+  PartyBox: `<svg viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="5" width="80" height="150" rx="12" stroke="currentColor" stroke-width="2" opacity="0.3"/><circle cx="50" cy="45" r="20" stroke="currentColor" stroke-width="1.5" opacity="0.2"/><circle cx="50" cy="110" r="20" stroke="currentColor" stroke-width="1.5" opacity="0.2"/></svg>`,
+  'Home Audio': `<svg viewBox="0 0 160 100" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="140" height="80" rx="10" stroke="currentColor" stroke-width="2" opacity="0.3"/><circle cx="50" cy="50" r="18" stroke="currentColor" stroke-width="1.5" opacity="0.2"/><circle cx="110" cy="50" r="18" stroke="currentColor" stroke-width="1.5" opacity="0.2"/></svg>`,
+  Soundbars: `<svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="10" width="190" height="40" rx="10" stroke="currentColor" stroke-width="2" opacity="0.3"/><circle cx="40" cy="30" r="10" stroke="currentColor" stroke-width="1.5" opacity="0.15"/><circle cx="100" cy="30" r="10" stroke="currentColor" stroke-width="1.5" opacity="0.15"/><circle cx="160" cy="30" r="10" stroke="currentColor" stroke-width="1.5" opacity="0.15"/></svg>`,
+  'Party Speakers': `<svg viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="5" width="80" height="150" rx="12" stroke="currentColor" stroke-width="2" opacity="0.3"/><circle cx="50" cy="45" r="20" stroke="currentColor" stroke-width="1.5" opacity="0.2"/><circle cx="50" cy="110" r="20" stroke="currentColor" stroke-width="1.5" opacity="0.2"/></svg>`,
+};
 
 /* Color hex for swatches */
 const CLR = {'Natural Titanium':'#b5a994','Black Titanium':'#3a3a3c','White Titanium':'#e8e3dc','Desert Titanium':'#c4a97d',
   'Sort':'#1d1d1f','Hvid':'#f5f5f7','Grøn':'#4a6b3f','Blå':'#2d4e8a','Pink':'#f9d0c7','Midnight':'#1d1d2b','Starlight':'#f0e6d3',
-  'Sky Blue':'#a7c4e0','Green':'#4a6b3f','Rød':'#c0392b','Space Black':'#1d1d1f','Silver':'#e3e4e6','Space Grey':'#6b6b6f',
+  'Sky Blue':'#a7c4e0','Dybblå':'#1a3a5c','Kosmisk orange':'#e87f3a','Himmelblå':'#a7c4e0','Green':'#4a6b3f','Rød':'#c0392b','Space Black':'#1d1d1f','Silver':'#e3e4e6','Space Grey':'#6b6b6f',
   'Blue':'#4a7dc0','Purple':'#8b6baf','Yellow':'#f5d547','Orange':'#f5a623','Cream':'#f5f0e1','Brown':'#6b4c3b',
   'Black & Brass':'#2d2d2d','Turkis':'#40c4aa','Lilla':'#9b59b6','Camo':'#5a6b4a','Squad (Camo)':'#5a6b4a',
-  'Jet Black':'#0a0a0a','Rose Gold':'#e8b4b8','Sølv':'#c0c0c0','Coral':'#ff7f50','Indigo Trail':'#3f51b5',
+  'Jet Black':'#0a0a0a','Rose Gold':'#e8b4b8','Sølv':'#c0c0c0','Gul':'#f5d547','Champagne':'#f5deb3','Mocha':'#8B7355','Forest':'#3a5a2a','Gold':'#d4af37','Jet Black':'#0a0a0a','Coral':'#ff7f50','Indigo Trail':'#3f51b5',
 };
 
 /* Product families for Apple-style grouping */
 const FAMILIES = {
   'iPhone 17 Pro': { models:['iPhone 17 Pro','iPhone 17 Pro Max'], label:'iPhone 17 Pro og\niPhone 17 Pro Max', screen:'6,3" og 6,9"', spec:'A19 Pro · 48 MP kamera · Titanium' },
-  'iPhone 17 Air': { models:['iPhone 17 Air'], label:'iPhone Air', screen:'6,6"', spec:'A19 · Ultratyndt design' },
   'iPhone 17': { models:['iPhone 17'], label:'iPhone 17', screen:'6,3"', spec:'A19 · ProMotion · 48 MP' },
   'iPhone 17e': { models:['iPhone 17e'], label:'iPhone 17e', screen:'6,1"', spec:'A19 · Face ID · USB-C' },
   'iPhone 16 Pro': { models:['iPhone 16 Pro','iPhone 16 Pro Max'], label:'iPhone 16 Pro og\niPhone 16 Pro Max', screen:'6,3" og 6,9"', spec:'A18 Pro · 48 MP · Titanium' },
@@ -452,6 +503,8 @@ export default function App() {
   const [browseProduct, setBrowseProduct] = useState(null);
   const [customerCart, setCustomerCart] = useState([]);
   const [configuring, setConfiguring] = useState(null); // {product, config:{}, stepIdx:0}
+  const [carouselIdx, setCarouselIdx] = useState(0);
+  const [showFullSpecs, setShowFullSpecs] = useState(false);
 
   const t = useMemo(() => T[lang] || T.da, [lang]);
 
@@ -1150,7 +1203,7 @@ export default function App() {
 
   // PRODUCTS — Visual Brand → Category → Product → Configure → Cart flow
   const renderProducts = () => {
-    const isCustomerView = true; // Both admin and customer use visual flow
+    const isCustomerView = true;
 
     // ═══ APPLE-STYLE CONFIGURATOR ═══
     if (configuring) {
@@ -1159,100 +1212,197 @@ export default function App() {
       const steps = cp.steps || [];
       const price = getConfigPrice(cp, cfg);
       const colorStep = steps.find(s => s.k === 'color');
-      const otherSteps = steps.filter(s => s.k !== 'color');
-      const allDone = steps.length === 0 || Object.keys(cfg).length >= steps.length;
+      const otherSteps = steps.filter(s => s.k !== 'color' && s.k !== 'region');
+      const hasRegion = cp.brand === 'Apple' && cp.cat === 'iPhone';
+      const regionDone = !hasRegion || cfg.region;
+      const stepsDone = steps.length === 0 || Object.keys(cfg).filter(k=>k!=='region').length >= steps.length;
+      const allDone = stepsDone && regionDone;
       const selectedColor = cfg.color;
       const colorHex = CLR[selectedColor] || '#888';
       const family = Object.values(FAMILIES).find(f => f.models.includes(cp.model));
       const familyProducts = family ? family.models.map(m => PRODUCTS.find(p => p.model === m)).filter(Boolean) : [cp];
+      const spec = getSpec(cp.model);
+      const svgHtml = PROD_SVG[cp.cat] || PROD_SVG['iPhone'] || '';
+      // Product images: use data-images attribute if available, otherwise SVG placeholder
+      const productImages = cp.images || []; // Will be filled when real images are added
 
-      if (allDone) return (
+      // ═══ SUMMARY PAGE ═══
+      if (allDone) {
+        const regionData = cfg.region || 'eu';
+        const aNum = regionData === 'eu' ? (spec.eu||'—') : (spec.india||'—');
+        return (
         <div className="fade-in" style={{ maxWidth:800, margin:'0 auto' }}>
-          <button className="btn-ghost" onClick={()=>setConfiguring({...configuring, config:{}, stepIdx:0})} style={{ marginBottom:24 }}>{IC.back} {da(lang)?'Ændr konfiguration':'Change configuration'}</button>
+          <button className="btn-ghost" onClick={()=>{setConfiguring({...configuring, config:{}, stepIdx:0});setShowFullSpecs(false);setCarouselIdx(0);}} style={{ marginBottom:24, color:'var(--accent)' }}>← {da(lang)?'Ændr konfiguration':'Change configuration'}</button>
           <div style={{ display:'flex', gap:40, flexWrap:'wrap', alignItems:'flex-start' }}>
-            <div style={{ flex:'1 1 300px' }}>
-              <h1 style={{ fontSize:'2rem', fontWeight:700, lineHeight:1.2, marginBottom:4 }}>{da(lang)?'Din nye':'Your new'}</h1>
-              <h1 style={{ fontSize:'2rem', fontWeight:700, lineHeight:1.2, marginBottom:4 }}>{cp.model}.</h1>
-              <p style={{ fontSize:'1.2rem', color:'var(--text-muted)', marginBottom:24 }}>{da(lang)?'Lige som du vil have den.':'Just the way you want it.'}</p>
-              <div style={{ width:200, height:200, borderRadius:24, background:`linear-gradient(135deg, ${colorHex}33, ${colorHex}11)`, display:'flex', alignItems:'center', justifyContent:'center', fontSize:'5rem', border:'1px solid var(--border)' }}>
-                {CAT_ICONS[cp.cat]||'📦'}
+            <div style={{ flex:'1 1 280px' }}>
+              <h1 style={{ fontSize:'1.8rem', fontWeight:700, lineHeight:1.2 }}>{da(lang)?'Din nye':'Your new'}</h1>
+              <h1 style={{ fontSize:'1.8rem', fontWeight:700, lineHeight:1.2, marginBottom:4 }}>{cp.model}.</h1>
+              <p style={{ fontSize:'1rem', color:'var(--text-muted)', marginBottom:20 }}>{da(lang)?'Lige som du vil have den.':'Just the way you want it.'}</p>
+              <div style={{ width:180, height:180, borderRadius:20, background:'#f5f5f7', display:'flex', alignItems:'center', justifyContent:'center', border:'1px solid var(--border)' }}>
+                {productImages.length > 0
+                  ? <img src={productImages[0]} alt={cp.model} style={{ maxHeight:160, objectFit:'contain', cursor:'pointer' }}/>
+                  : <div style={{color:'var(--text-muted)',opacity:0.5}} dangerouslySetInnerHTML={{__html:svgHtml}}/>}
               </div>
             </div>
             <div style={{ flex:'1 1 340px' }}>
-              <div style={{ marginBottom:16 }}>
-                <div style={{ fontSize:'1rem', fontWeight:600 }}>{cp.model} {fmtConfig(cfg)}</div>
-                <div style={{ fontSize:'1.2rem', fontWeight:600, color:'var(--accent)', marginTop:8 }}>{da(lang)?'Pris oplyses efter bestilling':'Price upon request'}</div>
-                <div style={{ fontSize:'0.8rem', color:'var(--text-muted)', marginTop:4 }}>📦 {da(lang)?'Ca. 2 ugers leveringstid':'Approx. 2 weeks delivery'}</div>
+              <div style={{ fontSize:'1rem', fontWeight:600 }}>{cp.model} {fmtConfig(cfg)}</div>
+              <div style={{ display:'flex', gap:6, marginTop:10, flexWrap:'wrap' }}>
+                {hasRegion && <span style={{ fontSize:'0.75rem', fontWeight:500, padding:'4px 10px', borderRadius:8, background:'var(--success-bg,#e8f5e9)', color:'var(--success,#2e7d32)' }}>{cfg.region==='eu'?'🇪🇺 EU':'🇮🇳 Indien'}</span>}
+                <span style={{ fontSize:'0.75rem', fontWeight:500, padding:'4px 10px', borderRadius:8, background:'var(--info-bg,#e3f2fd)', color:'var(--info,#1565c0)' }}>📦 2–3 {da(lang)?'ugers levering':'weeks delivery'}</span>
               </div>
               <div className="divider"/>
-              {Object.entries(cfg).map(([k,v]) => (
+              {hasRegion && (
+                <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:12, padding:14, marginBottom:12 }}>
+                  <table style={{ width:'100%', fontSize:'0.85rem', borderCollapse:'collapse' }}>
+                    <tbody>
+                      <tr><td style={{ color:'var(--text-muted)', padding:'4px 0', width:100 }}>A-nummer</td><td style={{ fontWeight:600, fontFamily:'var(--mono)', padding:'4px 0' }}>{aNum}</td></tr>
+                      <tr><td style={{ color:'var(--text-muted)', padding:'4px 0' }}>Region</td><td style={{ padding:'4px 0' }}>{cfg.region==='eu'?'Europa (CE)':'Indien (BIS)'}</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              {Object.entries(cfg).filter(([k])=>k!=='region').map(([k,v]) => (
                 <div key={k} style={{ display:'flex', justifyContent:'space-between', padding:'6px 0' }}>
                   <span style={{ color:'var(--text-secondary)', textTransform:'capitalize' }}>{steps.find(s=>s.k===k)?.l||k}</span>
                   <span style={{ fontWeight:600, display:'flex', alignItems:'center', gap:6 }}>{k==='color' && <span style={{width:14,height:14,borderRadius:7,background:CLR[v]||'#888',display:'inline-block',border:'1px solid var(--border)'}}/>}{v}</span>
                 </div>
               ))}
               <div className="divider"/>
+              <div style={{ fontSize:'0.8rem', color:'var(--text-muted)', marginBottom:8 }}>📦 {da(lang)?'Endelig pris oplyses efter modtagelse af bestilling':'Final price provided after order received'}</div>
               <button className="btn-primary" style={{ width:'100%', padding:'14px 0', fontSize:'1rem', borderRadius:12 }} onClick={() => {
-                setCustomerCart(prev => [...prev, { productId:cp.id, model:cp.model, brand:cp.brand, config:cfg, configLabel:fmtConfig(cfg), unitPrice:price, qty:1, total:price }]);
-                setConfiguring(null);
+                setCustomerCart(prev => [...prev, { productId:cp.id, model:cp.model, brand:cp.brand, config:cfg, configLabel:fmtConfig(cfg), unitPrice:price, qty:1, total:price, region:cfg.region, aNumber:aNum }]);
+                setConfiguring(null); setShowFullSpecs(false); setCarouselIdx(0);
                 showToast(da(lang)?'Tilføjet til bestilling ✓':'Added to order ✓');
-              }}>{da(lang)?'Læg i bestilling':'Add to order'}</button>
+              }}>{da(lang)?'Læg i Shoppingpose':'Add to Shopping Bag'}</button>
             </div>
           </div>
         </div>
-      );
+      );}
 
+      // ═══ CONFIGURATOR ═══
       return (
         <div className="fade-in" style={{ maxWidth:800, margin:'0 auto' }}>
-          <button className="btn-ghost" onClick={()=>setConfiguring(null)} style={{ marginBottom:16 }}>{IC.back} {da(lang)?'Tilbage':'Back'}</button>
+          <button className="btn-ghost" onClick={()=>{setConfiguring(null);setShowFullSpecs(false);setCarouselIdx(0);}} style={{ marginBottom:16, color:'var(--accent)' }}>← {da(lang)?'Tilbage':'Back'}</button>
+
+          {/* Model tabs */}
           {familyProducts.length > 1 && (
             <div style={{ display:'flex', gap:4, marginBottom:24, borderBottom:'2px solid var(--border)' }}>
               {familyProducts.map(fp => (
-                <button key={fp.model} onClick={() => setConfiguring({ product:fp, config:{}, stepIdx:0 })}
-                  style={{ padding:'10px 20px', background:'transparent', border:'none', borderBottom: fp.model===cp.model ? '2px solid var(--text)' : '2px solid transparent',
+                <button key={fp.model} onClick={() => {setConfiguring({ product:fp, config:{}, stepIdx:0 });setCarouselIdx(0);setShowFullSpecs(false);}}
+                  style={{ padding:'10px 20px', background:'transparent', border:'none', borderBottom: fp.model===cp.model ? '2.5px solid var(--text)' : '2.5px solid transparent',
                     color: fp.model===cp.model ? 'var(--text)' : 'var(--text-muted)', fontWeight: fp.model===cp.model?700:400, fontSize:'0.95rem', cursor:'pointer', marginBottom:-2 }}>
                   {fp.model}
                 </button>
               ))}
             </div>
           )}
-          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:24 }}>
-            <h2 style={{ fontSize:'1.8rem', fontWeight:700 }}>{cp.model}</h2>
-            <div style={{ textAlign:'right' }}>
-              <div style={{ fontSize:'0.9rem', color:'var(--text-muted)' }}>{da(lang)?'Konfigurerbar':'Configurable'}</div>
-            </div>
+
+          {/* Title */}
+          <h2 style={{ fontSize:'1.6rem', fontWeight:700, marginBottom:12 }}>{cp.model}</h2>
+
+          {/* Product Image Carousel - Apple #f5f5f7 background */}
+          <div style={{ position:'relative', width:'100%', background:'#f5f5f7', borderRadius:20, minHeight:280, display:'flex', alignItems:'center', justifyContent:'center', marginBottom:12, overflow:'hidden' }}>
+            {productImages.length > 1 && <button onClick={()=>setCarouselIdx(i=>(i-1+productImages.length)%productImages.length)} style={{ position:'absolute', left:12, top:'50%', transform:'translateY(-50%)', width:40, height:40, borderRadius:20, background:'rgba(0,0,0,0.08)', border:'none', fontSize:18, cursor:'pointer', zIndex:2 }}>‹</button>}
+            {productImages.length > 0
+              ? <img src={productImages[carouselIdx%productImages.length]} alt={cp.model} style={{ maxHeight:260, objectFit:'contain', cursor:'pointer', transition:'opacity 0.3s' }}/>
+              : <div style={{width:160,height:260,display:'flex',alignItems:'center',justifyContent:'center',color:'var(--text-muted)',opacity:0.4}} dangerouslySetInnerHTML={{__html:svgHtml}}/>}
+            {productImages.length > 1 && <button onClick={()=>setCarouselIdx(i=>(i+1)%productImages.length)} style={{ position:'absolute', right:12, top:'50%', transform:'translateY(-50%)', width:40, height:40, borderRadius:20, background:'rgba(0,0,0,0.08)', border:'none', fontSize:18, cursor:'pointer', zIndex:2 }}>›</button>}
           </div>
+          {/* Carousel dots */}
+          {productImages.length > 1 && (
+            <div style={{ display:'flex', gap:6, justifyContent:'center', padding:'8px 0' }}>
+              {productImages.map((_,i) => <div key={i} onClick={()=>setCarouselIdx(i)} style={{ width:i===carouselIdx?20:8, height:8, borderRadius:4, background:i===carouselIdx?'var(--text)':'var(--border)', cursor:'pointer', transition:'all 0.2s' }}/>)}
+            </div>
+          )}
+
+          {/* Quick specs - 8 compact cards */}
+          {spec.chip && (
+            <>
+              <div style={{ display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:6, margin:'12px 0' }}>
+                <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:10, padding:'10px 6px', textAlign:'center' }}><div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>Chip</div><div style={{ fontSize:'0.75rem', fontWeight:700, marginTop:2 }}>{spec.chip}</div></div>
+                <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:10, padding:'10px 6px', textAlign:'center' }}><div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>RAM</div><div style={{ fontSize:'0.75rem', fontWeight:700, marginTop:2 }}>{spec.ram}</div></div>
+                <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:10, padding:'10px 6px', textAlign:'center' }}><div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>{da(lang)?'Skærm':'Screen'}</div><div style={{ fontSize:'0.75rem', fontWeight:700, marginTop:2 }}>{spec.scr}</div></div>
+                <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:10, padding:'10px 6px', textAlign:'center' }}><div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>{da(lang)?'Kamera':'Camera'}</div><div style={{ fontSize:'0.75rem', fontWeight:700, marginTop:2 }}>{spec.cam}</div></div>
+              </div>
+              <div style={{ display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:6, marginBottom:8 }}>
+                <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:10, padding:'10px 6px', textAlign:'center' }}><div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>{da(lang)?'Opladning':'Charging'}</div><div style={{ fontSize:'0.7rem', fontWeight:600, marginTop:2 }}>{spec.charge}</div></div>
+                <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:10, padding:'10px 6px', textAlign:'center' }}><div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>SIM</div><div style={{ fontSize:'0.7rem', fontWeight:600, marginTop:2 }}>{spec.sim}</div></div>
+                <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:10, padding:'10px 6px', textAlign:'center' }}><div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>WiFi</div><div style={{ fontSize:'0.7rem', fontWeight:600, marginTop:2 }}>{spec.wifi}</div></div>
+                <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:10, padding:'10px 6px', textAlign:'center' }}><div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>OS</div><div style={{ fontSize:'0.75rem', fontWeight:700, marginTop:2 }}>{spec.os}</div></div>
+              </div>
+
+              {/* Expandable full specs */}
+              <button onClick={()=>setShowFullSpecs(!showFullSpecs)} style={{ width:'100%', padding:10, background:'none', border:'1px solid var(--border)', borderRadius:10, fontSize:'0.8rem', color:'var(--text-muted)', cursor:'pointer', margin:'6px 0 20px', transition:'all 0.15s' }}>
+                {showFullSpecs ? '▲' : '▼'} {da(lang)?'Vis alle specifikationer':'Show all specifications'}
+              </button>
+              {showFullSpecs && (
+                <table style={{ width:'100%', fontSize:'0.8rem', borderCollapse:'collapse', marginBottom:16 }}>
+                  <tbody>
+                    {Object.entries(spec).filter(([k])=>!['eu','india'].includes(k)).map(([k,v]) => (
+                      <tr key={k}><td style={{ color:'var(--text-muted)', padding:'6px 8px', borderBottom:'1px solid var(--border)', width:110, fontWeight:500, textTransform:'capitalize' }}>{k}</td><td style={{ padding:'6px 8px', borderBottom:'1px solid var(--border)' }}>{v}</td></tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </>
+          )}
+
+          {/* Color selection */}
           {colorStep && (
-            <div style={{ marginBottom:28 }}>
-              <h3 style={{ fontWeight:700, fontSize:'1rem', marginBottom:4 }}>{da(lang)?'Finish.':'Finish.'} <span style={{ color:'var(--text-muted)', fontWeight:400 }}>{da(lang)?'Vælg din favorit.':'Choose your favorite.'}</span></h3>
+            <div style={{ marginBottom:24 }}>
+              <h3 style={{ fontWeight:700, fontSize:'1rem', marginBottom:4 }}>Finish. <span style={{ color:'var(--text-muted)', fontWeight:400 }}>{da(lang)?'Vælg din favorit.':'Choose your favorite.'}</span></h3>
               <div style={{ fontSize:'0.85rem', fontWeight:600, marginBottom:8 }}>{da(lang)?'Farve':'Color'}{selectedColor ? ` — ${selectedColor}` : ''}</div>
-              <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
+              <div style={{ display:'flex', gap:12, flexWrap:'wrap', alignItems:'center' }}>
                 {colorStep.ch.map(ch => {
                   const hex = CLR[ch.v] || '#888'; const sel = cfg.color === ch.v;
-                  return (<div key={ch.v} onClick={() => setConfiguring({...configuring, config:{...cfg, color:ch.v}})}
-                    style={{ width:32, height:32, borderRadius:16, background:hex, cursor:'pointer', border: sel?'3px solid var(--accent)':'2px solid var(--border)',
-                      boxShadow: sel?'0 0 0 2px var(--bg), 0 0 0 4px var(--accent)':'none', transition:'all 0.15s' }} title={ch.v}/>);
+                  return (<div key={ch.v} onClick={() => {setConfiguring({...configuring, config:{...cfg, color:ch.v}});setCarouselIdx(0);}}
+                    style={{ width:32, height:32, borderRadius:16, background:hex, cursor:'pointer', border: sel?'3px solid var(--accent)':'2.5px solid var(--border)',
+                      boxShadow: sel?'0 0 0 2.5px var(--bg), 0 0 0 5px var(--accent)':'none', transition:'all 0.15s' }} title={ch.v}/>);
                 })}
               </div>
             </div>
           )}
+
+          {/* Other steps (storage, RAM, etc.) */}
           {otherSteps.map(step => (
-            <div key={step.k} style={{ marginBottom:28 }}>
+            <div key={step.k} style={{ marginBottom:24 }}>
               <h3 style={{ fontWeight:700, fontSize:'1rem', marginBottom:4 }}>{step.l}. <span style={{ color:'var(--text-muted)', fontWeight:400 }}>{da(lang)?'Hvor meget har du brug for?':'How much do you need?'}</span></h3>
               <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
                 {step.ch.map(ch => {
                   const sel = cfg[step.k] === ch.v;
                   return (<div key={ch.v} onClick={() => setConfiguring({...configuring, config:{...cfg, [step.k]:ch.v}})}
-                    style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'16px 20px', borderRadius:12,
-                      border: sel?'2px solid var(--accent)':'1px solid var(--border)', background: sel?'var(--accent-bg)':'var(--bg-card)', cursor:'pointer', transition:'all 0.15s' }}>
-                    <span style={{ fontSize:'1.1rem', fontWeight:700, color: sel?'var(--accent)':'var(--text)' }}>{ch.v}</span>
-                    <span style={{ fontSize:'0.95rem', color: sel?'var(--accent)':'var(--text-secondary)' }}>{sel ? '✓' : ''}</span>
+                    style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'14px 18px', borderRadius:12,
+                      border: sel?'2.5px solid var(--accent)':'1.5px solid var(--border)', background: sel?'rgba(0,113,227,0.03)':'var(--bg-card)', cursor:'pointer', transition:'all 0.12s' }}>
+                    <span style={{ fontSize:'1rem', fontWeight:700, color: sel?'var(--accent)':'var(--text)' }}>{ch.v}</span>
+                    {sel && <span style={{ color:'var(--accent)' }}>✓</span>}
                   </div>);
                 })}
               </div>
             </div>
           ))}
-          {!allDone && <div style={{ textAlign:'center', padding:'20px 0', color:'var(--text-muted)' }}>{da(lang)?'Vælg alle muligheder ovenfor':'Select all options above'}</div>}
+
+          {/* Region selection - only for Apple iPhones */}
+          {hasRegion && (
+            <div style={{ marginBottom:24 }}>
+              <h3 style={{ fontWeight:700, fontSize:'1rem', marginBottom:4 }}>Region. <span style={{ color:'var(--text-muted)', fontWeight:400 }}>{da(lang)?'Hvor skal enheden bruges?':'Where will the device be used?'}</span></h3>
+              <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:10, marginTop:8 }}>
+                <div onClick={() => setConfiguring({...configuring, config:{...cfg, region:'eu'}})}
+                  style={{ padding:16, borderRadius:12, border:cfg.region==='eu'?'2.5px solid var(--accent)':'1.5px solid var(--border)', background:cfg.region==='eu'?'rgba(0,113,227,0.03)':'var(--bg-card)', cursor:'pointer', textAlign:'center', transition:'all 0.12s' }}>
+                  <div style={{ fontSize:'1.5rem' }}>🇪🇺</div>
+                  <div style={{ fontWeight:700, fontSize:'0.9rem', color:cfg.region==='eu'?'var(--accent)':'var(--text)' }}>Europa</div>
+                  <div style={{ fontSize:'0.7rem', color:'var(--text-muted)', marginTop:3 }}>Model {spec.eu||'—'}<br/>CE · Nano-SIM + eSIM</div>
+                </div>
+                <div onClick={() => setConfiguring({...configuring, config:{...cfg, region:'india'}})}
+                  style={{ padding:16, borderRadius:12, border:cfg.region==='india'?'2.5px solid var(--accent)':'1.5px solid var(--border)', background:cfg.region==='india'?'rgba(0,113,227,0.03)':'var(--bg-card)', cursor:'pointer', textAlign:'center', transition:'all 0.12s' }}>
+                  <div style={{ fontSize:'1.5rem' }}>🇮🇳</div>
+                  <div style={{ fontWeight:700, fontSize:'0.9rem', color:cfg.region==='india'?'var(--accent)':'var(--text)' }}>Indien</div>
+                  <div style={{ fontSize:'0.7rem', color:'var(--text-muted)', marginTop:3 }}>Model {spec.india||'—'}<br/>BIS · Nano-SIM + eSIM</div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {!allDone && <div style={{ textAlign:'center', padding:'16px 0', color:'var(--text-muted)', fontSize:'0.85rem' }}>{da(lang)?'Vælg alle muligheder ovenfor for at fortsætte':'Select all options above to continue'}</div>}
         </div>
       );
     }
@@ -1399,36 +1549,49 @@ export default function App() {
         </div>
         <h2 style={{ fontSize:'1.3rem', fontWeight:700, marginBottom:8 }}>{browseBrand} {browseCat}</h2>
         <p style={{ color:'var(--text-muted)', fontSize:'0.85rem', marginBottom:20 }}>{productsInCat.length} {da(lang)?'produkter':'products'}</p>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(280px, 1fr))', gap:16 }}>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(260px, 1fr))', gap:16 }}>
           {productsInCat.map(p => {
             const si = stockInfo(p.stock, t);
+            const colorStep = p.steps?.find(s=>s.k==='color');
+            const spec = getSpec(p.model);
+            const svgHtml = PROD_SVG[p.cat] || '';
+            const productImages = p.images || [];
             return (
-              <div key={p.model} className="card" style={{ padding:20, transition:'all 0.15s', display:'flex', flexDirection:'column', justifyContent:'space-between' }}
+              <div key={p.model} className="card" style={{ padding:0, transition:'all 0.15s', display:'flex', flexDirection:'column', overflow:'hidden' }}
                 onMouseEnter={e=>e.currentTarget.style.borderColor='var(--accent)'}
                 onMouseLeave={e=>e.currentTarget.style.borderColor='var(--border)'}>
-                <div>
-                  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:10 }}>
-                    <span className="badge badge-accent">{p.brand}</span>
-                    <span style={{ fontSize:'0.75rem' }}><span className={`stock-dot ${si.cls}`}/>{si.label}</span>
+                {/* Product image area */}
+                <div style={{ width:'100%', background:'#f5f5f7', borderRadius:'var(--radius-lg) var(--radius-lg) 0 0', minHeight:160, display:'flex', alignItems:'center', justifyContent:'center', padding:16 }}>
+                  {productImages.length > 0
+                    ? <img src={productImages[0]} alt={p.model} style={{ maxHeight:140, objectFit:'contain' }}/>
+                    : svgHtml ? <div style={{width:100,height:130,color:'var(--text-muted)',opacity:0.35}} dangerouslySetInnerHTML={{__html:svgHtml}}/> : <span style={{fontSize:'3rem',opacity:0.3}}>{CAT_ICONS[p.cat]||'📦'}</span>}
+                </div>
+                {/* Color dots */}
+                {colorStep && (
+                  <div style={{ display:'flex', gap:5, justifyContent:'center', padding:'8px 0' }}>
+                    {colorStep.ch.slice(0,6).map(ch => <span key={ch.v} style={{ width:12, height:12, borderRadius:6, background:CLR[ch.v]||'#888', border:'1px solid var(--border)', display:'inline-block' }}/>)}
                   </div>
-                  <div style={{ fontWeight:700, fontSize:'1.05rem', marginBottom:6 }}>{p.model}</div>
-                  <div style={{ fontFamily:'var(--mono)', fontSize:'1.2rem', color:'var(--accent)', marginBottom:10 }}>{p.steps ? (da(lang)?'Konfigurerbart':'Configurable') : ''}</div>
-                  {p.steps && (
-                    <div style={{ display:'flex', gap:6, flexWrap:'wrap', marginBottom:12 }}>
-                      {p.steps.map((s,i)=>(
-                        <span key={i} style={{ background:'var(--bg)', padding:'3px 10px', borderRadius:20, border:'1px solid var(--border)', fontSize:'0.7rem', color:'var(--text-muted)' }}>{s.l}: {s.ch.length}</span>
+                )}
+                <div style={{ padding:'10px 16px 16px' }}>
+                  <div style={{ fontWeight:700, fontSize:'1rem', marginBottom:4 }}>{p.model}</div>
+                  {/* Compact spec tags */}
+                  {spec.chip && (
+                    <div style={{ display:'flex', gap:4, flexWrap:'wrap', marginBottom:8 }}>
+                      {[spec.chip, spec.ram !== '—' && spec.ram, spec.cam !== '—' && spec.cam, spec.wifi !== '—' && spec.wifi].filter(Boolean).slice(0,4).map((s,i) => (
+                        <span key={i} style={{ background:'var(--bg,#f5f5f7)', padding:'2px 8px', borderRadius:20, border:'1px solid var(--border)', fontSize:'0.65rem', color:'var(--text-muted)' }}>{s}</span>
                       ))}
                     </div>
                   )}
+                  <div style={{ fontSize:'0.75rem', color:'var(--text-muted)', marginBottom:10 }}>📦 {da(lang)?'Ca. 2 ugers levering':'Approx. 2 weeks delivery'}</div>
+                  {isCustomerView ? (
+                    <button className="btn-primary btn-sm" style={{ width:'100%' }} onClick={() => {
+                      if (p.steps && p.steps.length > 0) {setConfiguring({ product:p, config:{}, stepIdx:0 });setCarouselIdx(0);setShowFullSpecs(false);}
+                      else { setCustomerCart(prev => [...prev, { productId:p.id, model:p.model, brand:p.brand, config:{}, configLabel:'', unitPrice:p.price, qty:1, total:p.price }]); showToast(da(lang)?'Tilføjet ✓':'Added ✓'); }
+                    }}>
+                      {p.steps ? (da(lang)?'Køb':'Buy') : (da(lang)?'Tilføj til bestilling':'Add to order')}
+                    </button>
+                  ) : null}
                 </div>
-                {isCustomerView ? (
-                  <button className="btn-primary btn-sm" style={{ width:'100%', marginTop:8 }} onClick={() => {
-                    if (p.steps && p.steps.length > 0) setConfiguring({ product:p, config:{}, stepIdx:0 });
-                    else { setCustomerCart(prev => [...prev, { productId:p.id, model:p.model, brand:p.brand, config:{}, configLabel:'', unitPrice:p.price, qty:1, total:p.price }]); showToast(da(lang)?'Tilføjet ✓':'Added ✓'); }
-                  }}>
-                    {p.steps ? (da(lang)?'Konfigurer & bestil':'Configure & order') : (da(lang)?'Tilføj til bestilling':'Add to order')}
-                  </button>
-                ) : null}
               </div>
             );
           })}
@@ -1938,4 +2101,3 @@ export default function App() {
     </div>
   );
 }
- 
