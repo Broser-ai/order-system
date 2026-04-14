@@ -39,14 +39,14 @@ const T = {
     invoices:'Fakturaer', creditNotes:'Kreditnotaer', reports:'Rapporter', settings:'Indstillinger', profile:'Profil',
     myOrders:'Mine ordrer', search:'Søg...', save:'Gem', cancel:'Annuller', delete:'Slet', edit:'Rediger',
     add:'Tilføj', close:'Luk', confirm:'Bekræft', total:'Total', subtotal:'Subtotal', vat:'Moms', qty:'Antal',
-    price:0'Pris', status:'Status', date:'Dato', actions:'Handlinger', name:'Navn', email:'E-mail',
+    price:'Pris', status:'Status', date:'Dato', actions:'Handlinger', name:'Navn', email:'E-mail',
     phone:'Telefon', address:'Adresse', company:'Firma', vatNo:'CVR-nr', city:'By', zip:'Postnr',
     country:'Land', notes:'Noter', deliveryAddr:'Leveringsadresse', billingAddr:'Faktureringsadresse',
     received:'Modtaget', processing:'Behandler', shipped:'Afsendt', delivered:'Leveret', cancelled:'Annulleret',
     proforma:'Proforma', finalInvoice:'Endelig faktura', creditNote:'Kreditnota',
     payNow:'Betal nu', payWithPayPal:'Betal med PayPal', paid:'Betalt', unpaid:'Ubetalt',
     partialDelivery:'Dellevering', deliveryProof:'Leveringsbevis', uploadPhoto:'Upload foto',
-    signature:'Signatur', stock:0'Lager', inStock:'På lager', lowStock:'Få på lager', outOfStock:'Ikke på lager',
+    signature:'Signatur', stock:'Lager', inStock:'På lager', lowStock:'Få på lager', outOfStock:'Ikke på lager',
     exportExcel:'Eksporter Excel', exportPDF:'Eksporter PDF', exportCSV:'Eksporter CSV',
     language:'Sprog', currency:'Valuta', orderNo:'Ordrenr', invoiceNo:'Fakturanr',
     from:'Fra', to:'Til', quantity:'Antal', unitPrice:'Enhedspris', lineTotal:'Linjetotal',
@@ -76,14 +76,14 @@ const T = {
     invoices:'Invoices', creditNotes:'Credit notes', reports:'Reports', settings:'Settings', profile:'Profile',
     myOrders:'My orders', search:'Search...', save:'Save', cancel:'Cancel', delete:'Delete', edit:'Edit',
     add:'Add', close:'Close', confirm:'Confirm', total:'Total', subtotal:'Subtotal', vat:'VAT', qty:'Qty',
-    price:0'Price', status:'Status', date:'Date', actions:'Actions', name:'Name', email:'Email',
+    price:'Price', status:'Status', date:'Date', actions:'Actions', name:'Name', email:'Email',
     phone:'Phone', address:'Address', company:'Company', vatNo:'VAT No', city:'City', zip:'Zip',
     country:'Country', notes:'Notes', deliveryAddr:'Delivery address', billingAddr:'Billing address',
     received:'Received', processing:'Processing', shipped:'Shipped', delivered:'Delivered', cancelled:'Cancelled',
     proforma:'Proforma', finalInvoice:'Final invoice', creditNote:'Credit note',
     payNow:'Pay now', payWithPayPal:'Pay with PayPal', paid:'Paid', unpaid:'Unpaid',
     partialDelivery:'Partial delivery', deliveryProof:'Delivery proof', uploadPhoto:'Upload photo',
-    signature:'Signature', stock:0'Stock', inStock:'In stock', lowStock:'Low stock', outOfStock:'Out of stock',
+    signature:'Signature', stock:'Stock', inStock:'In stock', lowStock:'Low stock', outOfStock:'Out of stock',
     exportExcel:'Export Excel', exportPDF:'Export PDF', exportCSV:'Export CSV',
     language:'Language', currency:'Currency', orderNo:'Order no', invoiceNo:'Invoice no',
     from:'From', to:'To', quantity:'Quantity', unitPrice:'Unit price', lineTotal:'Line total',
@@ -113,14 +113,14 @@ const T = {
     invoices:'Rechnungen', creditNotes:'Gutschriften', reports:'Berichte', settings:'Einstellungen', profile:'Profil',
     myOrders:'Meine Bestellungen', search:'Suchen...', save:'Speichern', cancel:'Abbrechen', delete:'Löschen', edit:'Bearbeiten',
     add:'Hinzufügen', close:'Schließen', confirm:'Bestätigen', total:'Gesamt', subtotal:'Zwischensumme', vat:'MwSt', qty:'Menge',
-    price:0'Preis', status:'Status', date:'Datum', actions:'Aktionen', name:'Name', email:'E-Mail',
+    price:'Preis', status:'Status', date:'Datum', actions:'Aktionen', name:'Name', email:'E-Mail',
     phone:'Telefon', address:'Adresse', company:'Firma', vatNo:'USt-IdNr', city:'Stadt', zip:'PLZ',
     country:'Land', notes:'Notizen', deliveryAddr:'Lieferadresse', billingAddr:'Rechnungsadresse',
     received:'Empfangen', processing:'In Bearbeitung', shipped:'Versandt', delivered:'Geliefert', cancelled:'Storniert',
     proforma:'Proforma', finalInvoice:'Endrechnung', creditNote:'Gutschrift',
     payNow:'Jetzt bezahlen', payWithPayPal:'Mit PayPal bezahlen', paid:'Bezahlt', unpaid:'Unbezahlt',
     partialDelivery:'Teillieferung', deliveryProof:'Liefernachweis', uploadPhoto:'Foto hochladen',
-    signature:'Unterschrift', stock:0'Lager', inStock:'Auf Lager', lowStock:'Wenig Lager', outOfStock:'Nicht vorrätig',
+    signature:'Unterschrift', stock:'Lager', inStock:'Auf Lager', lowStock:'Wenig Lager', outOfStock:'Nicht vorrätig',
     exportExcel:'Excel exportieren', exportPDF:'PDF exportieren', exportCSV:'CSV exportieren',
     language:'Sprache', currency:'Währung', orderNo:'Bestell-Nr', invoiceNo:'Rechnungs-Nr',
     from:'Von', to:'Bis', quantity:'Menge', unitPrice:'Stückpreis', lineTotal:'Zeilensumme',
@@ -150,14 +150,14 @@ const T = {
     invoices:'चालान', creditNotes:'क्रेडिट नोट', reports:'रिपोर्ट', settings:'सेटिंग्स', profile:'प्रोफ़ाइल',
     myOrders:'मेरे ऑर्डर', search:'खोजें...', save:'सहेजें', cancel:'रद्द करें', delete:'हटाएं', edit:'संपादित करें',
     add:'जोड़ें', close:'बंद करें', confirm:'पुष्टि करें', total:'कुल', subtotal:'उप-कुल', vat:'वैट', qty:'मात्रा',
-    price:0'कीमत', status:'स्थिति', date:'तारीख', actions:'कार्रवाई', name:'नाम', email:'ईमेल',
+    price:'कीमत', status:'स्थिति', date:'तारीख', actions:'कार्रवाई', name:'नाम', email:'ईमेल',
     phone:'फ़ोन', address:'पता', company:'कंपनी', vatNo:'वैट नंबर', city:'शहर', zip:'पिन कोड',
     country:'देश', notes:'नोट्स', deliveryAddr:'डिलीवरी का पता', billingAddr:'बिलिंग का पता',
     received:'प्राप्त', processing:'प्रक्रिया में', shipped:'भेजा गया', delivered:'डिलीवर किया', cancelled:'रद्द',
     proforma:'प्रोफ़ॉर्मा', finalInvoice:'अंतिम चालान', creditNote:'क्रेडिट नोट',
     payNow:'अभी भुगतान करें', payWithPayPal:'PayPal से भुगतान', paid:'भुगतान किया', unpaid:'अवैतनिक',
     partialDelivery:'आंशिक डिलीवरी', deliveryProof:'डिलीवरी प्रमाण', uploadPhoto:'फोटो अपलोड',
-    signature:'हस्ताक्षर', stock:0'स्टॉक', inStock:'स्टॉक में', lowStock:'कम स्टॉक', outOfStock:'स्टॉक में नहीं',
+    signature:'हस्ताक्षर', stock:'स्टॉक', inStock:'स्टॉक में', lowStock:'कम स्टॉक', outOfStock:'स्टॉक में नहीं',
     exportExcel:'Excel निर्यात', exportPDF:'PDF निर्यात', exportCSV:'CSV निर्यात',
     language:'भाषा', currency:'मुद्रा', orderNo:'ऑर्डर नं', invoiceNo:'चालान नं',
     from:'से', to:'तक', quantity:'मात्रा', unitPrice:'इकाई मूल्य', lineTotal:'कुल',
@@ -187,14 +187,14 @@ const T = {
     invoices:'发票', creditNotes:'贷方通知单', reports:'报告', settings:'设置', profile:'个人资料',
     myOrders:'我的订单', search:'搜索...', save:'保存', cancel:'取消', delete:'删除', edit:'编辑',
     add:'添加', close:'关闭', confirm:'确认', total:'合计', subtotal:'小计', vat:'增值税', qty:'数量',
-    price:0'价格', status:'状态', date:'日期', actions:'操作', name:'姓名', email:'电子邮件',
+    price:'价格', status:'状态', date:'日期', actions:'操作', name:'姓名', email:'电子邮件',
     phone:'电话', address:'地址', company:'公司', vatNo:'税号', city:'城市', zip:'邮编',
     country:'国家', notes:'备注', deliveryAddr:'送货地址', billingAddr:'账单地址',
     received:'已接收', processing:'处理中', shipped:'已发货', delivered:'已送达', cancelled:'已取消',
     proforma:'形式发票', finalInvoice:'最终发票', creditNote:'贷方通知单',
     payNow:'立即支付', payWithPayPal:'用PayPal支付', paid:'已付', unpaid:'未付',
     partialDelivery:'部分交付', deliveryProof:'交付证明', uploadPhoto:'上传照片',
-    signature:'签名', stock:0'库存', inStock:'有货', lowStock:'库存不足', outOfStock:'缺货',
+    signature:'签名', stock:'库存', inStock:'有货', lowStock:'库存不足', outOfStock:'缺货',
     exportExcel:'导出Excel', exportPDF:'导出PDF', exportCSV:'导出CSV',
     language:'语言', currency:'货币', orderNo:'订单号', invoiceNo:'发票号',
     from:'从', to:'至', quantity:'数量', unitPrice:'单价', lineTotal:'行合计',
@@ -1316,20 +1316,24 @@ export default function App() {
           )}
 
           {/* Quick specs - 8 compact cards */}
-          {spec.chip && (
-            <>
-              <div style={{ display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:6, margin:'12px 0' }}>
-                <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:10, padding:'10px 6px', textAlign:'center' }}><div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>Chip</div><div style={{ fontSize:'0.75rem', fontWeight:700, marginTop:2 }}>{spec.chip}</div></div>
-                <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:10, padding:'10px 6px', textAlign:'center' }}><div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>RAM</div><div style={{ fontSize:'0.75rem', fontWeight:700, marginTop:2 }}>{spec.ram}</div></div>
-                <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:10, padding:'10px 6px', textAlign:'center' }}><div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>{da(lang)?'Skærm':'Screen'}</div><div style={{ fontSize:'0.75rem', fontWeight:700, marginTop:2 }}>{spec.scr}</div></div>
-                <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:10, padding:'10px 6px', textAlign:'center' }}><div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>{da(lang)?'Kamera':'Camera'}</div><div style={{ fontSize:'0.75rem', fontWeight:700, marginTop:2 }}>{spec.cam}</div></div>
-              </div>
-              <div style={{ display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:6, marginBottom:8 }}>
-                <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:10, padding:'10px 6px', textAlign:'center' }}><div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>{da(lang)?'Opladning':'Charging'}</div><div style={{ fontSize:'0.7rem', fontWeight:600, marginTop:2 }}>{spec.charge}</div></div>
-                <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:10, padding:'10px 6px', textAlign:'center' }}><div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>SIM</div><div style={{ fontSize:'0.7rem', fontWeight:600, marginTop:2 }}>{spec.sim}</div></div>
-                <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:10, padding:'10px 6px', textAlign:'center' }}><div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>WiFi</div><div style={{ fontSize:'0.7rem', fontWeight:600, marginTop:2 }}>{spec.wifi}</div></div>
-                <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:10, padding:'10px 6px', textAlign:'center' }}><div style={{ fontSize:'0.65rem', color:'var(--text-muted)' }}>OS</div><div style={{ fontSize:'0.75rem', fontWeight:700, marginTop:2 }}>{spec.os}</div></div>
-              </div>
+          {spec.chip && (() => {
+            const specItems = [
+              {l:'Chip',v:spec.chip},{l:'RAM',v:spec.ram},{l:da(lang)?'Skærm':'Screen',v:spec.scr},{l:da(lang)?'Kamera':'Camera',v:spec.cam},
+              {l:da(lang)?'Opladning':'Charging',v:spec.charge},{l:'SIM',v:spec.sim},{l:'WiFi/BT',v:spec.wifi},{l:(spec.os&&(spec.os.includes('iOS')||spec.os.includes('macOS')||spec.os.includes('watchOS')))?'OS':(da(lang)?'Batteri':'Battery'),v:spec.os}
+            ].filter(s => s.v && s.v !== '—');
+            const rows = [];
+            for(let i=0;i<specItems.length;i+=4) rows.push(specItems.slice(i,i+4));
+            return (<>
+              {rows.map((row,ri) => (
+                <div key={ri} style={{ display:'grid', gridTemplateColumns:`repeat(${Math.min(row.length,4)}, 1fr)`, gap:6, margin:ri===0?'12px 0':'0 0 8px' }}>
+                  {row.map((s,i) => (
+                    <div key={i} style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:10, padding:'10px 6px', textAlign:'center' }}>
+                      <div style={{ fontSize:'0.65rem', color:'#86868b' }}>{s.l}</div>
+                      <div style={{ fontSize:'0.75rem', fontWeight:700, marginTop:2, color:'#1d1d1f' }}>{s.v}</div>
+                    </div>
+                  ))}
+                </div>
+              ))}
 
               {/* Expandable full specs */}
               <button onClick={()=>setShowFullSpecs(!showFullSpecs)} style={{ width:'100%', padding:10, background:'none', border:'1px solid var(--border)', borderRadius:10, fontSize:'0.8rem', color:'var(--text-muted)', cursor:'pointer', margin:'6px 0 20px', transition:'all 0.15s' }}>
@@ -1338,14 +1342,14 @@ export default function App() {
               {showFullSpecs && (
                 <table style={{ width:'100%', fontSize:'0.8rem', borderCollapse:'collapse', marginBottom:16 }}>
                   <tbody>
-                    {Object.entries(spec).filter(([k])=>!['eu','india'].includes(k)).map(([k,v]) => (
+                    {Object.entries(spec).filter(([k,v])=>!['eu','india'].includes(k) && v && v !== '—').map(([k,v]) => (
                       <tr key={k}><td style={{ color:'var(--text-muted)', padding:'6px 8px', borderBottom:'1px solid var(--border)', width:110, fontWeight:500, textTransform:'capitalize' }}>{k}</td><td style={{ padding:'6px 8px', borderBottom:'1px solid var(--border)' }}>{v}</td></tr>
                     ))}
                   </tbody>
                 </table>
               )}
-            </>
-          )}
+            </>);
+          })()}
 
           {/* Color selection */}
           {colorStep && (
@@ -1577,8 +1581,8 @@ export default function App() {
                   {/* Compact spec tags */}
                   {spec.chip && (
                     <div style={{ display:'flex', gap:4, flexWrap:'wrap', marginBottom:8 }}>
-                      {[spec.chip, spec.ram !== '—' && spec.ram, spec.cam !== '—' && spec.cam, spec.wifi !== '—' && spec.wifi].filter(Boolean).slice(0,4).map((s,i) => (
-                        <span key={i} style={{ background:'var(--bg,#f5f5f7)', padding:'2px 8px', borderRadius:20, border:'1px solid var(--border)', fontSize:'0.65rem', color:'var(--text-muted)' }}>{s}</span>
+                      {[spec.chip !== '—' && spec.chip, spec.ram !== '—' && spec.ram, spec.cam !== '—' && spec.cam, spec.wifi !== '—' && spec.wifi, spec.os && spec.os].filter(Boolean).slice(0,4).map((s,i) => (
+                        <span key={i} style={{ background:'var(--bg,#f5f5f7)', padding:'2px 8px', borderRadius:20, border:'1px solid var(--border)', fontSize:'0.65rem', color:'#86868b' }}>{s}</span>
                       ))}
                     </div>
                   )}
