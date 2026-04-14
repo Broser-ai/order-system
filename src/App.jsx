@@ -1255,8 +1255,8 @@ export default function App() {
                 <div style={{ background:'var(--bg-secondary,#f5f5f7)', borderRadius:12, padding:14, marginBottom:12 }}>
                   <table style={{ width:'100%', fontSize:'0.85rem', borderCollapse:'collapse' }}>
                     <tbody>
-                      <tr><td style={{ color:'var(--text-muted)', padding:'4px 0', width:100 }}>A-nummer</td><td style={{ fontWeight:600, fontFamily:'var(--mono)', padding:'4px 0' }}>{aNum}</td></tr>
-                      <tr><td style={{ color:'var(--text-muted)', padding:'4px 0' }}>Region</td><td style={{ padding:'4px 0' }}>{cfg.region==='eu'?'Europa (CE)':'Indien (BIS)'}</td></tr>
+                      <tr><td style={{ color:'var(--text-muted)', padding:'4px 0', width:100 }}>A-nummer</td><td style={{ fontWeight:600, fontFamily:'var(--mono)', padding:'4px 0', color:'#1d1d1f' }}>{aNum}</td></tr>
+                      <tr><td style={{ color:'var(--text-muted)', padding:'4px 0' }}>Region</td><td style={{ padding:'4px 0', color:'#1d1d1f' }}>{cfg.region==='eu'?'Europa (CE)':'Indien (BIS)'}</td></tr>
                     </tbody>
                   </table>
                 </div>
@@ -1270,7 +1270,7 @@ export default function App() {
               <div className="divider"/>
               <div style={{ fontSize:'0.8rem', color:'var(--text-muted)', marginBottom:8 }}>📦 {da(lang)?'Endelig pris oplyses efter modtagelse af bestilling':'Final price provided after order received'}</div>
               <button className="btn-primary" style={{ width:'100%', padding:'14px 0', fontSize:'1rem', borderRadius:12 }} onClick={() => {
-                setCustomerCart(prev => [...prev, { productId:cp.id, model:cp.model, brand:cp.brand, config:cfg, configLabel:fmtConfig(cfg), unitPrice:price, qty:1, total:price, region:cfg.region, aNumber:aNum }]);
+                setCustomerCart(prev => [...prev, { productId:cp.id, model:cp.model, brand:cp.brand, config:cfg, configLabel:fmtConfig(cfg), unitPrice:price, qty:5, total:price, region:cfg.region, aNumber:aNum }]);
                 setConfiguring(null); setShowFullSpecs(false); setCarouselIdx(0);
                 showToast(da(lang)?'Tilføjet til bestilling ✓':'Added to order ✓');
               }}>{da(lang)?'Læg i Shoppingpose':'Add to Shopping Bag'}</button>
@@ -1425,7 +1425,7 @@ export default function App() {
                   <div><div style={{ fontWeight:600 }}>{it.model}</div>{it.configLabel && <div style={{ fontSize:'0.8rem', color:'var(--text-muted)' }}>{it.configLabel}</div>}</div>
                 </div>
                 <div style={{ display:'flex', alignItems:'center', gap:12 }}>
-                  <input type="number" min={1} max={99} value={it.qty} style={{ width:55 }} onChange={e => { const c=[...customerCart]; c[i].qty=Math.max(1,+e.target.value); setCustomerCart(c); }}/>
+                  <input type="number" min={5} max={999} value={it.qty} style={{ width:55 }} onChange={e => { const c=[...customerCart]; c[i].qty=Math.max(5,+e.target.value); setCustomerCart(c); }}/>
                   <button className="btn-icon" onClick={()=>setCustomerCart(prev=>prev.filter((_,j)=>j!==i))}>{IC.x}</button>
                 </div>
               </div>
@@ -1447,7 +1447,7 @@ export default function App() {
                 payment_status:'unpaid',notes:'',created_at:new Date().toISOString()};
               const{data,error}=await sb.from('orders').insert(newOrder).select().single();
               if(!error&&data){setOrders(prev=>[data,...prev]);setCustomerCart([]);showToast(t.orderCreated);setView('orders');}
-              else showToast(t.error,'error'); setLoading(false);
+              else { console.error('Order error:', error); showToast((error?.message||t.error),'error'); } setLoading(false);
             }} disabled={loading}>{loading?'...':da(lang)?'Send bestilling':'Place order'}</button>
             <button className="btn-secondary" onClick={()=>{setBrowseBrand(null);setBrowseCat(null);}}>{da(lang)?'+ Tilføj flere':'+ Add more'}</button>
           </div>
