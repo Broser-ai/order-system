@@ -1,0 +1,38 @@
+export const riskClasses = [
+  {
+    id: "low",
+    name: "Low Risk",
+    color: "#16a34a",
+    bg_color: "#dcfce7",
+    examples: "Read-only docs, web search, data retrieval, summarization, draft generation to clipboard",
+    approval_default: "auto_allow",
+    display_order: 1,
+  },
+  {
+    id: "medium",
+    name: "Medium Risk",
+    color: "#d97706",
+    bg_color: "#fef3c7",
+    examples: "Sandbox writes, draft emails (not sent), staging deploys, CRM updates in test env",
+    approval_default: "approve_first_run",
+    display_order: 2,
+  },
+  {
+    id: "high",
+    name: "High Risk",
+    color: "#dc2626",
+    bg_color: "#fee2e2",
+    examples: "Production deploys, customer-facing emails, CRM production writes, API calls with side effects",
+    approval_default: "approve_every_run",
+    display_order: 3,
+  },
+  {
+    id: "critical",
+    name: "Critical Risk",
+    color: "#7c3aed",
+    bg_color: "#ede9fe",
+    examples: "Payments, legal submissions, regulated filings, data deletion, infrastructure changes",
+    approval_default: "approve_plus_second_reviewer",
+    display_order: 4,
+  },
+];
